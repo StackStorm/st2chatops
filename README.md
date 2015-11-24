@@ -6,8 +6,13 @@ Contains many pre-installed libraries for different adapters without waiting for
 
 ## Node Version
 
-Grab your favorite Node.JS version from https://hub.docker.com/_/node/, and pick your tag. Update `Dockerfile`
+Grab your favorite Node.JS version from https://hub.docker.com/\_/node/, and pick your tag. Update `Dockerfile`
 as needed.
+
+## Pre-Requsites
+
+* Docker
+* Docker Hub Login (corporate login is in LastPass... create or attach your user to the `StackStorm` org)
 
 ## Building
 
@@ -27,4 +32,4 @@ This is currently under dev. The following adapters are still needed:
 * Hipchat
 * IRC
 
-Problems with Node v
+Problems with Node v4 are causing issues. Under investigation.
