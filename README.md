@@ -16,7 +16,7 @@ Otherwise, set ENV variables as necessary for your adapter of choice.
 
 ## Node Version
 
-Grab your favorite Node.JS version from https://hub.docker.com/\_/node/, and pick your tag. Update `Dockerfile`
+Grab your favorite Node.JS version from https://hub.docker.com/_/node/, and pick your tag. Update `Dockerfile`
 as needed.
 
 ### Pre-Requsites
