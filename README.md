@@ -33,13 +33,3 @@ as needed.
 * Step 2: Push the container up: `docker push stackstorm/hubot:<VER>`
   * Use the same tag specified in Step 1.
 * Step 3: Profit
-
-### TODO
-
-This is currently under dev. The following adapters are still needed:
-
-* XMPP
-* Hipchat
-* IRC
-
-Problems with Node v4 are causing issues. Under investigation.
