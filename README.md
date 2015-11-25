@@ -4,17 +4,27 @@ This repository contains the out-of-the-box default settings for Hubot to be use
 
 Contains many pre-installed libraries for different adapters without waiting for NPM
 
+## Usage
+
+At a minimum, the following variables must be set:
+
+* HUBOT_NAME: What is your bot name?
+* HUBOT_ADAPTER: Chat Adapter used with Hubot
+* HUBOT_ALIAS: Alias to be used with your bot.
+
+Otherwise, set ENV variables as necessary for your adapter of choice.
+
 ## Node Version
 
 Grab your favorite Node.JS version from https://hub.docker.com/\_/node/, and pick your tag. Update `Dockerfile`
 as needed.
 
-## Pre-Requsites
+### Pre-Requsites
 
 * Docker
 * Docker Hub Login (corporate login is in LastPass... create or attach your user to the `StackStorm` org)
 
-## Building
+### Building
 
 * Step 0: Log in to docker with `docker login`.
   * Only have to do this the first time
@@ -24,7 +34,7 @@ as needed.
   * Use the same tag specified in Step 1.
 * Step 3: Profit
 
-## TODO
+### TODO
 
 This is currently under dev. The following adapters are still needed:
 

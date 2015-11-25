@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+fail() {
+    echo "$1"
+    echo "See README.md for more information"
+    exit 1
+}
+
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+# Ensure proper ENV variables are set
+if [ ! -n "HUBOT_ADAPTER" ]; then
+   fail("Must provide HUBOT_ADAPTER ENV variable to start.")
+fi
+
+if [ ! -n "HUBOT_NAME" ]; then
+    fail("Must provide HUBOT_NAME to start")
+fi
+
+if [ ! -n "HUBOT_ALIAS" ]; then
+    fail("Must provide HUBOT_ALIAS to start")
+fi
+
+exec node_modules/.bin/hubot "@"
