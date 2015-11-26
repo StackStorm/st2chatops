@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
   make
 
 COPY . /app
-RUN cd /app; npm install --production; npm cache clean
+WORKDIR /app
+RUN npm install --production; npm cache clean
 
 RUN apt-get -y remove \
   libicu-dev \
@@ -26,4 +27,5 @@ RUN apt-get -y clean
 RUN apt-get -y purge
 
 EXPOSE 8080
+WORKDIR /app
 CMD ["/app/bin/hubot"]
