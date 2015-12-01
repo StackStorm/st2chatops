@@ -1,3 +1,4 @@
 [
- "hubot-stackstorm"
+  "hubot-stackstorm",
+  "hubot-help"
 ]
