@@ -10,7 +10,7 @@
     "hubot-redis-brain" : "0.0.3",
     "hubot-scripts"     : "^2.16.2",
     "hubot-help"        : "^0.1.2",
-    "hubot-stackstorm"  : "^0.3.1-rc1",
+    "hubot-stackstorm"  : "^0.3.1-rc2",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-xmpp"        : "git+https://github.com/markstory/hubot-xmpp.git#94c3438e42778c53e38f6909939c514da50a0dca",
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
