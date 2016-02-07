@@ -33,8 +33,10 @@ as needed.
 * Step 2: Push the container up: `docker push stackstorm/hubot:<VER>`
   * Use the same tag specified in Step 1.
 * Step 3: Update the `latest` tag:
+
   ```
   docker build -t stackstorm/hubot:latest .
   docker push stackstorm/hubot:latest
   ```
+  
 * Step 4: Profit
