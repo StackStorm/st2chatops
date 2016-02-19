@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_installinit:
+	# So far don't start services
+	dh_installinit --no-start --name=st2hubot
