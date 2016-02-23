@@ -1,0 +1,41 @@
+FROM {{ dist }}:{{ version }}
+
+{% if dist in ('centos', 'fedora') -%}
+
+# Add NodeSource repo
+RUN curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+
+# Install development tools
+RUN yum -y install nodejs gcc-c++ make git rpmdevtools
+
+{%- if version in ('centos6') %}
+
+RUN wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo && \
+    yum -y install devtoolset-2-gcc devtoolset-2-binutils devtoolset-2-gcc-c++
+
+ENV CC  /opt/rh/devtoolset-2/root/usr/bin/gcc
+ENV CPP /opt/rh/devtoolset-2/root/usr/bin/cpp
+ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
+
+{%- endif %}
+
+{% else -%}
+
+# Install prerequesties
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get -y install curl
+
+# Add NodeSource repo
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+
+# Install node
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get -y install nodejs build-essential git
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    devscripts debhelper dh-make && apt-get clean
+
+{% endif -%}
+
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]

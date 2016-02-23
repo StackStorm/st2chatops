@@ -1,0 +1,10 @@
+## Suites configuration
+#
+suite:
+  working_dir: /root/docker-hubot
+  environment:
+    - DEBUG_LEVEL=0
+    - ARTIFACT_DIR=/root/build
+  volumes:
+    - .:/root/docker-hubot
+    - /tmp/docker-hubot:/root/build

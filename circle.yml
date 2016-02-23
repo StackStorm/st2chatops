@@ -9,8 +9,6 @@ general:
     # - ~/logs
 
 machine:
-  node:
-    version: 4.2.2
   environment:
     DISTROS: "wheezy jessie trusty el6 el7"
     PKGTYPE: "deb deb deb rpm rpm"
@@ -34,31 +32,52 @@ checkout:
     - git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
     - git clone --depth 1 ${ST2_TEST_ENVIRONEMENT} ~/st2box
     - |
-      DISTROS=($DISTROS)
+      distros=($DISTROS)
+      DISTRO=${distros[$CIRCLE_NODE_INDEX]}
       PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
       PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision trusty ${PKG_VERSION} st2hubot)
       echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
       echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
+      echo "export DISTRO=${DISTRO}" >> ~/.circlerc
 
 dependencies:
   pre:
-    - sudo apt-get install rpm parallel jq
-    - gem install package_cloud
+    # - sudo apt-get install rpm parallel jq
+    # - gem install package_cloud
     - sudo pip install docker-compose
+    - |
+      docker-compose -f docker-compose.circle.yml run \
+        -e PKG_VERSION=${PKG_VERSION} \
+        -e PKG_RELEASE=${PKG_RELEASE} \
+        ${DISTRO} pull
+  override:
+    - |
+      docker-compose -f docker-compose.circle.yml run \
+        -e PKG_VERSION=${PKG_VERSION} \
+        -e PKG_RELEASE=${PKG_RELEASE} \
+        ${DISTRO} build
   post:
-    - docker-compose -f ~/st2box/docker-compose.yaml pull
+    # - docker-compose -f ~/st2box/docker-compose.yaml pull
 
 test:
   # pre:
   #   - docker-compose -f ~/st2box/docker-compose.yaml up -d
   #   - docker-compose -f ~/st2box/docker-compose.yaml run client st2 run core.noop
+  override:
+    - |
+      docker-compose -f docker-compose.circle.yml run \
+        -e PKG_VERSION=${PKG_VERSION} \
+        -e PKG_RELEASE=${PKG_RELEASE} \
+        ${DISTRO} test
+    - rsync -rv /tmp/docker-hubot/ node0:~/packages/${DISTRO}:
+        parallel: true
   post:
     # - docker-compose -f ~/st2box/docker-compose.yaml down
     # - docker-compose -f ~/st2box/docker-compose.yaml up -d
     # - docker-compose -f ~/st2box/docker-compose.yaml run client st2 run core.noop
     # - docker-compose -f ~/st2box/docker-compose.yaml run client st2 execution list
-    - dpkg-buildpackage -b -uc -us
-    - rpmbuild -bb rpm/st2hubot.spec
+    # - dpkg-buildpackage -b -uc -us
+    # - rpmbuild -bb rpm/st2hubot.spec
     # - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/logs/${name}.log 2>&1; done
 
 deployment:
@@ -69,13 +88,13 @@ deployment:
       - /v[0-9]+(\.[0-9]+)*/
       - feature/circleci
     commands:
-      - |
-        DISTROS=($DISTROS)
-        PKGTYPE=($PKGTYPE)
-        for i in ${!DISTROS[@]}; do
-          mkdir -p ~/packages/${DISTROS[$i]}
-          cp ../*.${PKGTYPE[$i]} ~/packages/${DISTROS[$i]}
-        done
+      # - |
+      #   DISTROS=($DISTROS)
+      #   PKGTYPE=($PKGTYPE)
+      #   for i in ${!DISTROS[@]}; do
+      #     mkdir -p ~/packages/${DISTROS[$i]}
+      #     cp ../*.${PKGTYPE[$i]} ~/packages/${DISTROS[$i]}
+      #   done
       # Deploy to PackageCloud all artifacts for respective distros in parallel
       - "parallel -v -j0 --line-buffer ~/st2-packages/.circle/packagecloud.sh deploy {} ~/packages/{} ::: ${DISTROS}"
       - ~/st2-packages/.circle/save_payload.py ~/packages
