@@ -1,3 +1,4 @@
+# Packaging environments
 wheezy:
   build: ./packagingenv/wheezy
   extends:
@@ -24,6 +25,37 @@ el7:
 
 el6:
   build: ./packagingenv/centos6
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+# Testing environments
+wheezy-test:
+  build: ./testingenv/wheezy
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+jessie-test:
+  build: ./testingenv/jessie
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+trusty-test:
+  build: ./testingenv/trusty
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+el7-test:
+  build: ./testingenv/centos7
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+el6-test:
+  build: ./testingenv/centos6
   extends:
     file: docker-compose.override.yml
     service: suite

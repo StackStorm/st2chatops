@@ -3,6 +3,7 @@
 # IS_ENTERPRISE
 # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
 # PACKAGECLOUD_TOKEN
+# SLACK_TOKEN
 general:
   artifacts:
     - ~/packages
@@ -45,11 +46,8 @@ dependencies:
     # - sudo apt-get install rpm parallel jq
     # - gem install package_cloud
     - sudo pip install docker-compose
-    - |
-      docker-compose -f docker-compose.circle.yml run \
-        -e PKG_VERSION=${PKG_VERSION} \
-        -e PKG_RELEASE=${PKG_RELEASE} \
-        ${DISTRO} pull
+    - docker-compose -f docker-compose.circle.yml run ${DISTRO} pull
+    - docker-compose -f docker-compose.circle.yml run ${DISTRO}-test pull
   override:
     - |
       docker-compose -f docker-compose.circle.yml run \
@@ -57,18 +55,18 @@ dependencies:
         -e PKG_RELEASE=${PKG_RELEASE} \
         ${DISTRO} build
   post:
-    # - docker-compose -f ~/st2box/docker-compose.yaml pull
+    - docker-compose -f ~/st2box/docker-compose.yaml pull
 
 test:
-  # pre:
-  #   - docker-compose -f ~/st2box/docker-compose.yaml up -d
-  #   - docker-compose -f ~/st2box/docker-compose.yaml run client st2 run core.noop
+  pre:
+    - docker-compose -f ~/st2box/docker-compose.yaml up -d
   override:
     - |
       docker-compose -f docker-compose.circle.yml run \
         -e PKG_VERSION=${PKG_VERSION} \
         -e PKG_RELEASE=${PKG_RELEASE} \
-        ${DISTRO} test
+        -e SLACK_TOKEN=${SLACK_TOKEN} \
+        ${DISTRO}-test test
     - rsync -rv /tmp/docker-hubot/ node0:~/packages/${DISTRO}:
         parallel: true
   post:
