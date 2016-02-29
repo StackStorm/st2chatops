@@ -1,15 +1,37 @@
 # StackStorm's st2chatops
 
-This repository delivers [StackStorm Chatops](https://docs.stackstorm.com/chatops) in a docker image. The image includes [hubot](https://hubot.github.com/), [hubot-stackstorm](https://github.com/StackStorm/hubot-stackstorm)
-and pre-installed adapters for many Chat services. 
+This repository delivers [StackStorm Chatops](https://docs.stackstorm.com/chatops) in a form of packages and docker image. The package includes [hubot](https://hubot.github.com/), [hubot-stackstorm](https://github.com/StackStorm/hubot-stackstorm)
+and pre-installed adapters for many Chat services.
 
-## Usage
+## Package
+
+### Usage
+
+For instructions to install st2chatops package from repos, please refer to StackStorm installation instruction for [Deb-based](https://docs.stackstorm.com/install/deb.html#setup-chatops) or [RPM-based](https://docs.stackstorm.com/install/rpm.html#setup-chatops) distributions.
+
+Make sure you've added StackStorm repos before installing the package.
+
+### Node Version
+
+Refer to official node [documentation](https://nodejs.org/en/download/package-manager/) on installing NodeJS from packages.
+
+### Building
+
+Building of the packages is handled automatically by CircleCI. In case you'd like to run it locally, you can use our building pipeline by running docker-compose:
+
+        docker-compose -f docker-compose.circle.yml run ${DISTRO} build
+
+Where ${DISTRO} refers to flavor name. See [docker-compose.circle.yml](docker-compose.circle.yml) file for the list of supported flavors.
+
+## Docker
+
+### Usage
 
 * Pull the StackStorm/hubot image:
-    
+
         docker pull stackstorm/hubot
 
-* Set a hostname or IP address that will be accessable form a docker container,
+* Set a hostname or IP address that will be accessible form a docker container,
   as $ST2_HOSTNAME environment variable:
 
        export $ST2_HOSTNAME={MY_STACKSTORM_HOST_NAME}
@@ -22,20 +44,20 @@ and pre-installed adapters for many Chat services.
 [IRC](https://github.com/nandub/hubot-irc),
 [XMPP](https://github.com/markstory/hubot-xmpp).
 
-* Use [scripts/st2chatops-docker-run.sh](scripts/st2chatops-docker-run.sh) to start the docker container instance. 
+* Use [scripts/st2chatops-docker-run.sh](scripts/st2chatops-docker-run.sh) to start the docker container instance.
 The script is set for Slack; for other Chats, **edit it** to pass the environment variables as required for your Chat service adapter.
 Run the script, and ensure that hubot-stackstorm is running and there are no errors:
 
         ./st2chatops-docker-run.sh
         docker inspect -f {{.State.Status}} stackstorm-hubot
         docker logs stackstorm-hubot
-  
+
   To automatically start `stackstorm-hubot`, use [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart>),
   or [integrate with a process manager](https://docs.docker.com/engine/admin/host_integration).
 
 * Go to your Chat room and begin Chatopsing. Learn more at [docs.stackstorm.com/chatops](https://docs.stackstorm.com/chatops)
 
-## Node Version
+### Node Version
 
 Grab your favorite Node.JS version from https://hub.docker.com/_/node/, and pick your tag. Update `Dockerfile` as needed.
 
@@ -58,5 +80,5 @@ Grab your favorite Node.JS version from https://hub.docker.com/_/node/, and pick
   docker build -t stackstorm/hubot:latest .
   docker push stackstorm/hubot:latest
   ```
-  
+
 * Step 4: Profit
