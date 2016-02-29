@@ -1,18 +1,18 @@
 #!/bin/sh
 #
 ### BEGIN INIT INFO
-# Provides: st2hubot
+# Provides: st2chatops
 # Required-Start: $local_fs $network $named $remote_fs $syslog
 # Required-Stop: $local_fs $network $named $remote_fs $syslog
-# Short-Description: st2hubot component
-# Description: st2hubot - StackStorm service st2hubot
+# Short-Description: st2chatops component
+# Description: st2chatops - StackStorm service st2chatops
 ### END INIT INFO
 
-# st2hubot    This shell script takes care of starting and stopping
-#             st2hubot daemon.
+# st2chatops    This shell script takes care of starting and stopping
+#             st2chatops daemon.
 # chkconfig: - 85 15
-# description: st2hubot - StackStorm service st2hubot
-# processname: st2hubot
+# description: st2chatops - StackStorm service st2chatops
+# processname: st2chatops
 
 # Source function library.
 . /etc/rc.d/init.d/functions
@@ -20,11 +20,11 @@
 # Source networking configuration.
 . /etc/sysconfig/network
 
-DESC="st2hubot"
-NAME=st2hubot
+DESC="st2chatops"
+NAME=st2chatops
 DAEMON=bin/hubot
 DAEMON_ARGS=""
-WORKING_DIRECTORY=/opt/stackstorm/hubot
+WORKING_DIRECTORY=/opt/stackstorm/chatops
 PIDFILE=/var/run/$NAME.pid
 RUNAS_USER="st2"
 RUNAS_GROUP="st2"

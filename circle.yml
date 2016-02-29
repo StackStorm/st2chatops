@@ -36,7 +36,7 @@ checkout:
       distros=($DISTROS)
       DISTRO=${distros[$CIRCLE_NODE_INDEX]}
       PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
-      PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision trusty ${PKG_VERSION} st2hubot)
+      PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision trusty ${PKG_VERSION} st2chatops)
       echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
       echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
       echo "export DISTRO=${DISTRO}" >> ~/.circlerc
@@ -75,7 +75,7 @@ test:
     # - docker-compose -f ~/st2box/docker-compose.yaml run client st2 run core.noop
     # - docker-compose -f ~/st2box/docker-compose.yaml run client st2 execution list
     # - dpkg-buildpackage -b -uc -us
-    # - rpmbuild -bb rpm/st2hubot.spec
+    # - rpmbuild -bb rpm/st2chatops.spec
     # - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/logs/${name}.log 2>&1; done
 
 deployment:

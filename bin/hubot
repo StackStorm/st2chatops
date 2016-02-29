@@ -12,7 +12,7 @@ HERE=$(dirname $(dirname "$(readlink -f "$0")"))
 
 export PATH="$HERE/node_modules/.bin:$HERE/node_modules/hubot/node_modules/.bin:$PATH"
 
-. $HERE/st2hubot.env
+. $HERE/st2chatops.env
 
 # Ensure proper ENV variables are set
 if [ ! -n "$HUBOT_ADAPTER" ]; then

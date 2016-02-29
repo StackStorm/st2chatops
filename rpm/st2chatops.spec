@@ -3,16 +3,16 @@
 %define version %(echo "${PKG_VERSION:-%{pkg_version}}")
 %define release %(echo "${PKG_RELEASE:-1}")
 
-Name:           st2hubot
+Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-Summary:        St2Hubot - StackStorm Hubot
+Summary:        St2Chatops - StackStorm Chatops
 
 License:        Apache
 URL:            https://github.com/stackstorm/docker-hubot
-Source0:        st2hubot
+Source0:        st2chatops
 
-Prefix:         /opt/stackstorm/hubot
+Prefix:         /opt/stackstorm/chatops
 
 %define _builddir %(pwd)
 %define _rpmdir %(pwd)/..
@@ -32,9 +32,9 @@ Prefix:         /opt/stackstorm/hubot
 %install
   %make_install
 %if 0%{?use_systemd}
-  install -D -p -m0644 %{_builddir}/rpm/st2hubot.service %{buildroot}%{_unitdir}/st2hubot.service
+  install -D -p -m0644 %{_builddir}/rpm/st2chatops.service %{buildroot}%{_unitdir}/st2chatops.service
 %else
-  install -D -p -m0755 %{_builddir}/rpm/st2hubot.init %{buildroot}%{_sysconfdir}/rc.d/init.d/st2hubot
+  install -D -p -m0755 %{_builddir}/rpm/st2chatops.init %{buildroot}%{_sysconfdir}/rc.d/init.d/st2chatops
 %endif
 
 %clean
@@ -43,7 +43,7 @@ Prefix:         /opt/stackstorm/hubot
 %files
   /*
 %if 0%{?use_systemd}
-  %{_unitdir}/st2hubot.service
+  %{_unitdir}/st2chatops.service
 %else
-  %{_sysconfdir}/rc.d/init.d/st2hubot
+  %{_sysconfdir}/rc.d/init.d/st2chatops
 %endif

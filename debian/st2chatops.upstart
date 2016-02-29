@@ -1,4 +1,4 @@
-description     "StackStorm Hubot service"
+description     "StackStorm Chatops service"
 author          "StackStorm Engineering <opsadmin@stackstorm.com>"
 
 start on filesystem and net-device-up IFACE!=lo
@@ -12,10 +12,10 @@ respawn limit 2 5
 umask 022
 kill timeout 60
 
-chdir /opt/stackstorm/hubot
+chdir /opt/stackstorm/chatops
 
 script
-  NAME=st2hubot
+  NAME=st2chatops
   DAEMON_ARGS=""
 
   # Read configuration variable file if it is present

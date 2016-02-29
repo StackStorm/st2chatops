@@ -1,5 +1,5 @@
 #!/bin/bash
-# st2hubot-docker-run.sh - Conviniense script for running stackstorm-hubot docker container
+# st2chatops-docker-run.sh - Conviniense script for running stackstorm-hubot docker container
 
 HERE=$(dirname $(dirname "$(readlink -f "$0")"))
 
@@ -16,5 +16,5 @@ echo "Running $ST2_CONTAINER ..."
 /usr/bin/docker run                                              \
   --name $ST2_CONTAINER --net bridge --detach=true               \
   -m 0b -p 8081:8080 --add-host $ST2_HOSTNAME:10.0.1.100         \
-  -v $HERE/st2hubot.env:/app/st2hubot.env                        \
+  -v $HERE/st2chatops.env:/app/st2chatops.env                        \
   stackstorm/hubot

@@ -1,4 +1,4 @@
-Source: st2hubot
+Source: st2chatops
 Section: unknown
 Priority: optional
 Maintainer: StackStorm Engineering <opsadmin@stackstorm.com>
@@ -8,8 +8,8 @@ Homepage: <insert the upstream URL, if relevant>
 #Vcs-Git: git://github.com/stackstorm/docker-hubot.git
 #Vcs-Browser: https://github.com/stackstorm/docker-hubot
 
-Package: st2hubot
+Package: st2chatops
 Architecture: any
 Pre-Depends: dpkg (>= 1.16.16)
-Description: St2Hubot - StackStorm Hubot
+Description: St2Chatops - StackStorm Chatops
  <insert long description, indented with spaces>

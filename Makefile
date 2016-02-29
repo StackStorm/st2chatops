@@ -1,7 +1,7 @@
 COMPONENT := $(notdir $(CURDIR))
 PKG_RELEASE ?= 1
 PKG_VERSION ?= $(shell node -e "console.log(require('./package.json').st2_version)")
-PREFIX ?= /opt/stackstorm/hubot
+PREFIX ?= /opt/stackstorm/chatops
 
 ifneq (,$(wildcard /etc/debian_version))
 	DEBIAN := 1
@@ -30,7 +30,7 @@ install: changelog
 	cp -R $(CURDIR)/node_modules $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/hubot-scripts.json $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/external-scripts.json $(DESTDIR)$(PREFIX)
-	cp -R $(CURDIR)/st2hubot.env $(DESTDIR)$(PREFIX)
+	cp -R $(CURDIR)/st2chatops.env $(DESTDIR)$(PREFIX)
 
 changelog:
 ifeq ($(DEBIAN),1)

@@ -14,7 +14,7 @@ and pre-installed adapters for many Chat services.
 
        export $ST2_HOSTNAME={MY_STACKSTORM_HOST_NAME}
 
-* Use [`scripts/st2hubot.env`](scripts/st2hubot.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
+* Use [`scripts/st2chatops.env`](scripts/st2chatops.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
 [Slack](https://github.com/slackhq/hubot-slack),
 [HipChat](https://github.com/hipchat/hubot-hipchat),
 [Yammer](https://github.com/athieriot/hubot-yammer),
@@ -22,11 +22,11 @@ and pre-installed adapters for many Chat services.
 [IRC](https://github.com/nandub/hubot-irc),
 [XMPP](https://github.com/markstory/hubot-xmpp).
 
-* Use [scripts/st2hubot-docker-run.sh](scripts/st2hubot-docker-run.sh) to start the docker container instance. 
+* Use [scripts/st2chatops-docker-run.sh](scripts/st2chatops-docker-run.sh) to start the docker container instance. 
 The script is set for Slack; for other Chats, **edit it** to pass the environment variables as required for your Chat service adapter.
 Run the script, and ensure that hubot-stackstorm is running and there are no errors:
 
-        ./st2hubot-docker-run.sh
+        ./st2chatops-docker-run.sh
         docker inspect -f {{.State.Status}} stackstorm-hubot
         docker logs stackstorm-hubot
   

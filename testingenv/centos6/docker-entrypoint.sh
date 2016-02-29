@@ -7,10 +7,10 @@ pull)
   ;;
 test)
   rpm -i $ARTIFACT_DIR/*.rpm
-  cd /opt/stackstorm/hubot
-  sed -i.bak -r "s/^(export HUBOT_SLACK_TOKEN.).*/\1$SLACK_TOKEN/" st2hubot.env
-  sed -i.bak -r "s/^(export ST2_AUTH_USERNAME.).*/\1$ST2_USERNAME/" st2hubot.env
-  sed -i.bak -r "s/^(export ST2_AUTH_PASSWORD.).*/\1$ST2_PASSWORD/" st2hubot.env
+  cd /opt/stackstorm/chatops
+  sed -i.bak -r "s/^(export HUBOT_SLACK_TOKEN.).*/\1$SLACK_TOKEN/" st2chatops.env
+  sed -i.bak -r "s/^(export ST2_AUTH_USERNAME.).*/\1$ST2_USERNAME/" st2chatops.env
+  sed -i.bak -r "s/^(export ST2_AUTH_PASSWORD.).*/\1$ST2_PASSWORD/" st2chatops.env
   bin/hubot &> /tmp/hubot.log &
   sleep 10
   cat /tmp/hubot.log

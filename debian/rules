@@ -4,4 +4,4 @@
 
 override_dh_installinit:
 	# So far don't start services
-	dh_installinit --no-start --name=st2hubot
+	dh_installinit --no-start --name=st2chatops

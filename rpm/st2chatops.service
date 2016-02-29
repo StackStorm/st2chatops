@@ -1,5 +1,5 @@
 [Unit]
-Description=StackStorm service st2hubot
+Description=StackStorm service st2chatops
 After=network.target
 
 [Service]
@@ -7,8 +7,8 @@ Type=simple
 User=st2
 Group=st2
 Environment="DAEMON_ARGS=''"
-EnvironmentFile=-/etc/sysconfig/st2hubot
-WorkingDirectory=/opt/stackstorm/hubot
+EnvironmentFile=-/etc/sysconfig/st2chatops
+WorkingDirectory=/opt/stackstorm/chatops
 ExecStart=bin/hubot $DAEMON_ARGS
 TimeoutSec=60
 PrivateTmp=true

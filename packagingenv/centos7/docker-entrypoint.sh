@@ -6,7 +6,7 @@ case "$operation" in
 pull)
   ;;
 build)
-  rpmbuild -bb rpm/st2hubot.spec
+  rpmbuild -bb rpm/st2chatops.spec
   cp ../*.rpm $ARTIFACT_DIR
   ;;
 *)
