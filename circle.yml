@@ -59,14 +59,11 @@ dependencies:
 
 test:
   pre:
-    - docker-compose -f ~/st2box/docker-compose.yaml up -d
+    - docker-compose -f ~/st2box/docker-compose.yaml up -d:
+        parallel: true
   override:
-    - |
-      docker-compose -f docker-compose.circle.yml run \
-        -e PKG_VERSION=${PKG_VERSION} \
-        -e PKG_RELEASE=${PKG_RELEASE} \
-        -e SLACK_TOKEN=${SLACK_TOKEN} \
-        ${DISTRO}-test test
+    - docker-compose -f docker-compose.circle.yml run -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test:
+        parallel: true
     - rsync -rv /tmp/docker-hubot/ node0:~/packages/${DISTRO}:
         parallel: true
   post:
