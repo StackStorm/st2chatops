@@ -64,7 +64,7 @@ test:
   override:
     - docker-compose -f docker-compose.circle.yml run -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test:
         parallel: true
-    - rsync -rv /tmp/docker-hubot/ node0:~/packages/${DISTRO}:
+    - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
         parallel: true
   post:
     - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/logs/${name}.log 2>&1; done

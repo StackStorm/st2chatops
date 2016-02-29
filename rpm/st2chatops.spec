@@ -9,7 +9,7 @@ Release:        %{release}
 Summary:        St2Chatops - StackStorm Chatops
 
 License:        Apache
-URL:            https://github.com/stackstorm/docker-hubot
+URL:            https://github.com/stackstorm/st2chatops
 Source0:        st2chatops
 
 Prefix:         /opt/stackstorm/chatops

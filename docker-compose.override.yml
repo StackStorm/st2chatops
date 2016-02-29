@@ -1,7 +1,7 @@
 ## Suites configuration
 #
 suite:
-  working_dir: /root/docker-hubot
+  working_dir: /root/st2chatops
   environment:
     - DEBUG_LEVEL=0
     - ARTIFACT_DIR=/root/build
@@ -11,5 +11,5 @@ suite:
   extra_hosts:
     - "docker:172.17.0.1"
   volumes:
-    - .:/root/docker-hubot
-    - /tmp/docker-hubot:/root/build
+    - .:/root/st2chatops
+    - /tmp/st2chatops:/root/build

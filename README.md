@@ -1,4 +1,4 @@
-# StackStorm's docker-hubot
+# StackStorm's st2chatops
 
 This repository delivers [StackStorm Chatops](https://docs.stackstorm.com/chatops) in a docker image. The image includes [hubot](https://hubot.github.com/), [hubot-stackstorm](https://github.com/StackStorm/hubot-stackstorm)
 and pre-installed adapters for many Chat services. 
