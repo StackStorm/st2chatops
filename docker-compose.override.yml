@@ -1,0 +1,15 @@
+## Suites configuration
+#
+suite:
+  working_dir: /root/st2chatops
+  environment:
+    - DEBUG_LEVEL=0
+    - ARTIFACT_DIR=/root/build
+    - ST2_HOSTNAME=docker
+    - ST2_USERNAME=admin
+    - ST2_PASSWORD=123
+  extra_hosts:
+    - "docker:172.17.0.1"
+  volumes:
+    - .:/root/st2chatops
+    - /tmp/st2chatops:/root/build

@@ -8,7 +8,11 @@ fail() {
     exit 1
 }
 
-export PATH="/app/node_modules/.bin:/app/node_modules/hubot/node_modules/.bin:$PATH"
+HERE=$(dirname $(dirname "$(readlink -f "$0")"))
+
+export PATH="$HERE/node_modules/.bin:$HERE/node_modules/hubot/node_modules/.bin:$PATH"
+
+. $HERE/st2chatops.env
 
 # Ensure proper ENV variables are set
 if [ ! -n "$HUBOT_ADAPTER" ]; then
@@ -23,4 +27,4 @@ if [ ! -n "$HUBOT_ALIAS" ]; then
     fail "Must provide HUBOT_ALIAS to start"
 fi
 
-exec /app/node_modules/.bin/hubot "@"
+exec $HERE/node_modules/.bin/hubot "@"

@@ -1,0 +1,25 @@
+description     "StackStorm Chatops service"
+author          "StackStorm Engineering <opsadmin@stackstorm.com>"
+
+start on filesystem and net-device-up IFACE!=lo
+stop on starting rc RUNLEVEL=[016]
+
+setuid st2
+setgid st2
+respawn
+respawn limit 2 5
+
+umask 022
+kill timeout 60
+
+chdir /opt/stackstorm/chatops
+
+script
+  NAME=st2chatops
+  DAEMON_ARGS=""
+
+  # Read configuration variable file if it is present
+  [ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+  exec bin/hubot $DAEMON_ARGS
+end script
