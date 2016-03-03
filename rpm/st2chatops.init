@@ -22,7 +22,7 @@
 
 DESC="st2chatops"
 NAME=st2chatops
-DAEMON=bin/hubot
+DAEMON=/opt/stackstorm/chatops/bin/hubot
 DAEMON_ARGS=""
 WORKING_DIRECTORY=/opt/stackstorm/chatops
 PIDFILE=/var/run/$NAME.pid
