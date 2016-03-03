@@ -18,6 +18,10 @@ Prefix:         /opt/stackstorm/chatops
 %define _rpmdir %(pwd)/..
 %define _build_name_fmt %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
+%if 0%{?_unitdir:1}
+  %define use_systemd 1
+%endif
+
 
 %description
   <insert long description, indented with spaces>
@@ -41,7 +45,7 @@ Prefix:         /opt/stackstorm/chatops
   rm -rf %{buildroot}
 
 %files
-  /*
+  /opt/stackstorm/chatops/*
 %if 0%{?use_systemd}
   %{_unitdir}/st2chatops.service
 %else
