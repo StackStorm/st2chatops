@@ -13,7 +13,7 @@ test)
   sed -i.bak -r "s/^(export ST2_AUTH_USERNAME.).*/\1$ST2_USERNAME/" st2chatops.env
   sed -i.bak -r "s/^(export ST2_AUTH_PASSWORD.).*/\1$ST2_PASSWORD/" st2chatops.env
   bin/hubot &> /tmp/hubot.log &
-  sleep 10
+  sleep 15
   cat /tmp/hubot.log
   grep -rq "INFO Slack client now connected" /tmp/hubot.log && \
   grep -rq "INFO [[:digit:]]\+ commands are loaded" /tmp/hubot.log
