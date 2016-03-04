@@ -26,6 +26,7 @@ DAEMON=/opt/stackstorm/chatops/bin/hubot
 DAEMON_ARGS=""
 WORKING_DIRECTORY=/opt/stackstorm/chatops
 PIDFILE=/var/run/$NAME.pid
+LOGFILE=/var/log/$NAME.log
 RUNAS_USER="st2"
 RUNAS_GROUP="st2"
 
@@ -61,8 +62,11 @@ nohup_start() {
   # Echo daemon
   [ "${BOOTUP:-}" = "verbose" -a -z "${LSB:-}" ] && echo -n " $base"
 
+  # make sure log file exists and owned by the same user
+  touch $LOGFILE && chown $runas_user:$runas_group $LOGFILE
+
   # And start it up.
-  $nice runuser -s /bin/bash -g $runas_group $runas_user -c "$corelimit >/dev/null 2>&1 ; cd $WORKING_DIRECTORY && nohup </dev/null >/dev/null 2>&1 $* &"
+  $nice runuser -s /bin/bash -g $runas_group $runas_user -c "$corelimit >/dev/null 2>&1 ; cd $WORKING_DIRECTORY && nohup </dev/null >>$LOGFILE 2>&1 $* &"
 }
 
 # Write pid of a running daemon into the pidfile
