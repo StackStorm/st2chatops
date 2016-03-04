@@ -1,13 +1,21 @@
 ## Suites configuration
 #
 suite:
+  image: fake
   working_dir: /root/st2chatops
   environment:
     - DEBUG_LEVEL=0
     - ARTIFACT_DIR=/root/build
-    - ST2_HOSTNAME=${ST2_HOSTNAME}
-    - ST2_USERNAME=admin
-    - ST2_PASSWORD=123
   volumes:
     - .:/root/st2chatops
     - /tmp/st2chatops:/root/build
+
+suite-test:
+  image: fake
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+  environment:
+    - ST2_HOSTNAME=${ST2_HOSTNAME}
+    - ST2_USERNAME=${ST2_USERNAME}
+    - ST2_PASSWORD=${ST2_PASSWORD}
