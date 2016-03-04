@@ -18,7 +18,7 @@ machine:
     ST2_USERNAME: admin
     ST2_PASSWORD: 123
   pre:
-    - mkdir -p ~/packages/logs
+    - mkdir -p ~/packages
     # Need latest Docker version for some features to work (CircleCI by default works with outdated version)
     - |
       sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
@@ -60,15 +60,11 @@ test:
     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
         parallel: true
   override:
-    - ifconfig:
-        parallel: true
-    - "echo $(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')":
-        parallel: true
-    - docker-compose -f docker-compose.circle.yml run -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test:
+    - "docker-compose -f docker-compose.circle.yml run -e ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}') -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test":
         parallel: true
   post:
     # Store logs
-    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/packages/logs/${name}.log 2>&1; done:
+    - mkdir -p ~/tmp/st2chatops/logs && for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/tmp/st2chatops/logs/${name}.log 2>&1; done:
         parallel: true
     # Copy all Packages to node0
     - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
