@@ -14,7 +14,7 @@ machine:
     ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
     ST2_TEST_ENVIRONEMENT: https://github.com/enykeev/st2box
     DEPLOY_PACKAGES: 1
-    ST2_HOST: localhost
+    ST2_HOSTNAME: "$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
     ST2_USERNAME: admin
     ST2_PASSWORD: 123
   pre:
