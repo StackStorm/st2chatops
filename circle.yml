@@ -73,7 +73,7 @@ deployment:
     owner: StackStorm
     branch:
       - master
-      - /v[0-9]+(\.[0-9]+)*/
+      - /v[0-9]+\.[0-9]+/
       - feature/circleci
     commands:
       # Deploy to PackageCloud all artifacts for respective distros in parallel
@@ -85,4 +85,4 @@ experimental:
     branches:
       only:
         - master
-        - /v[0-9]+(\.[0-9]+)*/
+        - /v[0-9]+\.[0-9]+/
