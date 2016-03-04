@@ -10,7 +10,7 @@ general:
 
 machine:
   pre:
-    - mkdir -p ~/packages ~/tmp/st2chatops/log
+    - mkdir -p ~/packages /tmp/st2chatops/log
     # Need latest Docker version for some features to work (CircleCI by default works with outdated version)
     - |
       sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
@@ -69,7 +69,7 @@ test:
        ${DISTRO}-test test
      : parallel: true
   post:
-    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/tmp/st2chatops/log/${name}.log 2>&1; done:
+    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done:
         parallel: true
     # Copy all Packages to node0
     - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
