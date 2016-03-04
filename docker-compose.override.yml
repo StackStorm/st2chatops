@@ -16,6 +16,6 @@ suite-test:
     file: docker-compose.override.yml
     service: suite
   environment:
-    - ST2_HOSTNAME=${ST2_HOSTNAME}
-    - ST2_USERNAME=${ST2_USERNAME}
-    - ST2_PASSWORD=${ST2_PASSWORD}
+    - ST2_HOSTNAME=172.17.0.1
+    - ST2_USERNAME=admin
+    - ST2_PASSWORD=123

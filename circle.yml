@@ -9,6 +9,14 @@ general:
     - ~/packages
 
 machine:
+  pre:
+    - mkdir -p ~/packages ~/tmp/st2chatops/log
+    # Need latest Docker version for some features to work (CircleCI by default works with outdated version)
+    - |
+      sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
+      sudo chmod 0755 /usr/bin/docker
+  services:
+    - docker
   environment:
     DISTROS: "wheezy jessie trusty el6 el7"
     ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
@@ -17,19 +25,9 @@ machine:
     ST2_HOSTNAME: "$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
     ST2_USERNAME: admin
     ST2_PASSWORD: 123
-  pre:
-    - mkdir -p ~/packages
-    # Need latest Docker version for some features to work (CircleCI by default works with outdated version)
-    - |
-      sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
-      sudo chmod 0755 /usr/bin/docker
-  services:
-    - docker
 
 checkout:
   post:
-    - echo $ST2_HOSTNAME
-    - exit 1
     - git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
     - git clone --depth 1 ${ST2_TEST_ENVIRONEMENT} ~/st2box
     - |
@@ -62,11 +60,16 @@ test:
     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
         parallel: true
   override:
-    - "docker-compose run -e ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}') -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test":
-        parallel: true
+   - ? |
+       docker-compose run \
+       -e ST2_HOSTNAME=${ST2_HOSTNAME} \
+       -e ST2_USERNAME=${ST2_USERNAME} \
+       -e ST2_PASSWORD=${ST2_PASSWORD} \
+       -e SLACK_TOKEN=${SLACK_TOKEN} \
+       ${DISTRO}-test test
+     : parallel: true
   post:
-    # Store logs
-    - mkdir -p ~/tmp/st2chatops/logs && for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/tmp/st2chatops/logs/${name}.log 2>&1; done:
+    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/tmp/st2chatops/log/${name}.log 2>&1; done:
         parallel: true
     # Copy all Packages to node0
     - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
