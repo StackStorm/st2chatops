@@ -28,6 +28,8 @@ machine:
 
 checkout:
   post:
+    - echo $ST2_HOSTNAME
+    - exit 1
     - git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
     - git clone --depth 1 ${ST2_TEST_ENVIRONEMENT} ~/st2box
     - |
