@@ -44,11 +44,11 @@ dependencies:
     - sudo apt-get update && sudo apt-get install -y rpm parallel jq
     - gem install package_cloud
     - sudo pip install docker-compose
-    - docker-compose -f docker-compose.circle.yml run ${DISTRO} pull
-    - docker-compose -f docker-compose.circle.yml run ${DISTRO}-test pull
+    - docker-compose run ${DISTRO} pull
+    - docker-compose run ${DISTRO}-test pull
   override:
     - |
-      docker-compose -f docker-compose.circle.yml run \
+      docker-compose run \
         -e PKG_VERSION=${PKG_VERSION} \
         -e PKG_RELEASE=${PKG_RELEASE} \
         ${DISTRO} build
@@ -60,7 +60,7 @@ test:
     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
         parallel: true
   override:
-    - "docker-compose -f docker-compose.circle.yml run -e ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}') -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test":
+    - "docker-compose run -e ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}') -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test":
         parallel: true
   post:
     # Store logs
