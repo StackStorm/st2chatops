@@ -12,7 +12,6 @@ general:
 machine:
   environment:
     DISTROS: "wheezy jessie trusty el6 el7"
-    PKGTYPE: "deb deb deb rpm rpm"
     ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
     ST2_TEST_ENVIRONEMENT: https://github.com/enykeev/st2box
     DEPLOY_PACKAGES: 1
