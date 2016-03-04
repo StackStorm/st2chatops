@@ -60,6 +60,10 @@ test:
     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
         parallel: true
   override:
+    - ifconfig:
+        parallel: true
+    - "echo $(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')":
+        parallel: true
     - docker-compose -f docker-compose.circle.yml run -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test:
         parallel: true
   post:
