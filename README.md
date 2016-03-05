@@ -19,9 +19,9 @@ Refer to official node [documentation](https://nodejs.org/en/download/package-ma
 
 Building of the packages is handled automatically by CircleCI. In case you'd like to run it locally, you can use our building pipeline by running docker-compose:
 
-        docker-compose -f docker-compose.circle.yml run ${DISTRO} build
+        docker-compose run ${DISTRO} build
 
-Where ${DISTRO} refers to flavor name. See [docker-compose.circle.yml](docker-compose.circle.yml) file for the list of supported flavors.
+Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.yml) file for the list of supported flavors.
 
 ## Docker
 

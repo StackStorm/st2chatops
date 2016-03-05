@@ -34,28 +34,28 @@ wheezy-test:
   build: ./testingenv/wheezy
   extends:
     file: docker-compose.override.yml
-    service: suite
+    service: suite-test
 
 jessie-test:
   build: ./testingenv/jessie
   extends:
     file: docker-compose.override.yml
-    service: suite
+    service: suite-test
 
 trusty-test:
   build: ./testingenv/trusty
   extends:
     file: docker-compose.override.yml
-    service: suite
+    service: suite-test
 
 el7-test:
   build: ./testingenv/centos7
   extends:
     file: docker-compose.override.yml
-    service: suite
+    service: suite-test
 
 el6-test:
   build: ./testingenv/centos6
   extends:
     file: docker-compose.override.yml
-    service: suite
+    service: suite-test
