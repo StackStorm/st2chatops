@@ -7,26 +7,24 @@
 general:
   artifacts:
     - ~/packages
-    - ~/logs
 
 machine:
-  environment:
-    DISTROS: "wheezy jessie trusty el6 el7"
-    PKGTYPE: "deb deb deb rpm rpm"
-    ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
-    ST2_TEST_ENVIRONEMENT: https://github.com/enykeev/st2box
-    DEPLOY_PACKAGES: 1
-    ST2_HOST: localhost
-    ST2_USERNAME: admin
-    ST2_PASSWORD: 123
   pre:
-    - mkdir -p ~/packages ~/logs
+    - mkdir -p ~/packages /tmp/st2chatops/log
     # Need latest Docker version for some features to work (CircleCI by default works with outdated version)
     - |
       sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.9.0-circleci'
       sudo chmod 0755 /usr/bin/docker
   services:
     - docker
+  environment:
+    DISTROS: "wheezy jessie trusty el6 el7"
+    ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
+    ST2_TEST_ENVIRONEMENT: https://github.com/enykeev/st2box
+    DEPLOY_PACKAGES: 1
+    ST2_HOSTNAME: "$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
+    ST2_USERNAME: admin
+    ST2_PASSWORD: 123
 
 checkout:
   post:
@@ -36,7 +34,7 @@ checkout:
       distros=($DISTROS)
       DISTRO=${distros[$CIRCLE_NODE_INDEX]}
       PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
-      PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision trusty ${PKG_VERSION} st2chatops)
+      PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
       echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
       echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
       echo "export DISTRO=${DISTRO}" >> ~/.circlerc
@@ -46,11 +44,11 @@ dependencies:
     - sudo apt-get update && sudo apt-get install -y rpm parallel jq
     - gem install package_cloud
     - sudo pip install docker-compose
-    - docker-compose -f docker-compose.circle.yml run ${DISTRO} pull
-    - docker-compose -f docker-compose.circle.yml run ${DISTRO}-test pull
+    - docker-compose run ${DISTRO} pull
+    - docker-compose run ${DISTRO}-test pull
   override:
     - |
-      docker-compose -f docker-compose.circle.yml run \
+      docker-compose run \
         -e PKG_VERSION=${PKG_VERSION} \
         -e PKG_RELEASE=${PKG_RELEASE} \
         ${DISTRO} build
@@ -62,19 +60,27 @@ test:
     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
         parallel: true
   override:
-    - docker-compose -f docker-compose.circle.yml run -e SLACK_TOKEN=${SLACK_TOKEN} ${DISTRO}-test test:
+   - ? |
+       docker-compose run \
+       -e ST2_HOSTNAME=${ST2_HOSTNAME} \
+       -e ST2_USERNAME=${ST2_USERNAME} \
+       -e ST2_PASSWORD=${ST2_PASSWORD} \
+       -e SLACK_TOKEN=${SLACK_TOKEN} \
+       ${DISTRO}-test test
+     : parallel: true
+  post:
+    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done:
         parallel: true
+    # Copy all Packages to node0
     - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
         parallel: true
-  post:
-    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/logs/${name}.log 2>&1; done
 
 deployment:
   publish:
     owner: StackStorm
     branch:
       - master
-      - /v[0-9]+(\.[0-9]+)*/
+      - /v[0-9]+\.[0-9]+/
       - feature/circleci
     commands:
       # Deploy to PackageCloud all artifacts for respective distros in parallel
@@ -86,4 +92,4 @@ experimental:
     branches:
       only:
         - master
-        - /v[0-9]+(\.[0-9]+)*/
+        - /v[0-9]+\.[0-9]+/
