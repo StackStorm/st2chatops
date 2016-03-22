@@ -40,6 +40,7 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 [Slack](https://github.com/slackhq/hubot-slack),
 [HipChat](https://github.com/hipchat/hubot-hipchat),
 [Yammer](https://github.com/athieriot/hubot-yammer),
+[Cisco Spark](https://github.com/tonybaloney/hubot-spark),
 [Flowdock](https://github.com/flowdock/hubot-flowdock),
 [IRC](https://github.com/nandub/hubot-irc),
 [XMPP](https://github.com/markstory/hubot-xmpp).

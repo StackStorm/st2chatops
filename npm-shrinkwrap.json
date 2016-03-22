@@ -849,6 +849,11 @@
       "from": "git+https://github.com/athieriot/hubot-yammer.git",
       "resolved": "git+https://github.com/athieriot/hubot-yammer.git#fde43a79a977203370ac7f2595702ad60406cffb"
     },
+    "hubot-spark": {
+      "version": "1.0.1",
+      "from": "hubot-spark@1.0.1",
+      "resolved": "https://registry.npmjs.org/hubot-spark/-/hubot-spark-1.0.1.tgz"
+    },
     "iconv": {
       "version": "2.1.11",
       "from": "iconv@>=2.1.6 <2.2.0",
