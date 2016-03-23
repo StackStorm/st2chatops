@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "st2_version": "1.4dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -11,7 +11,7 @@
     "hubot-redis-brain" : "0.0.3",
     "hubot-scripts"     : "^2.16.2",
     "hubot-help"        : "^0.1.2",
-    "hubot-stackstorm"  : "^0.3.9",
+    "hubot-stackstorm"  : "^0.4.1",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
     "hubot-spark"       : "^1.7.0",
