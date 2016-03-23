@@ -41,7 +41,7 @@ checkout:
 
 dependencies:
   pre:
-    - sudo apt-get update && sudo apt-get install -y rpm parallel jq
+    - sudo rm -R /var/cache/apt/ && sudo apt-get update && sudo apt-get install -y rpm parallel jq
     - gem install package_cloud
     - sudo pip install docker-compose
     - docker-compose run ${DISTRO} pull
