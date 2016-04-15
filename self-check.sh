@@ -16,7 +16,7 @@ and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
 You can access Hubot logs in your catch-all log file:
-\e[1m/var/log/upstart\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
+\e[1m/var/log/upstart/\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
 
 StackStorm logs are stored in:
 \e[1m/var/log/st2/\e[0m
@@ -32,20 +32,17 @@ Hubot is working, StackStorm commands are loaded normally
 and messages from StackStorm are getting through.
 
 If you can't see the bot in your chat at this point,
-the most probable cause is incorrect login credentials.
+the most probable cause is incorrect login credentials,
+like a token or username/password. Check the settings:
 
-Check that your bot is using the right credentials to log in.
-If you installed StackStorm with the All-In-One Installer,
-the Hubot init script is located at:
-
-\e[1m/etc/init.d/docker-hubot\e[0m
+\e[1m/opt/stackstorm/chatops/st2chatops.env\e[0m
 
 If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs with:
-\e[1mdocker logs hubot\e[0m
+You can access Hubot logs in your catch-all log file:
+\e[1m/var/log/upstart/\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
 
 StackStorm logs are stored in:
 \e[1m/var/log/st2/\e[0m
@@ -156,7 +153,7 @@ else
 fi
 
 
-hubotlog=$({ echo -n; sleep 5; echo 'yourbot help'; echo; sleep 2; } | /opt/stackstorm/chatops/bin/hubot --test 2>/dev/null)
+hubotlog=$({ echo -n; sleep 5; echo 'hubot help'; echo; sleep 2; } | /opt/stackstorm/chatops/bin/hubot --test 2>/dev/null)
 
 
 # Check that Hubot responds to help
@@ -190,7 +187,7 @@ fi
 
 channel=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 execution=$($($st2 action execute chatops.post_message channel="$channel" message="Debug. If you see this you're incredibly lucky but please ignore." 2>/dev/null | grep "execution get") 2>/dev/null)
-hubotlogs=$($docker logs hubot | grep "$channel")
+hubotlogs=$(cat /var/log/upstart/st2chatops.log | grep -c "$channel")
 
 
 # Check that post_message is executed successfully.
@@ -209,7 +206,7 @@ fi
 
 
 # Check that post_message is getting through.
-if [ "0" = "$(echo "$hubotlogs" | wc -l)" ]; then
+if [ "0" = "$(echo $hubotlogs)" ]; then
     echo -e "\e[31mStep 9 failed: chatops.post_message hasn't been received.\e[0m"
     echo
     echo -e "    Try to check both Hubot and StackStorm logs for more information."
