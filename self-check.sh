@@ -15,10 +15,9 @@ If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs in \e[1m/var/log/st2chatops.log\e[0m.
+You can access Hubot logs at \e[1m/var/log/st2/st2chatops.log\e[0m.
 
-StackStorm logs are stored in:
-\e[1m/var/log/st2/\e[0m
+Other StackStorm logs are also stored in \e[1m/var/log/st2/\e[0m.
 "
 
 
@@ -40,10 +39,9 @@ If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs in \e[1m/var/log/st2chatops.log\e[0m.
+You can access Hubot logs at \e[1m/var/log/st2/st2chatops.log\e[0m.
 
-StackStorm logs are stored in:
-\e[1m/var/log/st2/\e[0m
+Other StackStorm logs are also stored in \e[1m/var/log/st2/\e[0m.
 "
 
 
@@ -185,7 +183,7 @@ fi
 
 channel=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 execution=$($($st2 action execute chatops.post_message channel="$channel" message="Debug. If you see this you're incredibly lucky but please ignore." 2>/dev/null | grep "execution get") 2>/dev/null)
-hubotlogs=$(cat /var/log/st2chatops.log | grep -c "$channel")
+hubotlogs=$(cat /var/log/st2/st2chatops.log | grep -c "$channel")
 
 
 # Check that post_message is executed successfully.
