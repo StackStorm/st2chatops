@@ -23,5 +23,5 @@ script
   # Read configuration variable file if it is present
   [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
-  exec bin/hubot $DAEMON_ARGS
+  exec bin/hubot $DAEMON_ARGS >> /var/log/st2/st2chatops.log 2>&1
 end script
