@@ -15,8 +15,7 @@ If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs in your catch-all log file:
-\e[1m/var/log/upstart/\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
+You can access Hubot logs in \e[1m/var/log/st2chatops.log\e[0m.
 
 StackStorm logs are stored in:
 \e[1m/var/log/st2/\e[0m
@@ -41,8 +40,7 @@ If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs in your catch-all log file:
-\e[1m/var/log/upstart/\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
+You can access Hubot logs in \e[1m/var/log/st2chatops.log\e[0m.
 
 StackStorm logs are stored in:
 \e[1m/var/log/st2/\e[0m
