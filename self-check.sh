@@ -1,6 +1,7 @@
 #!/bin/bash
 
 st2="/usr/bin/st2"
+cd /opt/stackstorm/chatops
 
 
 failure="
