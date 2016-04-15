@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-docker="/usr/bin/sudo /usr/bin/docker"
 st2="/usr/bin/st2"
 
 
@@ -17,8 +15,8 @@ If you're still having trouble, gist the log files
 and come see us in our Slack community:
 \e[4mhttps://stackstorm.com/community-signup\e[0m
 
-You can access Hubot logs with:
-\e[1mdocker logs hubot\e[0m
+You can access Hubot logs in your catch-all log file:
+\e[1m/var/log/upstart\e[0m on Ubuntu or \e[1msyslog\e[0m/\e[1mmessages\e[0m on RHEL.
 
 StackStorm logs are stored in:
 \e[1m/var/log/st2/\e[0m
@@ -77,36 +75,32 @@ fi
 
 
 # Check if Hubot is installed and running
-if [ "true" = "$($docker inspect --format='{{.State.Running}}' hubot 2>/dev/null)" ]; then
+if [ "1" = "$(service st2chatops status 2>/dev/null | grep -c running)" ]; then
     echo -e "Step 1: Hubot is running."
 else
-    echo -e "\e[31mStep 1 failed: Hubot container is not running on this machine.\e[0m"
+    echo -e "\e[31mStep 1 failed: Hubot is not running on this machine.\e[0m"
     echo
-    echo -e "    Try launching it with:"
+    echo -e "    Try restarting it with:"
     echo
-    echo -e "    \e[1mservice docker-hubot start\e[0m"
+    echo -e "    \e[1mservice st2chatops restart\e[0m"
     echo
-    echo -e "    If there's no \"docker-hubot\" service, then"
-    echo -e "    your StackStorm installation could be outdated."
-    echo -e "    Try reinstalling or running the update script:"
-    echo
-    echo -e "    \e[1msudo update-system\e[0m"
+    echo -e "    There's a variety of reasons why Hubot would stop, "
+    echo -e "    but the most common is incorrect adapter settings."
+    echo -e "    Check /opt/stackstorm/chatops/st2chatops.env"
     echo -e "$failure"
     exit 1
 fi
 
 
 # Check if Hubot-stackstorm is installed
-npm=$($docker exec -it hubot npm list 2>/dev/null | grep hubot-stackstorm | sed -r "s/.*\s(hubot.*)\\r/\1/")
+npm=$(cd /opt/stackstorm/chatops && npm list 2>/dev/null | grep hubot-stackstorm | sed -r "s/.*@(.*)\s*/\1/")
 if [ "0" = "$(echo "$npm" | wc -c)" ]; then
-    echo -e "\e[31mStep 2 failed: Hubot-stackstorm is not installed inside the container.\e[0m"
+    echo -e "\e[31mStep 2 failed: Hubot-stackstorm is not installed.\e[0m"
     echo
-    echo -e "    It's possible the container is outdated or corrupted."
-    echo -e "    Try removing it and restarting the init script:"
+    echo -e "    It's possible the Hubot install is outdated or corrupted."
+    echo -e "    Try installing the plugin manually:"
     echo
-    echo -e "    \e[1msudo service docker-hubot stop\e[0m"
-    echo -e "    \e[1msudo docker rmi stackstorm/hubot\e[0m"
-    echo -e "    \e[1msudo service docker-hubot start\e[0m"
+    echo -e "    \e[1mcd /opt/stackstorm/chatops && npm install hubot-stackstorm\e[0m"
     echo -e "$failure"
     exit 1
 else
@@ -162,19 +156,17 @@ else
 fi
 
 
-hubotlog=$({ echo -n; sleep 5; echo 'hubot help'; echo; sleep 2; } | $docker exec -i hubot bash -c "export HUBOT_ADAPTER=shell; export EXPRESS_PORT=31337; bin/hubot"; 2>/dev/null)
+hubotlog=$({ echo -n; sleep 5; echo 'yourbot help'; echo; sleep 2; } | /opt/stackstorm/chatops/bin/hubot --test 2>/dev/null)
 
 
 # Check that Hubot responds to help
 if [ "0" = "$(echo "$hubotlog" | grep -c "help - Displays")" ]; then
     echo -e "\e[31mStep 6 failed: Hubot doesn't respond to the \"help\" command.\e[0m"
     echo
-    echo -e "    Try reinstalling the container. This error shouldn't happen"
-    echo -e "    unless the Hubot installation wasn't successful."
-    echo
-    echo -e "    \e[1msudo service docker-hubot stop\e[0m"
-    echo -e "    \e[1msudo docker rmi stackstorm/hubot\e[0m"
-    echo -e "    \e[1msudo service docker-hubot start\e[0m"
+    echo -e "    Try reinstalling the st2chatops package. This error shouldn't"
+    echo -e "    happen unless the Hubot installation wasn't successful."
+    echo -e "    It's also possible you changed the bot's name; this script"
+    echo -e "    assumes that \"hubot\" is something the bot will respond to."
     echo -e "$failure"
     exit 1
 else
@@ -186,13 +178,9 @@ fi
 if [ "0" = "$(echo "$hubotlog" | grep -c "commands are loaded")" ]; then
     echo -e "\e[31mStep 7 failed: Hubot doesn't try to load commands from StackStorm.\e[0m"
     echo
-    echo -e "    Try reinstalling the container and checking credentials."
+    echo -e "    Try checking credentials in \e[1mst2chatops.env\e[0m."
     echo -e "    This error means the \"hubot-stackstorm\" plugin couldn't"
     echo -e "    load, connect to StackStorm or authenticate."
-    echo
-    echo -e "    \e[1msudo service docker-hubot stop\e[0m"
-    echo -e "    \e[1msudo docker rmi stackstorm/hubot\e[0m"
-    echo -e "    \e[1msudo service docker-hubot start\e[0m"
     echo -e "$failure"
     exit 1
 else
