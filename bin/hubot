@@ -14,6 +14,17 @@ export PATH="$HERE/node_modules/.bin:$HERE/node_modules/hubot/node_modules/.bin:
 
 . $HERE/st2chatops.env
 
+for i in "$@"
+  do
+    case $i in
+      --test)
+      export HUBOT_ADAPTER=shell
+      export EXPRESS_PORT=31337
+      shift
+      ;;
+    esac
+  done
+
 # Ensure proper ENV variables are set
 if [ ! -n "$HUBOT_ADAPTER" ]; then
    fail "Must provide HUBOT_ADAPTER ENV variable to start."
