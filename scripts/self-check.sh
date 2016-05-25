@@ -47,7 +47,7 @@ Other StackStorm logs are also stored in \e[1m/var/log/st2/\e[0m.
 
 
 echo
-echo -e "Starting the Nine-Step Hubot Self-Check Program"
+echo -e "Starting the Eleven-Step Hubot Self-Check Program"
 echo -e "==============================================="
 echo
 
@@ -152,7 +152,6 @@ fi
 
 hubotlog=$({ echo -n; sleep 5; echo 'hubot help'; echo; sleep 2; } | /opt/stackstorm/chatops/bin/hubot --test 2>/dev/null)
 
-
 # Check that Hubot responds to help
 if [ "0" = "$(echo "$hubotlog" | grep -c "help - Displays")" ]; then
     echo -e "\e[31mStep 6 failed: Hubot doesn't respond to the \"help\" command.\e[0m"
@@ -184,8 +183,7 @@ fi
 
 channel=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 execution=$($($st2 action execute chatops.post_message channel="$channel" message="Debug. If you see this you're incredibly lucky but please ignore." 2>/dev/null | grep "execution get") 2>/dev/null)
-hubotlogs=$(cat /var/log/st2/st2chatops.log | grep -c "$channel")
-
+hubotlogs=$(tail /var/log/st2/st2chatops.log)
 
 # Check that post_message is executed successfully.
 if [ "0" = "$(echo "$execution" | grep -c "succeeded")" ]; then
@@ -202,17 +200,47 @@ else
 fi
 
 
+# Check if the Hubot Adapter TOKEN has expired
+if [ "0" != "$(echo "$hubotlogs" | grep -c "Unauthorized - Token has expired.")" ]; then
+    echo -e "\e[31mStep 9 failed: The hubot adapter token has expired\e[0m"
+    echo -e "    Try restarting it with:"
+    echo
+    echo -e "    \e[1mservice st2chatops restart\e[0m"
+    echo
+    echo -e "$failure"
+    exit 1
+else
+    echo -e "Step 9: The hubot adapter token is ok"
+fi
+
+
 # Check that post_message is getting through.
-if [ "0" = "$(echo $hubotlogs)" ]; then
-    echo -e "\e[31mStep 9 failed: chatops.post_message hasn't been received.\e[0m"
+if [ "0" = "$(echo $hubotlogs | grep -c "$channel")" ]; then
+    echo -e "\e[31mStep 10 failed: chatops.post_message hasn't been received.\e[0m"
     echo
     echo -e "    Try to check both Hubot and StackStorm logs for more information."
     echo -e "$failure"
     exit 1
 else
-    echo -e "Step 9: chatops.post_message has been received."
+    echo -e "Step 10: chatops.post_message has been received."
 fi
 
+
+complete_flow=$({ echo -n; sleep 5; echo 'hubot st2 list 5 actions pack=st2'; echo; sleep 10; } | bin/hubot --test 2>/dev/null)
+
+# End to end test to check st2 list via hubot
+if [ "0" = "$(echo "$complete_flow" | grep -c "st2.actions.list - Retrieve a list of available StackStorm actions.")" ]; then
+    echo -e "\e[31mStep 11 failed: End to End Test Failed.\e[0m"
+    echo
+    echo -e "    Try reinstalling the st2chatops package. This error shouldn't"
+    echo -e "    happen unless the Hubot installation wasn't successful."
+    echo -e "    It's also possible you changed the bot's name; this script"
+    echo -e "    assumes that \"hubot\" is something the bot will respond to."
+    echo -e "$failure"
+    exit 1
+else
+    echo -e "Step 11: Hubot responding to the \"st2 list\" command."
+fi
 
 echo -e "$success"
 exit 0
