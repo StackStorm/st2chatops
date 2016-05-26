@@ -47,7 +47,7 @@ Other StackStorm logs are also stored in \e[1m/var/log/st2/\e[0m.
 
 
 echo
-echo -e "Starting the Eleven-Step Hubot Self-Check Program"
+echo -e "Starting the Hubot Self-Check Program"
 echo -e "==============================================="
 echo
 
@@ -88,6 +88,7 @@ fi
 
 # Check if Hubot-stackstorm is installed
 npm=$(cd /opt/stackstorm/chatops && npm list 2>/dev/null | grep hubot-stackstorm | sed -r "s/.*@(.*)\s*/\1/")
+
 if [ "0" = "$(echo "$npm" | wc -c)" ]; then
     echo -e "\e[31mStep 2 failed: Hubot-stackstorm is not installed.\e[0m"
     echo
@@ -150,9 +151,9 @@ else
 fi
 
 
+# Check that Hubot responds to help
 hubotlog=$({ echo -n; sleep 5; echo 'hubot help'; echo; sleep 2; } | /opt/stackstorm/chatops/bin/hubot --test 2>/dev/null)
 
-# Check that Hubot responds to help
 if [ "0" = "$(echo "$hubotlog" | grep -c "help - Displays")" ]; then
     echo -e "\e[31mStep 6 failed: Hubot doesn't respond to the \"help\" command.\e[0m"
     echo
@@ -181,10 +182,10 @@ else
 fi
 
 
+# Check that post_message is executed successfully.
 channel=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 execution=$($($st2 action execute chatops.post_message channel="$channel" message="Debug. If you see this you're incredibly lucky but please ignore." 2>/dev/null | grep "execution get") 2>/dev/null)
 
-# Check that post_message is executed successfully.
 if [ "0" = "$(echo "$execution" | grep -c "succeeded")" ]; then
     echo -e "\e[31mStep 8 failed: chatops.post_message doesn't work.\e[0m"
     echo
@@ -200,9 +201,7 @@ fi
 
 
 #Skipping these steps for RHEL7: https://github.com/StackStorm/st2-packages/issues/300
-if [ "True" = "$RH7OS" ]; then
-    echo "Step 9-10 are skipped on RHEL7";
-else
+if [ "False" = "$RH7OS" ]; then
     hubotlogs=$(tail /var/log/st2/st2chatops.log)
     # Check if the Hubot Adapter TOKEN has expired
     if [ "0" != "$(echo "$hubotlogs" | grep -c "Unauthorized - Token has expired.")" ]; then
@@ -234,7 +233,7 @@ complete_flow=$({ echo -n; sleep 5; echo 'hubot st2 list 5 actions pack=st2'; ec
 
 # End to end test to check st2 list via hubot
 if [ "0" = "$(echo "$complete_flow" | grep -c "st2.actions.list - Retrieve a list of available StackStorm actions.")" ]; then
-    echo -e "\e[31mStep 11 failed: End to End Test Failed.\e[0m"
+    echo -e "\e[31mEnd to end test failed: Hubot not responding to \"st2 list\" command.\e[0m"
     echo
     echo -e "    Try reinstalling the st2chatops package. This error shouldn't"
     echo -e "    happen unless the Hubot installation wasn't successful."
@@ -243,7 +242,7 @@ if [ "0" = "$(echo "$complete_flow" | grep -c "st2.actions.list - Retrieve a lis
     echo -e "$failure"
     exit 1
 else
-    echo -e "Step 11: Hubot responding to the \"st2 list\" command."
+    echo -e "End To End Test: Hubot responding to the \"st2 list\" command."
 fi
 
 echo -e "$success"
