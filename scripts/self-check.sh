@@ -2,7 +2,7 @@
 
 st2="/usr/bin/st2"
 cd /opt/stackstorm/chatops
-
+RH7OS=`python -c "import platform;print '.el7' in platform.platform()"`
 
 failure="
 ===============================================
@@ -183,7 +183,6 @@ fi
 
 channel=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 execution=$($($st2 action execute chatops.post_message channel="$channel" message="Debug. If you see this you're incredibly lucky but please ignore." 2>/dev/null | grep "execution get") 2>/dev/null)
-hubotlogs=$(tail /var/log/st2/st2chatops.log)
 
 # Check that post_message is executed successfully.
 if [ "0" = "$(echo "$execution" | grep -c "succeeded")" ]; then
@@ -200,31 +199,36 @@ else
 fi
 
 
-# Check if the Hubot Adapter TOKEN has expired
-if [ "0" != "$(echo "$hubotlogs" | grep -c "Unauthorized - Token has expired.")" ]; then
-    echo -e "\e[31mStep 9 failed: The hubot adapter token has expired\e[0m"
-    echo -e "    Try restarting it with:"
-    echo
-    echo -e "    \e[1mservice st2chatops restart\e[0m"
-    echo
-    echo -e "$failure"
-    exit 1
+#Skipping these steps for RHEL7: https://github.com/StackStorm/st2-packages/issues/300
+if [ "True" = "$RH7OS" ]; then
+    echo "Step 9-10 are skipped on RHEL7";
 else
-    echo -e "Step 9: The hubot adapter token is ok"
+    hubotlogs=$(tail /var/log/st2/st2chatops.log)
+    # Check if the Hubot Adapter TOKEN has expired
+    if [ "0" != "$(echo "$hubotlogs" | grep -c "Unauthorized - Token has expired.")" ]; then
+        echo -e "\e[31mStep 9 failed: The hubot adapter token has expired\e[0m"
+        echo -e "    Try restarting it with:"
+        echo
+        echo -e "    \e[1mservice st2chatops restart\e[0m"
+        echo
+        echo -e "$failure"
+        exit 1
+    else
+        echo -e "Step 9: The hubot adapter token is ok"
+    fi
+
+
+    # Check that post_message is getting through.
+    if [ "0" = "$(echo $hubotlogs | grep -c "$channel")" ]; then
+        echo -e "\e[31mStep 10 failed: chatops.post_message hasn't been received.\e[0m"
+        echo
+        echo -e "    Try to check both Hubot and StackStorm logs for more information."
+        echo -e "$failure"
+        exit 1
+    else
+        echo -e "Step 10: chatops.post_message has been received."
+    fi
 fi
-
-
-# Check that post_message is getting through.
-if [ "0" = "$(echo $hubotlogs | grep -c "$channel")" ]; then
-    echo -e "\e[31mStep 10 failed: chatops.post_message hasn't been received.\e[0m"
-    echo
-    echo -e "    Try to check both Hubot and StackStorm logs for more information."
-    echo -e "$failure"
-    exit 1
-else
-    echo -e "Step 10: chatops.post_message has been received."
-fi
-
 
 complete_flow=$({ echo -n; sleep 5; echo 'hubot st2 list 5 actions pack=st2'; echo; sleep 10; } | bin/hubot --test 2>/dev/null)
 
