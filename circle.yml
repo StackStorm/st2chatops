@@ -25,6 +25,7 @@ machine:
     ST2_HOSTNAME: "$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')"
     ST2_USERNAME: admin
     ST2_PASSWORD: 123
+    ST2_API_KEY: ""
 
 checkout:
   post:
@@ -66,6 +67,7 @@ test:
        -e ST2_USERNAME=${ST2_USERNAME} \
        -e ST2_PASSWORD=${ST2_PASSWORD} \
        -e SLACK_TOKEN=${SLACK_TOKEN} \
+       -e ST2_API_KEY=${ST2_API_KEY} \
        ${DISTRO}-test test
      : parallel: true
   post:
