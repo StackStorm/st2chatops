@@ -28,9 +28,9 @@
       "resolved": "https://registry.npmjs.org/hubot-help/-/hubot-help-0.1.3.tgz"
     },
     "hubot-stackstorm": {
-      "version": "0.4.1",
-      "from": "hubot-stackstorm@0.4.1",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.4.1.tgz",
+      "version": "0.4.3",
+      "from": "hubot-stackstorm@0.4.3",
+      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.4.3.tgz",
       "dependencies": {
         "rsvp": {
           "version": "3.0.14",
