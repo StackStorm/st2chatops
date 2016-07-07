@@ -7,9 +7,9 @@ Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
 Requires:       nodejs >= 4.0.0
-Summary:        St2Chatops - StackStorm Chatops
+Summary:        St2Chatops - StackStorm ChatOps
 
-License:        Apache
+License:        Apache 2.0
 URL:            https://github.com/stackstorm/st2chatops
 Source0:        st2chatops
 
@@ -25,7 +25,8 @@ Prefix:         /opt/stackstorm/chatops
 
 
 %description
-  <insert long description, indented with spaces>
+  Package providing StackStorm ChatOps functionality: bundled, tested and ready to use Hubot
+  with hubot-stackstorm plugin and additional chat adapters
 
 %prep
   rm -rf %{buildroot}
