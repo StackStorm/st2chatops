@@ -34,7 +34,11 @@ checkout:
       distros=($DISTROS)
       DISTRO=${distros[$CIRCLE_NODE_INDEX]}
       PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
-      PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
+      if [ -n "$PACKAGECLOUD_TOKEN" ]; then
+        PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
+      else
+        PKG_RELEASE=1
+      fi
       echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
       echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
       echo "export DISTRO=${DISTRO}" >> ~/.circlerc

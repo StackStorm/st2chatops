@@ -4,12 +4,14 @@ Priority: optional
 Maintainer: StackStorm Engineering <opsadmin@stackstorm.com>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.5
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://github.com/stackstorm/st2chatops.git
-#Vcs-Browser: https://github.com/stackstorm/st2chatops
+Homepage: https://github.com/stackstorm/st2chatops
+Vcs-Git: git://github.com/stackstorm/st2chatops.git
+Vcs-Browser: https://github.com/stackstorm/st2chatops
 
 Package: st2chatops
 Architecture: any
 Pre-Depends: dpkg (>= 1.16.16)
-Description: St2Chatops - StackStorm Chatops
- <insert long description, indented with spaces>
+Depends: nodejs (>= 4.0.0)
+Description: St2Chatops - StackStorm ChatOps.
+ Package providing StackStorm ChatOps functionality: bundled, tested and ready to use Hubot
+ with hubot-stackstorm plugin and additional chat adapters
