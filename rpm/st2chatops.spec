@@ -53,3 +53,6 @@ Prefix:         /opt/stackstorm/chatops
 %else
   %{_sysconfdir}/rc.d/init.d/st2chatops
 %endif
+
+%config(noreplace) /opt/stackstorm/chatops/st2chatops.env
+%config(noreplace) /opt/stackstorm/chatops/external-scripts.json
