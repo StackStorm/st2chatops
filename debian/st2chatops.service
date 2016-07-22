@@ -1,0 +1,19 @@
+[Unit]
+Description=StackStorm service st2chatops
+After=network.target
+
+[Service]
+Type=simple
+User=st2
+Group=st2
+Environment="DAEMON_ARGS=''"
+EnvironmentFile=-/etc/default/st2chatops
+WorkingDirectory=/opt/stackstorm/chatops
+ExecStart=/opt/stackstorm/chatops/bin/hubot $DAEMON_ARGS
+TimeoutSec=60
+PrivateTmp=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
