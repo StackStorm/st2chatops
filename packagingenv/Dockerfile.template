@@ -37,5 +37,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 
 {% endif -%}
 
+{%- if version in ('xenial') %}
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    dh-systemd && apt-get clean
+
+{% endif -%}
+
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]

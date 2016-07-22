@@ -17,6 +17,12 @@ trusty:
     file: docker-compose.override.yml
     service: suite
 
+xenial:
+  build: ./packagingenv/xenial
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
 el7:
   build: ./packagingenv/centos7
   extends:
@@ -44,6 +50,12 @@ jessie-test:
 
 trusty-test:
   build: ./testingenv/trusty
+  extends:
+    file: docker-compose.override.yml
+    service: suite-test
+
+xenial-test:
+  build: ./testingenv/xenial
   extends:
     file: docker-compose.override.yml
     service: suite-test

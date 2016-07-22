@@ -1,7 +1,13 @@
 #!/usr/bin/make -f
+IS_SYSTEMD = $(shell command -v dh_systemd_enable > /dev/null 2>&1 && echo true)
+
 %:
-	dh $@
+	dh $@ $(shell $IS_SYSTEMD && echo --with=systemd)
 
 override_dh_installinit:
 	# So far don't start services
+ifeq (true, $(IS_SYSTEMD))
+	dh_systemd_enable --name=st2chatops st2chatops.service
+else
 	dh_installinit --no-start --name=st2chatops
+endif
