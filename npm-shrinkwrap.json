@@ -324,9 +324,9 @@
       "resolved": "git+https://github.com/nandub/hubot-irc.git#51d1f4b418fc039a456b7891c7f9bf836699cfdc"
     },
     "hubot-slack": {
-      "version": "3.4.2",
-      "from": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-3.4.2.tgz",
-      "resolved": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-3.4.2.tgz"
+      "version": "4.0.5",
+      "from": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-4.0.5.tgz",
+      "resolved": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-4.0.5.tgz"
     },
     "abbrev": {
       "version": "1.0.7",
