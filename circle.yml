@@ -56,25 +56,25 @@ dependencies:
         -e PKG_VERSION=${PKG_VERSION} \
         -e PKG_RELEASE=${PKG_RELEASE} \
         ${DISTRO} build
-#  post:
-#    - docker-compose -f ~/st2box/docker-compose.yaml pull
+  post:
+    - docker-compose -f ~/st2box/docker-compose.yaml pull
 
 test:
-#   pre:
-#     - docker-compose -f ~/st2box/docker-compose.yaml up -d:
-#         parallel: true
-#   override:
-#    - ? |
-#        docker-compose run \
-#        -e ST2_HOSTNAME=${ST2_HOSTNAME} \
-#        -e ST2_USERNAME=${ST2_USERNAME} \
-#        -e ST2_PASSWORD=${ST2_PASSWORD} \
-#        -e SLACK_TOKEN=${SLACK_TOKEN} \
-#        ${DISTRO}-test test
-#      : parallel: true
+  pre:
+    - docker-compose -f ~/st2box/docker-compose.yaml up -d:
+        parallel: true
+  override:
+   - ? |
+       docker-compose run \
+       -e ST2_HOSTNAME=${ST2_HOSTNAME} \
+       -e ST2_USERNAME=${ST2_USERNAME} \
+       -e ST2_PASSWORD=${ST2_PASSWORD} \
+       -e SLACK_TOKEN=${SLACK_TOKEN} \
+       ${DISTRO}-test test
+     : parallel: true
   post:
-#    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done:
-#        parallel: true
+    - for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done:
+        parallel: true
     # Copy all Packages to node0
     - rsync -rv /tmp/st2chatops/ node0:~/packages/${DISTRO}:
         parallel: true
