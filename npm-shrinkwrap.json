@@ -854,9 +854,8 @@
       }
     },
     "hubot-stackstorm": {
-      "version": "0.4.5",
-      "from": "hubot-stackstorm@>=0.4.1 <0.5.0",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.4.5.tgz",
+      "version": "0.5.0",
+      "from": "hubot-stackstorm@>=0.5.0 <0.6.0",
       "dependencies": {
         "rsvp": {
           "version": "3.0.14",

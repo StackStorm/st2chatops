@@ -11,7 +11,7 @@
     "hubot-redis-brain" : "0.0.3",
     "hubot-scripts"     : "^2.16.2",
     "hubot-help"        : "^0.1.2",
-    "hubot-stackstorm"  : "^0.4.1",
+    "hubot-stackstorm"  : "^0.5.0",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-matteruser"  : "^3.6.0",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
