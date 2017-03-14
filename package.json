@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "st2_version": "2.2.0",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -11,8 +11,9 @@
     "hubot-redis-brain" : "0.0.3",
     "hubot-scripts"     : "^2.16.2",
     "hubot-help"        : "^0.1.2",
-    "hubot-stackstorm"  : "^0.4.1",
+    "hubot-stackstorm"  : "^0.5.0",
     "hubot-flowdock"    : "^0.7.6",
+    "hubot-matteruser"  : "^3.6.0",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
     "hubot-spark"       : "^1.7.0",
     "hubot-xmpp"        : "git+https://github.com/markstory/hubot-xmpp.git#94c3438e42778c53e38f6909939c514da50a0dca",
