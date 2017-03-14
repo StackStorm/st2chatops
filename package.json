@@ -1,7 +1,7 @@
 {
   "name": "st2-hubot",
   "version": "0.1.7",
-  "st2_version": "2.3dev",
+  "st2_version": "2.2.0",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
   "description": "A simple helpful robot for your Company, with StackStorm Support",
