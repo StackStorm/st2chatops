@@ -18,7 +18,7 @@
     "hubot-xmpp"        : "git+https://github.com/markstory/hubot-xmpp.git#94c3438e42778c53e38f6909939c514da50a0dca",
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
     "hubot-irc"         : "git+https://github.com/nandub/hubot-irc#51d1f4b418fc039a456b7891c7f9bf836699cfdc",
-    "hubot-slack"       : "^4.0.5"
+    "hubot-slack"       : "^4.3.4"
   },
   "engines": {
     "node": "4.2.x"
