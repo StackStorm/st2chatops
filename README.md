@@ -43,7 +43,8 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 [Cisco Spark](https://github.com/tonybaloney/hubot-spark),
 [Flowdock](https://github.com/flowdock/hubot-flowdock),
 [IRC](https://github.com/nandub/hubot-irc),
-[XMPP](https://github.com/markstory/hubot-xmpp).
+[XMPP](https://github.com/markstory/hubot-xmpp),
+[Mattermost](https://github.com/loafoe/hubot-matteruser).
 
 * Use [scripts/st2chatops-docker-run.sh](scripts/st2chatops-docker-run.sh) to start the docker container instance.
 The script is set for Slack; for other Chats, **edit it** to pass the environment variables as required for your Chat service adapter.
