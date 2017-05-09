@@ -7,7 +7,7 @@ and pre-installed adapters for many Chat services.
 
 ### Usage
 
-For instructions to install st2chatops package from repos, please refer to StackStorm installation instruction for [Deb-based](https://docs.stackstorm.com/install/deb.html#setup-chatops) or [RPM-based](https://docs.stackstorm.com/install/rpm.html#setup-chatops) distributions.
+For instructions to install st2chatops package from repos, please refer to StackStorm installation instruction for [Deb-based](https://docs.stackstorm.com/install/deb.html#setup-chatops) or [RPM-based](https://docs.stackstorm.com/install/rhel7.html#setup-chatops) distributions.
 
 Make sure you've added StackStorm repos before installing the package.
 
