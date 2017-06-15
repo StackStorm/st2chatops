@@ -1,7 +1,7 @@
 FROM debian:jessie
 
 # Install prerequesties
-RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get -y install curl
 
 # Add NodeSource repo
