@@ -3,7 +3,7 @@ FROM {{ dist }}:{{ version }}
 {% if dist in ('centos', 'fedora') -%}
 
 # Add NodeSource repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
 # Install development tools
 RUN yum -y install nodejs gcc-c++ make git rpmdevtools
@@ -26,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
     apt-get -y install curl
 
 # Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
