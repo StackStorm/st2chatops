@@ -1,16 +1,4 @@
 # Packaging environments
-wheezy:
-  build: ./packagingenv/wheezy
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
-jessie:
-  build: ./packagingenv/jessie
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 trusty:
   build: ./packagingenv/trusty
   extends:
@@ -36,18 +24,6 @@ el6:
     service: suite
 
 # Testing environments
-wheezy-test:
-  build: ./testingenv/wheezy
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
-jessie-test:
-  build: ./testingenv/jessie
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
 trusty-test:
   build: ./testingenv/trusty
   extends:
