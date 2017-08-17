@@ -11,7 +11,7 @@
     "hubot-redis-brain" : "0.0.4",
     "hubot-scripts"     : "^2.17.2",
     "hubot-help"        : "^0.2.2",
-    "hubot-stackstorm"  : "^0.5.0",
+    "hubot-stackstorm"  : "git://github.com/stackstorm/hubot-stackstorm.git#issue_137/slack_post_data",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-matteruser"  : "^3.6.0",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
