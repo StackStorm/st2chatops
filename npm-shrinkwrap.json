@@ -837,9 +837,9 @@
       "resolved": "https://registry.npmjs.org/hubot-scripts/-/hubot-scripts-2.17.2.tgz"
     },
     "hubot-slack": {
-      "version": "3.4.2",
-      "from": "hubot-slack@>=3.4.2 <4.0.0",
-      "resolved": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-3.4.2.tgz"
+      "version": "4.3.4",
+      "from": "hubot-slack@>=4.3.4 <5.0.0",
+      "resolved": "https://registry.npmjs.org/hubot-slack/-/hubot-slack-4.3.4.tgz"
     },
     "hubot-spark": {
       "version": "1.7.1",
