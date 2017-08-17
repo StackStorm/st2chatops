@@ -9,7 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install nodejs build-essential git
+    apt-get -y install nodejs build-essential git libicu-dev
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
     devscripts debhelper dh-make && apt-get clean
