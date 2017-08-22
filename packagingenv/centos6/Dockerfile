@@ -1,4 +1,4 @@
-FROM centos:6.6
+FROM centos:6.8
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
