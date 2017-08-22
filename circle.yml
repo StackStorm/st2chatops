@@ -45,6 +45,9 @@ checkout:
 
 dependencies:
   pre:
+    # CircleCI v1 caching doesn't work for parallel builds
+    # Clean any possible cache from the previous runs to avoid re-using wrong distro cache
+    - rm -rf node_modules || true
     - sudo apt-get update && sudo apt-get install -y rpm parallel jq
     - gem install package_cloud
     - sudo pip install "docker-compose==1.14.0"
