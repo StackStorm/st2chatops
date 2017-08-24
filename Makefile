@@ -28,7 +28,6 @@ install: changelog
 	mkdir -p $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/bin $(DESTDIR)$(PREFIX)/bin
 	cp -R $(CURDIR)/node_modules $(DESTDIR)$(PREFIX)
-	cp -R $(CURDIR)/hubot-scripts.json $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/external-scripts.json $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/st2chatops.env $(DESTDIR)$(PREFIX)
 
