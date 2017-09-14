@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "st2_version": "2.5dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -10,8 +10,8 @@
     "hubot-diagnostics" : "0.0.2",
     "hubot-redis-brain" : "0.0.4",
     "hubot-scripts"     : "^2.17.2",
-    "hubot-help"        : "^0.2.2",
-    "hubot-stackstorm"  : "^0.6.0",
+    "hubot-help"        : "^1.0.1",
+    "hubot-stackstorm"  : "^0.7.0",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-matteruser"  : "^3.6.0",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
@@ -19,7 +19,8 @@
     "hubot-xmpp"        : "git+https://github.com/markstory/hubot-xmpp.git#94c3438e42778c53e38f6909939c514da50a0dca",
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
     "hubot-irc"         : "^0.2.9",
-    "hubot-slack"       : "^4.3.4"
+    "hubot-slack"       : "^4.3.4",
+    "hubot-rocketchat"  : "^1.0.11"
   },
   "engines": {
     "node": "6.11.x"
