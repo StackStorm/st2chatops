@@ -49,7 +49,7 @@ dependencies:
     # Clean any possible cache from the previous runs to avoid re-using wrong distro cache
     - rm -rf node_modules
     - sudo apt-get update && sudo apt-get install -y rpm parallel jq
-    - gem install package_cloud
+    - gem install package_cloud -v 0.2.45
     - sudo pip install "docker-compose==1.14.0"
     - docker-compose run ${DISTRO} pull
     - docker-compose run ${DISTRO}-test pull
