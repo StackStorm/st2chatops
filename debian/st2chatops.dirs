@@ -1,0 +1,3 @@
+/opt/stackstorm/chatops
+/var/log/st2
+/etc/logrotate.d

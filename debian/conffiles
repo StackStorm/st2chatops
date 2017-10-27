@@ -1,2 +1,3 @@
 /opt/stackstorm/chatops/st2chatops.env
 /opt/stackstorm/chatops/external-scripts.json
+/etc/logrotate.d/st2chatops
