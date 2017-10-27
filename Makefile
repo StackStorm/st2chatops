@@ -30,6 +30,7 @@ install: changelog
 	cp -R $(CURDIR)/node_modules $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/external-scripts.json $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/st2chatops.env $(DESTDIR)$(PREFIX)
+	install -m644 $(CURDIR)/conf/logrotate.conf $(DESTDIR)/etc/logrotate.d/st2chatops
 
 changelog:
 ifeq ($(DEBIAN),1)

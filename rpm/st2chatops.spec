@@ -49,6 +49,8 @@ Prefix:         /opt/stackstorm/chatops
 
 %files
   /opt/stackstorm/chatops/*
+  %attr(755, st2, root) %{_localstatedir}/log/st2
+  %config(noreplace) %{_sysconfdir}/logrotate.d/st2chatops
 %if 0%{?use_systemd}
   %{_unitdir}/st2chatops.service
 %else
