@@ -37,6 +37,12 @@ Prefix:         /opt/stackstorm/chatops
   make
 
 %install
+  # Cat debian/package.dirs, set buildroot prefix and create directories.
+  %define debian_dirs cat debian/%{name}.dirs | grep -v '^\\s*#' | sed 's~^~%{buildroot}/~' | \
+            while read dir_path; do \
+              mkdir -p "${dir_path}" \
+            done \
+  %{nil}
   %make_install
 %if 0%{?use_systemd}
   install -D -p -m0644 %{_builddir}/rpm/st2chatops.service %{buildroot}%{_unitdir}/st2chatops.service
