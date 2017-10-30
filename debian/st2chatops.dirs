@@ -1,0 +1,4 @@
+# Note: placing a path here will create directories for both deb/rpm to avoid code duplication
+/opt/stackstorm/chatops
+/var/log/st2
+/etc/logrotate.d
