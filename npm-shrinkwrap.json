@@ -24,7 +24,7 @@
     },
     "colors": {
       "version": "1.0.3",
-      "from": "colors@1.0.3",
+      "from": "colors@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/colors/-/colors-1.0.3.tgz"
     },
     "ddp.js": {
@@ -49,7 +49,7 @@
     },
     "hubot": {
       "version": "2.19.0",
-      "from": "hubot@2.19.0",
+      "from": "hubot@>=2.19.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/hubot/-/hubot-2.19.0.tgz",
       "dependencies": {
         "async": {
@@ -910,7 +910,7 @@
     },
     "hubot-flowdock": {
       "version": "0.7.7",
-      "from": "hubot-flowdock@0.7.7",
+      "from": "hubot-flowdock@>=0.7.6 <0.8.0",
       "resolved": "https://registry.npmjs.org/hubot-flowdock/-/hubot-flowdock-0.7.7.tgz",
       "dependencies": {
         "flowdock": {
@@ -1243,7 +1243,7 @@
     },
     "hubot-help": {
       "version": "0.2.2",
-      "from": "hubot-help@0.2.2",
+      "from": "hubot-help@>=0.2.2 <0.3.0",
       "resolved": "https://registry.npmjs.org/hubot-help/-/hubot-help-0.2.2.tgz"
     },
     "hubot-hipchat": {
@@ -2114,7 +2114,7 @@
     },
     "hubot-matteruser": {
       "version": "3.10.0",
-      "from": "hubot-matteruser@3.10.0",
+      "from": "hubot-matteruser@>=3.6.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/hubot-matteruser/-/hubot-matteruser-3.10.0.tgz",
       "dependencies": {
         "mattermost-client": {
@@ -2518,7 +2518,7 @@
     },
     "hubot-scripts": {
       "version": "2.17.2",
-      "from": "hubot-scripts@2.17.2",
+      "from": "hubot-scripts@>=2.17.2 <3.0.0",
       "resolved": "https://registry.npmjs.org/hubot-scripts/-/hubot-scripts-2.17.2.tgz",
       "dependencies": {
         "redis": {
@@ -2962,7 +2962,7 @@
     },
     "hubot-spark": {
       "version": "1.7.1",
-      "from": "hubot-spark@1.7.1",
+      "from": "hubot-spark@>=1.7.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/hubot-spark/-/hubot-spark-1.7.1.tgz",
       "dependencies": {
         "csco-spark": {
@@ -3268,9 +3268,9 @@
       }
     },
     "hubot-stackstorm": {
-      "version": "0.7.0",
-      "from": "hubot-stackstorm@>=0.7.0 <0.8.0",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.7.0.tgz"
+      "version": "0.8.0",
+      "from": "hubot-stackstorm@0.8.0",
+      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.8.0.tgz"
     },
     "hubot-xmpp": {
       "version": "0.1.18",
@@ -3982,9 +3982,9 @@
       "resolved": "https://registry.npmjs.org/rsvp/-/rsvp-3.0.14.tgz"
     },
     "st2client": {
-      "version": "0.4.5",
-      "from": "st2client@>=0.4.3 <0.5.0",
-      "resolved": "https://registry.npmjs.org/st2client/-/st2client-0.4.5.tgz"
+      "version": "1.1.1",
+      "from": "st2client@>=1.1.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/st2client/-/st2client-1.1.1.tgz"
     },
     "truncate": {
       "version": "1.0.5",
@@ -3997,9 +3997,9 @@
       "resolved": "https://registry.npmjs.org/url-parse/-/url-parse-1.0.5.tgz"
     },
     "uuid": {
-      "version": "3.1.0",
+      "version": "3.2.1",
       "from": "uuid@>=3.0.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/uuid/-/uuid-3.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz"
     },
     "websocket-driver": {
       "version": "0.7.0",
