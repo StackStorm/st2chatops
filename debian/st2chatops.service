@@ -14,8 +14,6 @@ TimeoutSec=60
 PrivateTmp=true
 Restart=on-failure
 RestartSec=5
-StandardOutput=syslog+console
-StandardError=syslog+console
 
 [Install]
 WantedBy=multi-user.target
