@@ -2,7 +2,8 @@
 
 st2="/usr/bin/st2"
 cd /opt/stackstorm/chatops
-RH7OS=`python -c "import platform;print '.el7' in platform.platform()"`
+RH7OS=$(python -c "import platform;print '.el7' in platform.platform()")
+UB16OS=$(python -c "import platform;print 'Ubuntu-16.04' in platform.platform()")
 
 failure="
 ===============================================
@@ -200,9 +201,13 @@ else
 fi
 
 
-#Skipping these steps for RHEL7: https://github.com/StackStorm/st2-packages/issues/300
-if [ "False" = "$RH7OS" ]; then
+#Skipping these steps for RHEL7 and Ubuntu 16.04: https://github.com/StackStorm/st2-packages/issues/300
+if [ "True" = "$RH7OS" -o "True" = "$UB16OS" ]; then
+    hubotlogs=$(journalctl --unit=st2chatops.service -n 50 --no-pager)
+else
     hubotlogs=$(tail /var/log/st2/st2chatops.log)
+fi
+if [ "$hubotlogs" ]; then
     # Check if the Hubot Adapter TOKEN has expired
     if [ "0" != "$(echo "$hubotlogs" | grep -c "Unauthorized - Token has expired.")" ]; then
         echo -e "\e[31mStep 9 failed: The hubot adapter token has expired\e[0m"
