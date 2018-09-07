@@ -58,11 +58,15 @@ jobs:
             -e PKG_VERSION=${PKG_VERSION} \
             -e PKG_RELEASE=${PKG_RELEASE} \
             ${DISTRO} build
+    # FIXME: These test containers are 1.6dev, and are out of date
+    # Once containers are updated, the tests need to look for ERROR logs, e.g. due to /stream not reachable
     - run: 
         name: Pull & launch Docker st2box images
         command: |
           docker-compose -f ~/st2box/docker-compose.yaml pull
           docker-compose -f ~/st2box/docker-compose.yaml up -d
+    # sleep 10 is needed to allow the st2box test containers time to start up.
+    # Otherwise st2api is not ready when the tests run.
     - run:
         name: Run tests
         command: |
