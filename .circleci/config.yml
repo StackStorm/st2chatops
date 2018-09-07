@@ -67,7 +67,7 @@ jobs:
         name: Run tests
         command: |
           source ~/.circlerc
-          sleep 5
+          sleep 10
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
