@@ -110,7 +110,7 @@ jobs:
       DISTROS: "trusty xenial el6 el7"
     steps:
       - attach_workspace:
-          at: ~
+          at: /home/circleci
       - run:
           name: List workspace files
           command: find . | sed 's|[^/]*/|  |g'
