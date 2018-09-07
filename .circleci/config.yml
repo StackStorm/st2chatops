@@ -1,3 +1,9 @@
+# Setup in CircleCI account the following ENV variables:
+ # IS_PRODUCTION (default: 0)
+ # IS_ENTERPRISE
+ # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
+ # PACKAGECLOUD_TOKEN
+ # SLACK_TOKEN
 version: 2
 jobs:
   build:
@@ -20,7 +26,7 @@ jobs:
           mkdir -p ~/packages /tmp/st2chatops/log
           git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
           git clone --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2box
-          sudo apt-get update -qq && sudo apt-get install -y rpm parallel jq
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq
           gem install package_cloud
           sudo pip install "docker-compose==1.14.0"
           rm -rf node_modules
@@ -118,7 +124,6 @@ jobs:
           name: Deploy deb/rpm packages to PackageCloud
           command: |
             "parallel -v -j0 --line-buffer  ~/st2-packages/.circle/packagecloud.sh deploy {} ~/packages/{} ::: ${DISTROS}"
-            ~/st2-packages/.circle/save_payload.py ~/packages
 
 workflows:
   version: 2
