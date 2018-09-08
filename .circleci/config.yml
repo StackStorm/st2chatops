@@ -112,8 +112,8 @@ jobs:
       - attach_workspace:
           at: /home/circleci
       - run:
-          name: List workspace files
-          command: find ~ | sed 's|[^/]*/|  |g'
+          name: List packages
+          command: find . | sed 's|[^/]*/|  |g'
       - run:
           name: Install dependencies
           command: |
@@ -122,7 +122,7 @@ jobs:
       - run:
           name: Deploy deb/rpm packages to PackageCloud
           command: |
-            "parallel -v -j0 --line-buffer  ~/st2-packages/.circle/packagecloud.sh deploy {} ~/packages/{} ::: ${DISTROS}"
+            parallel -v -j0 --line-buffer  ~/st2-packages/.circle/packagecloud.sh deploy {} ~/packages/{} ::: ${DISTROS}
 
 workflows:
   version: 2
