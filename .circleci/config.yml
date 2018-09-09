@@ -1,0 +1,141 @@
+# Setup in CircleCI account the following ENV variables:
+ # IS_PRODUCTION (default: 0)
+ # IS_ENTERPRISE
+ # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
+ # PACKAGECLOUD_TOKEN
+ # SLACK_TOKEN
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/StackStorm/st2chatops
+    parallelism: 4
+    shell: /bin/bash --login
+    environment:
+      DISTROS: trusty xenial el6 el7
+      ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
+      ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2box
+      DEPLOY_PACKAGES: 1
+      ST2_USERNAME: admin
+      ST2_PASSWORD: 123
+    steps:
+    - checkout
+    - run:
+        name: Create directories and get repos and dependencies
+        command: |
+          mkdir -p ~/packages /tmp/st2chatops/log
+          git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
+          git clone --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2box
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq
+          gem install package_cloud
+          sudo pip install "docker-compose==1.14.0"
+          rm -rf node_modules
+    - run:
+        name: Ensure Docker running
+        command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
+    - run:
+        name: Set up Ruby 2.0
+        command: |
+          rm -f StackStorm/st2chatops/.rvmrc; echo ruby-2.0.0-p645 > StackStorm/st2chatops/.ruby-version; rvm use ruby-2.0.0-p645 --default
+    - run:
+        name: Get PackageCloud variables
+        command: |
+          distros=($DISTROS)
+          DISTRO=${distros[$CIRCLE_NODE_INDEX]}
+          PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
+          if [ -n "$PACKAGECLOUD_TOKEN" ]; then
+            PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
+          else
+            PKG_RELEASE=1
+          fi
+          echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
+          echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
+          echo "export DISTRO=${DISTRO}" >> ~/.circlerc
+    - run:
+        name: Pull Docker build images
+        command: |
+          docker-compose run ${DISTRO} pull
+          docker-compose run ${DISTRO}-test pull
+    - run:
+        name: Build packages
+        command: |
+          source ~/.circlerc
+          docker-compose run \
+            -e PKG_VERSION=${PKG_VERSION} \
+            -e PKG_RELEASE=${PKG_RELEASE} \
+            ${DISTRO} build
+    # FIXME: These test containers are 1.6dev, and are out of date
+    # Once containers are updated, the tests need to look for ERROR logs, e.g. due to /stream not reachable
+    - run: 
+        name: Pull & launch Docker st2box images
+        command: |
+          docker-compose -f ~/st2box/docker-compose.yaml pull
+          docker-compose -f ~/st2box/docker-compose.yaml up -d
+    # sleep 10 is needed to allow the st2box test containers time to start up.
+    # Otherwise st2api is not ready when the tests run.
+    - run:
+        name: Run tests
+        command: |
+          source ~/.circlerc
+          sleep 10
+          export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
+          docker-compose run \
+          -e ST2_HOSTNAME=${ST2_HOSTNAME} \
+          -e ST2_USERNAME=${ST2_USERNAME} \
+          -e ST2_PASSWORD=${ST2_PASSWORD} \
+          -e SLACK_TOKEN=${SLACK_TOKEN} \
+          ${DISTRO}-test test
+    - run:
+        name: Collect logs
+        command: |
+          for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done
+          mkdir -p ~/packages/${DISTRO}
+          cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
+    - store_artifacts:
+        path: ~/packages
+        destination: packages
+    - persist_to_workspace:
+        root: ~/
+        paths:
+          - st2-packages
+          - packages
+
+  # Deploy produced deb/rpm packages to PackageCloud staging
+  deploy:
+    docker:
+      # The primary container is an instance of the first list image listed. Your build commands run in this container.
+      - image: circleci/ruby:2.4
+    working_directory: ~/packages
+    environment:
+      DISTROS: "trusty xenial el6 el7"
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - run:
+          name: List packages
+          command: find . | sed 's|[^/]*/|  |g'
+      - run:
+          name: Install dependencies
+          command: |
+            set -x
+            gem install package_cloud
+      - run:
+          name: Deploy deb/rpm packages to PackageCloud
+          command: |
+            parallel -v -j0 --line-buffer  ~/st2-packages/.circle/packagecloud.sh deploy {} ~/packages/{} ::: ${DISTROS}
+
+workflows:
+  version: 2
+  package-test-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - /v[0-9]+\.[0-9]+/
+                - feature/circleci
+                - circle2.0
