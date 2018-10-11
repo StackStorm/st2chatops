@@ -1,22 +1,19 @@
 FROM ubuntu:xenial
 
 # Install prerequesties
-RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
-    apt-get -y install curl
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    build-essential curl devscripts debhelper dh-make git libicu-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
+
 
 # Add NodeSource repo
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install node
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install nodejs build-essential git libicu-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    devscripts debhelper dh-make && apt-get clean
-
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    dh-systemd && apt-get clean
+RUN apt-get clean
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]

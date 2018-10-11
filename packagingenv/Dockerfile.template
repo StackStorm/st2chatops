@@ -2,11 +2,7 @@ FROM {{ dist }}:{{ version }}
 
 {% if dist in ('centos', 'fedora') -%}
 
-# Add NodeSource repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-
-# Install development tools
-RUN yum -y install nodejs gcc-c++ make git libicu-devel rpmdevtools
+RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 
 {%- if version in ('centos6') %}
 
@@ -19,27 +15,30 @@ ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
 
 {%- endif %}
 
+# Add NodeSource repo
+RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+
+# Install development tools
+RUN yum -y install nodejs
+
 {% else -%}
 
 # Install prerequesties
-RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
-    apt-get -y install curl
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    build-essential curl devscripts debhelper dh-make git libicu-dev
+
+{%- if version in ('xenial') %}
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
+{% endif %}
 
 # Add NodeSource repo
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install node
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install nodejs build-essential git libicu-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    devscripts debhelper dh-make && apt-get clean
-
-{% endif -%}
-
-{%- if version in ('xenial') %}
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    dh-systemd && apt-get clean
+RUN apt-get clean
 
 {% endif -%}
 
