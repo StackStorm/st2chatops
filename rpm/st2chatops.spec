@@ -3,6 +3,8 @@
 %define version %(echo "${PKG_VERSION:-%{pkg_version}}")
 %define release %(echo "${PKG_RELEASE:-1}")
 
+%define svc_user st2
+
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
@@ -54,6 +56,9 @@ Prefix:         /opt/stackstorm/chatops
 
 %clean
   rm -rf %{buildroot}
+
+%pre
+  (id %{svc_user} 1>/dev/null 2>&1) || adduser --no-create-home --system --user-group %{svc_user}
 
 %files
   /opt/stackstorm/chatops/*
