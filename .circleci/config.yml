@@ -21,9 +21,8 @@ jobs:
     steps:
     - checkout
     - run:
-        name: Create directories and get repos and dependencies
+        name: Get repos and dependencies
         command: |
-          mkdir -p ~/packages /tmp/st2chatops/log
           git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
           git clone --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2box
           sudo apt-get update -qq && sudo apt-get install -y rpm jq
@@ -51,6 +50,8 @@ jobs:
           echo "export PKG_VERSION=${PKG_VERSION}" >> ~/.circlerc
           echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
           echo "export DISTRO=${DISTRO}" >> ~/.circlerc
+          # Create required dirs
+          mkdir -p ~/packages/${DISTRO} /tmp/st2chatops
     - run:
         name: Pull Docker build images
         command: |
@@ -64,9 +65,11 @@ jobs:
             -e PKG_VERSION=${PKG_VERSION} \
             -e PKG_RELEASE=${PKG_RELEASE} \
             ${DISTRO} build
+          # Collect artifacts
+          cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
     # FIXME: These test containers are 1.6dev, and are out of date
     # Once containers are updated, the tests need to look for ERROR logs, e.g. due to /stream not reachable
-    - run: 
+    - run:
         name: Pull & launch Docker st2box images
         command: |
           docker-compose -f ~/st2box/docker-compose.yaml pull
@@ -87,10 +90,7 @@ jobs:
           ${DISTRO}-test test
     - run:
         name: Collect logs
-        command: |
-          for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/log/${name}.log 2>&1; done
-          mkdir -p ~/packages/${DISTRO}
-          cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
+        command: for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /packages/${DISTRO}/log/${name}.log 2>&1; done
     - store_artifacts:
         path: ~/packages
         destination: packages
