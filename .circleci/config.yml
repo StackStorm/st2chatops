@@ -16,8 +16,6 @@ jobs:
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
       ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
-      ST2_USERNAME: admin
-      ST2_PASSWORD: 123
     steps:
     - checkout
     - run:
@@ -85,7 +83,7 @@ jobs:
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
-          -e ST2_USERNAME=${ST2_USERNAME} \
+          -e ST2_USERNAME=${ST2_USER} \
           -e ST2_PASSWORD=${ST2_PASSWORD} \
           -e SLACK_TOKEN=${SLACK_TOKEN} \
           ${DISTRO}-test test
