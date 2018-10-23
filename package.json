@@ -13,7 +13,7 @@
     "hubot-help"        : "^0.2.2",
     "hubot-stackstorm"  : "^0.8.0",
     "hubot-flowdock"    : "^0.7.8",
-    "hubot-matteruser"  : "^3.6.0",
+    "hubot-matteruser"  : "^4.4.0",
     "hubot-spark"       : "^2.0.0",
     "hubot-xmpp"        : "^0.2.5",
     "hubot-irc"         : "^0.2.9",
