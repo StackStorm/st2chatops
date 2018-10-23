@@ -17,7 +17,6 @@
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
     "hubot-spark"       : "^2.0.0",
     "hubot-xmpp"        : "^0.2.5",
-    "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
     "hubot-irc"         : "^0.2.9",
     "hubot-slack"       : "^4.3.4",
     "hubot-rocketchat"  : "^1.0.11"
