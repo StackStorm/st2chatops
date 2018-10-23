@@ -14,7 +14,6 @@
     "hubot-stackstorm"  : "^0.8.0",
     "hubot-flowdock"    : "^0.7.6",
     "hubot-matteruser"  : "^3.6.0",
-    "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
     "hubot-spark"       : "^2.0.0",
     "hubot-xmpp"        : "^0.2.5",
     "hubot-irc"         : "^0.2.9",
