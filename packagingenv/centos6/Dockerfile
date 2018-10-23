@@ -10,7 +10,7 @@ ENV CPP /opt/rh/devtoolset-2/root/usr/bin/cpp
 ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
 
 # Add NodeSource repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
 
 # Install development tools
 RUN yum -y install nodejs

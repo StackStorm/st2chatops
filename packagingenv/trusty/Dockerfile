@@ -6,7 +6,7 @@ RUN apt-get update && \
     build-essential curl devscripts debhelper dh-make git libicu-dev
 
 # Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
