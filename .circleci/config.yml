@@ -73,6 +73,7 @@ jobs:
         command: |
           docker-compose -f ~/st2-docker/docker-compose.yml pull
           docker-compose -f ~/st2-docker/docker-compose.yml up -d
+          sleep 10
     # sleep 10 is needed to allow the st2-docker test containers time to start up.
     # Otherwise st2api is not ready when the tests run.
     - run:
