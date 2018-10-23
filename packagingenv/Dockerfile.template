@@ -16,7 +16,7 @@ ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
 {%- endif %}
 
 # Add NodeSource repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
 # Install development tools
 RUN yum -y install nodejs
@@ -33,7 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
 {% endif %}
 
 # Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs

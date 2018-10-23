@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
 
 
 # Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
