@@ -15,7 +15,7 @@
     "hubot-flowdock"    : "^0.7.6",
     "hubot-matteruser"  : "^3.6.0",
     "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
-    "hubot-spark"       : "^1.7.0",
+    "hubot-spark"       : "^2.0.0",
     "hubot-xmpp"        : "^0.2.5",
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
     "hubot-irc"         : "^0.2.9",
