@@ -18,7 +18,7 @@ all: build
 
 build:
 	npm install --production
-	npm cache clean
+	npm cache verify && npm cache clean --force
 
 test:
 	npm test
