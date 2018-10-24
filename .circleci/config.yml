@@ -66,8 +66,7 @@ jobs:
             ${DISTRO} build
           # Collect artifacts
           cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
-    # FIXME: These test containers are 1.6dev, and are out of date
-    # Once containers are updated, the tests need to look for ERROR logs, e.g. due to /stream not reachable
+    # TODO: The tests need to look for ERROR logs, e.g. due to /stream not reachable
     - run:
         name: Pull & launch Docker st2-docker images
         command: |
