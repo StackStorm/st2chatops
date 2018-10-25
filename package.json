@@ -14,6 +14,7 @@
     "hubot-stackstorm"  : "git+https://github.com/StackStorm/hubot-stackstorm#update-components",
     "hubot-flowdock"    : "^0.7.8",
     "hubot-matteruser"  : "^4.4.0",
+    "hubot-yammer"      : "git+https://github.com/athieriot/hubot-yammer",
     "hubot-spark"       : "^2.0.0",
     "hubot-xmpp"        : "^0.2.5",
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
