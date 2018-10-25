@@ -20,7 +20,7 @@
     "hubot-hipchat"     : "git+https://github.com/StackStorm/hubot-hipchat#sonnyp-patch",
     "hubot-irc"         : "^0.4.0",
     "hubot-slack"       : "^4.5.5",
-    "hubot-rocketchat"  : "^1.0.11"
+    "hubot-rocketchat"  : "^2.0.0"
   },
   "engines": {
     "node": ">=8.0 <11.0"
