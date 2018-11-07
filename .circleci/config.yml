@@ -1,9 +1,9 @@
 # Setup in CircleCI account the following ENV variables:
- # IS_PRODUCTION (default: 0)
- # IS_ENTERPRISE
- # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
- # PACKAGECLOUD_TOKEN
- # SLACK_TOKEN
+# IS_PRODUCTION (default: 0)
+# IS_ENTERPRISE
+# PACKAGECLOUD_ORGANIZATION (default: stackstorm)
+# PACKAGECLOUD_TOKEN
+# SLACK_TOKEN
 version: 2
 jobs:
   build:
@@ -14,17 +14,16 @@ jobs:
     environment:
       DISTROS: trusty xenial bionic el6 el7
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
-      ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2box
+      ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
-      ST2_USERNAME: admin
-      ST2_PASSWORD: 123
     steps:
     - checkout
     - run:
         name: Get repos and dependencies
         command: |
           git clone --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
-          git clone --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2box
+          git clone --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
+          make -C ~/st2-docker env
           sudo apt-get update -qq && sudo apt-get install -y rpm jq
           gem install package_cloud
           sudo pip install "docker-compose==1.14.0"
@@ -51,7 +50,7 @@ jobs:
           echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
           echo "export DISTRO=${DISTRO}" >> ~/.circlerc
           # Create required dirs
-          mkdir -p ~/packages/${DISTRO} /tmp/st2chatops
+          mkdir -p ~/packages/${DISTRO} /tmp/st2chatops/${DISTRO}/logs
     - run:
         name: Pull Docker build images
         command: |
@@ -67,15 +66,16 @@ jobs:
             ${DISTRO} build
           # Collect artifacts
           cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
-    # FIXME: These test containers are 1.6dev, and are out of date
-    # Once containers are updated, the tests need to look for ERROR logs, e.g. due to /stream not reachable
+    # TODO: The tests need to look for ERROR logs, e.g. due to /stream not reachable
     - run:
-        name: Pull & launch Docker st2box images
+        name: Pull & launch Docker st2-docker images
         command: |
-          docker-compose -f ~/st2box/docker-compose.yaml pull
-          docker-compose -f ~/st2box/docker-compose.yaml up -d
-    # sleep 10 is needed to allow the st2box test containers time to start up.
-    # Otherwise st2api is not ready when the tests run.
+          docker-compose -f ~/st2-docker/docker-compose.yml pull
+          docker-compose -f ~/st2-docker/docker-compose.yml up -d
+          # sleep 10 is needed to allow the st2-docker test containers time to start up.
+          # Otherwise st2api is not ready when the tests run.
+          sleep 10
+          docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list
     - run:
         name: Run tests
         command: |
@@ -84,13 +84,15 @@ jobs:
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
-          -e ST2_USERNAME=${ST2_USERNAME} \
+          -e ST2_USERNAME=${ST2_USER} \
           -e ST2_PASSWORD=${ST2_PASSWORD} \
           -e SLACK_TOKEN=${SLACK_TOKEN} \
           ${DISTRO}-test test
     - run:
-        name: Collect logs
-        command: for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /packages/${DISTRO}/log/${name}.log 2>&1; done
+        name: Collect logs and artifacts
+        command: |
+          for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/${DISTRO}/logs/${name}.log 2>&1; done
+          cp -r /tmp/st2chatops/${DISTRO}/logs  ~/packages/${DISTRO}
     - store_artifacts:
         path: ~/packages
         destination: packages
