@@ -6,7 +6,7 @@ FROM {{ dist }}:{{ version }}
 RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
 # Install development tools
-RUN yum -y install nodejs gcc-c++ make git rpmdevtools
+RUN yum -y install nodejs gcc-c++ make git libicu-devel rpmdevtools
 
 {%- if version in ('centos6') %}
 
@@ -23,21 +23,21 @@ ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
 
 # Install prerequesties
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
-    apt-get -y install curl
+    apt-get -y install curl gnupg
 
 # Add NodeSource repo
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
 # Install node
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install nodejs build-essential git
+    apt-get -y install nodejs build-essential git libicu-dev
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
     devscripts debhelper dh-make && apt-get clean
 
 {% endif -%}
 
-{%- if version in ('xenial') %}
+{%- if version in ('xenial', 'bionic') %}
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
     dh-systemd && apt-get clean
 
