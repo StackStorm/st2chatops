@@ -8,7 +8,7 @@
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-Requires:       nodejs >= 8.0, nodejs < 11.0
+Requires:       nodejs >= 8.0, nodejs < 2:11.0
 Summary:        St2Chatops - StackStorm ChatOps
 
 License:        Apache 2.0
