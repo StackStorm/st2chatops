@@ -25,7 +25,6 @@ test:
 
 clean:
 	rm -Rf node_modules/
-	git checkout HEAD -- debian/changelog npm-shrinkwrap.json
 
 distclean: clean
 	rm -Rf $(VIRTUALENV_DIR)
