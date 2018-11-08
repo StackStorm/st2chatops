@@ -50,7 +50,7 @@ jobs:
           echo "export PKG_RELEASE=${PKG_RELEASE}" >> ~/.circlerc
           echo "export DISTRO=${DISTRO}" >> ~/.circlerc
           # Create required dirs
-          mkdir -p ~/packages/${DISTRO} /tmp/st2chatops/${DISTRO}/logs
+          mkdir -p ~/packages/${DISTRO}/log /tmp/st2chatops
     - run:
         name: Pull Docker build images
         command: |
@@ -89,10 +89,8 @@ jobs:
           -e SLACK_TOKEN=${SLACK_TOKEN} \
           ${DISTRO}-test test
     - run:
-        name: Collect logs and artifacts
-        command: |
-          for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > /tmp/st2chatops/${DISTRO}/logs/${name}.log 2>&1; done
-          cp -r /tmp/st2chatops/${DISTRO}/logs  ~/packages/${DISTRO}
+        name: Collect logs
+        command: for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/packages/${DISTRO}/log/${name}.log 2>&1; done
     - store_artifacts:
         path: ~/packages
         destination: packages
