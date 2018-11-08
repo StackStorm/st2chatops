@@ -3,7 +3,7 @@ FROM {{ dist }}:{{ version }}
 {% if dist in ('centos', 'fedora') -%}
 
 # Add NodeSource repo
-RUN curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
 # Install development tools
 RUN yum -y install nodejs
@@ -11,15 +11,15 @@ RUN yum -y install nodejs
 {% else -%}
 
 # Install prerequesties
-RUN DEBIAN_FRONTEND=noninteractive apt-get clean && apt-get update && \
-    apt-get -y install curl
+RUN apt-get clean && apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install curl
 
 # Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Install node
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y install nodejs
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
 
 {% endif -%}
 
