@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 # Install prerequesties
 RUN apt-get clean && apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install curl
+    DEBIAN_FRONTEND=noninteractive apt-get -y install curl gnupg
 
 # Add NodeSource repo
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -

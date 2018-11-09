@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:bionic
 
 # Install prerequesties
 RUN apt-get clean && apt-get update && \

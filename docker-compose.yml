@@ -11,6 +11,12 @@ xenial:
     file: docker-compose.override.yml
     service: suite
 
+bionic:
+  build: ./packagingenv/bionic
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
 el7:
   build: ./packagingenv/centos7
   extends:
@@ -32,6 +38,12 @@ trusty-test:
 
 xenial-test:
   build: ./testingenv/xenial
+  extends:
+    file: docker-compose.override.yml
+    service: suite-test
+
+bionic-test:
+  build: ./testingenv/bionic
   extends:
     file: docker-compose.override.yml
     service: suite-test
