@@ -36,15 +36,16 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 
        export $ST2_HOSTNAME={MY_STACKSTORM_HOST_NAME}
 
-* Use [`scripts/st2chatops.env`](scripts/st2chatops.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
+* Use [`st2chatops.env`](st2chatops.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
 [Slack](https://github.com/slackhq/hubot-slack),
 [HipChat](https://github.com/hipchat/hubot-hipchat),
-[Yammer](https://github.com/athieriot/hubot-yammer),
 [Cisco Spark](https://github.com/tonybaloney/hubot-spark),
 [Flowdock](https://github.com/flowdock/hubot-flowdock),
 [IRC](https://github.com/nandub/hubot-irc),
 [XMPP](https://github.com/markstory/hubot-xmpp),
+[RocketChat](https://www.github.com/RocketChat/hubot-rocketchat),
 [Mattermost](https://github.com/loafoe/hubot-matteruser).
+
 
 * Use [scripts/st2chatops-docker-run.sh](scripts/st2chatops-docker-run.sh) to start the docker container instance.
 The script is set for Slack; for other Chats, **edit it** to pass the environment variables as required for your Chat service adapter.
@@ -61,12 +62,12 @@ Run the script, and ensure that hubot-stackstorm is running and there are no err
 
 ### Node Version
 
-Grab your favorite Node.JS version from https://hub.docker.com/_/node/, and pick your tag. Update `Dockerfile` as needed.
+Grab your favorite Node.JS version (>=8.0, <11.x), and pick your tag. Update `Dockerfile` as needed.
 
 ### Pre-Requsites
 
 * Docker
-* Docker Hub Login (corporate login is in LastPass... create or attach your user to the `StackStorm` org)
+* Docker Hub Login (only if you're pushing a new version to Docker Hub)
 
 ### Building
 
