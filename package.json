@@ -6,7 +6,9 @@
   "author": "StackStorm <support@stackstorm.com>",
   "description": "A simple helpful robot for your Company, with StackStorm Support",
   "dependencies": {
+    "botbuilder": "^3.16.0",
     "hubot": "^3.1.1",
+    "hubot-botframework": "^0.10.1",
     "hubot-diagnostics": "0.0.2",
     "hubot-flowdock": "^0.7.8",
     "hubot-help": "^0.2.2",
@@ -18,7 +20,7 @@
     "hubot-scripts": "^2.17.2",
     "hubot-slack": "^4.5.5",
     "hubot-spark": "^2.0.0",
-    "hubot-stackstorm": "0.9.2",
+    "hubot-stackstorm": "git+https://github.com/StackStorm/hubot-stackstorm.git#add-msteams",
     "hubot-xmpp": "^0.2.5"
   },
   "engines": {
