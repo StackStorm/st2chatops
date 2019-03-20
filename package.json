@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "st2_version": "3.0dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -11,7 +11,7 @@
     "hubot-redis-brain": "0.0.4",
     "hubot-scripts": "^2.17.2",
     "hubot-help": "^0.2.2",
-    "hubot-stackstorm": "0.9.0",
+    "hubot-stackstorm": "0.9.1",
     "hubot-flowdock": "^0.7.8",
     "hubot-matteruser": "^4.4.0",
     "hubot-spark": "^2.0.0",
