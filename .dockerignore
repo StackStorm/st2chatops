@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store*
+.hubot_history
+.idea
+debian/*.log
+# .git/  # Include the .git directory so git works during CircleCI tests
