@@ -1,6 +1,6 @@
-FROM node:6.11.1-slim
+FROM node:10.15-slim
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install --yes \
   python \
   libicu-dev \
   libxml2-dev \
@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
 
 COPY . /app
 WORKDIR /app
-RUN npm install --production; npm cache clean
+RUN npm install --production && npm cache verify
 
-RUN apt-get -y remove \
+RUN apt remove --yes \
   libicu-dev \
   libxml2-dev \
   libexpat1-dev \
@@ -21,11 +21,7 @@ RUN apt-get -y remove \
   git \
   make
 
-RUN apt-get -y autoremove
+RUN apt autoremove --yes
 
-RUN apt-get -y clean
-RUN apt-get -y purge
-
-EXPOSE 8080
-WORKDIR /app
-CMD ["/app/bin/hubot"]
+EXPOSE 8081
+CMD ["source /app/st2chatops.env && /app/bin/hubot"]
