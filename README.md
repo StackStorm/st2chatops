@@ -38,6 +38,7 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 
 * Use [`st2chatops.env`](st2chatops.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
 [Slack](https://github.com/slackhq/hubot-slack),
+[Microsoft Teams](https://github.com/Microsoft/BotFramework-Hubot),
 [HipChat](https://github.com/hipchat/hubot-hipchat),
 [Cisco Spark](https://github.com/tonybaloney/hubot-spark),
 [Flowdock](https://github.com/flowdock/hubot-flowdock),
@@ -85,3 +86,8 @@ Grab your favorite Node.JS version (>=8.0, <11.x), and pick your tag. Update `Do
   ```
 
 * Step 4: Profit
+
+### Updating
+
+* `hubot-slack` is not compatible with coffeescript 2 ([issue](https://github.com/slackapi/hubot-slack/issues/526), [PR](https://github.com/slackapi/hubot-slack/pull/528)) yet, so keep the `coffee-script` dependency pinned to `1.12.7`
+* `coffee-register` is required for dynamic `require`, but it cannot be updated past `1.0.0` because more recent versions (eg: `2.0.0`+) require coffeescript version `2.0.0`+
