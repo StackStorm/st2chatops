@@ -64,3 +64,12 @@ changelog:
 ifeq ($(DEBIAN),1)
 	debchange -v $(PKG_VERSION)-$(PKG_RELEASE) -M ""
 endif
+
+.PHONY: docker-dev-build
+docker-dev-build:
+	docker build --tag st2chatops-dev dev
+
+.PHONY: docker-dev
+docker-dev:
+	docker images st2chatops-dev 1>/dev/null || make docker-dev-build
+	docker run -it --rm --publish 127.0.0.1:8081:8081/tcp --volume $$(pwd):/app st2chatops-dev
