@@ -91,3 +91,15 @@ Grab your favorite Node.JS version (>=8.0, <11.x), and pick your tag. Update `Do
 
 * `hubot-slack` is not compatible with coffeescript 2 ([issue](https://github.com/slackapi/hubot-slack/issues/526), [PR](https://github.com/slackapi/hubot-slack/pull/528)) yet, so keep the `coffee-script` dependency pinned to `1.12.7`
 * `coffee-register` is required for dynamic `require`, but it cannot be updated past `1.0.0` because more recent versions (eg: `2.0.0`+) require coffeescript version `2.0.0`+
+
+### Copyright, License, and Contributors Agreement
+
+Copyright 2015-2019 Extreme Networks, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License. You may obtain a copy of the License in the [LICENSE](LICENSE) file, or at:
+
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+By contributing you agree that these contributions are your own (or approved by your employer) and you grant a full, complete, irrevocable copyright license to all users and developers of the project, present and future, pursuant to the license of the project.
