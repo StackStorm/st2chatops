@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "st2_version": "3.1dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -22,7 +22,7 @@
     "hubot-scripts": "^2.17.2",
     "hubot-slack": "^4.5.5",
     "hubot-spark": "^2.0.0",
-    "hubot-stackstorm": "^0.9.3",
+    "hubot-stackstorm": "^0.9.4",
     "hubot-xmpp": "^0.2.5"
   },
   "engines": {
