@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -3293,9 +3293,9 @@
       }
     },
     "hubot-stackstorm": {
-      "version": "0.9.4",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.9.4.tgz",
-      "integrity": "sha512-htnxczY8aowYRcBc7NHd9iBn4OHLSU4VhFSBoAX3cGGG0PQ9XkrNVpllF+mqAF720vh46Z+0cnd6d/Qz7ukTZw==",
+      "version": "0.9.5",
+      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.9.5.tgz",
+      "integrity": "sha512-8DaKcJWRVpUpl8h1txQcpDsahRjBDJtHT4IT3aVnwiKQcKeJHTwKEjtKJG0lslLcbVF2Cb3bJK7uX8S/9wIJgw==",
       "requires": {
         "babel-eslint": "^10.0.1",
         "cli-table": "<=1.0.0",
@@ -3303,7 +3303,7 @@
         "coffee-script": "1.12.7",
         "lodash": "^4.17.11",
         "rsvp": "^4.8.4",
-        "st2client": "^1.1.2",
+        "st2client": "^1.1.3",
         "truncate": "^2.0.1",
         "uuid": "^3.0.0"
       }
@@ -4412,9 +4412,9 @@
       }
     },
     "st2client": {
-      "version": "1.1.2",
-      "resolved": "https://registry.npmjs.org/st2client/-/st2client-1.1.2.tgz",
-      "integrity": "sha512-9M88Az99cebg5yPLqbL9h/k/f4WECNZgriZ8oM7woNbWmC814wkWYBf+pjBVOz6+tLBQ2lCxOH93WlkbouLzlA==",
+      "version": "1.1.3",
+      "resolved": "https://registry.npmjs.org/st2client/-/st2client-1.1.3.tgz",
+      "integrity": "sha512-YUMlFXRENID5OFQnbSU4zIP/oT0+DNZhVXSupPmu+6XdsSWSqu+apY8noo66iZ2Yhz4S+vjaB241q0frEQW+6Q==",
       "requires": {
         "axios": "^0.7.0",
         "eventsource": "^0.1.4",
