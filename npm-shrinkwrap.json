@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -3293,9 +3293,9 @@
       }
     },
     "hubot-stackstorm": {
-      "version": "0.9.5",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.9.5.tgz",
-      "integrity": "sha512-8DaKcJWRVpUpl8h1txQcpDsahRjBDJtHT4IT3aVnwiKQcKeJHTwKEjtKJG0lslLcbVF2Cb3bJK7uX8S/9wIJgw==",
+      "version": "0.9.6",
+      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.9.6.tgz",
+      "integrity": "sha512-WNQOU9FWKII4tAUiYzXaz+n/a5icwQ7xmUzR+bAEIV3HpzO3i4ZtKuNDG7XgK2PRNB833fJKQbHki7YJKE8HRQ==",
       "requires": {
         "babel-eslint": "^10.0.1",
         "cli-table": "<=1.0.0",
