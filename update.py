@@ -136,7 +136,7 @@ class Suite(object):
         confpath = os.path.join(self.workdir, 'suite.yml')
         if os.path.isfile(confpath):
             fd = open(confpath, 'r')
-            for opt, value in yaml.load(fd).items():
+            for opt, value in yaml.load(fd, Loader=yaml.FullLoader).items():
                 if value:
                     setattr(self, opt, value)
             fd.close()
@@ -160,10 +160,10 @@ class Suite(object):
             sys.exit(1)
 
         fd = open(found, 'r')
-        data = (yaml.load(fd) or {})
+        data = yaml.load(fd, Loader=yaml.FullLoader) or {}
         fd.close()
         self.distmap_cache[found] = data
-        return (data or {})
+        return data or {}
 
     def process(self):
         curd = os.getcwd()
@@ -176,12 +176,12 @@ class Suite(object):
             for variant in self.variants:
                 # Variant is None what means default, so empty string
                 if variant is None:
-                    yield(self.suite_context(suite, ''))
+                    yield self.suite_context(suite, '')
                 else:
                     # Variant matches suite list of names or regexes
                     variant = match_and_fetch(suite, variant)
                     if variant:
-                        yield(self.suite_context(suite, variant))
+                        yield self.suite_context(suite, variant)
         os.chdir(curd)
 
     def suite_context(self, suite, variant):
@@ -204,12 +204,12 @@ class Suite(object):
             for str_or_regex in mappings:
                 ematch = eqauls_or_matches(suite, str_or_regex)
                 if ematch is True:
-                    return (dist, suite)
+                    return dist, suite
                 elif ematch:
-                    return (dist, ematch.group(1) or suite)
+                    return dist, ematch.group(1) or suite
         print("Warn: suite to dist mapping not found! Check dist.yml for `{}' mapping."
               .format(suite))
-        return ('', suite)
+        return '', suite
 
 
 def main():
@@ -239,10 +239,11 @@ def main():
                                          fromfile=target_abspath + '.~',
                                          tofile=target_abspath,
                                          lineterm='', n=0):
-            print line
+            print(line)
 
         fd.write("{}\n".format(rendered))
         fd.close()
+
 
 if __name__ == '__main__':
     main()
