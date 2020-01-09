@@ -2,10 +2,11 @@ FROM centos:8
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 
-RUN yum -y update
+# Add NodeSource repo
+RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
 # Install development tools
-RUN dnf -y module install nodejs:10
+RUN yum -y install nodejs
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
