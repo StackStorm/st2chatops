@@ -9,7 +9,7 @@ jobs:
   build:
     machine: true
     working_directory: ~/StackStorm/st2chatops
-    parallelism: 5
+    parallelism: 6
     shell: /bin/bash --login
     environment:
       DISTROS: trusty xenial bionic el6 el7 el8
