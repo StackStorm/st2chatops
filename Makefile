@@ -17,7 +17,10 @@ endif
 all: build
 
 build:
-	mkdir ~/.nvm && chown -R root ~/.nvm
+	mkdir ~/.npm-global
+	npm config set prefix '~/.npm-global'
+	export PATH=~/.npm-global/bin:$PATH
+	source ~/.profile
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
