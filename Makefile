@@ -17,7 +17,7 @@ endif
 all: build
 
 build:
-	chown -R circleci ~/.nvm
+	chown -R root ~/.nvm
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
