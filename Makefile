@@ -17,7 +17,7 @@ endif
 all: build
 
 build:
-	chown -R "$(whoami)" ~/.nvm
+	chown -R circleci ~/.nvm
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
