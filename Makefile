@@ -17,7 +17,7 @@ endif
 all: build
 
 build:
-	npm install --production
+	npm install --production --force
 	npm cache verify && npm cache clean --force
 
 test:
