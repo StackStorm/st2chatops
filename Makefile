@@ -17,10 +17,7 @@ endif
 all: build
 
 build:
-	mkdir ~/.npm-global
-	npm config set prefix '~/.npm-global'
-	export PATH=~/.npm-global/bin:$PATH
-	source ~/.profile
+	git config --global url."https://".insteadOf git://
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
