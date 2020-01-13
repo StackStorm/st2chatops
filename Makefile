@@ -17,6 +17,7 @@ endif
 all: build
 
 build:
+	chown -R $(whoami) ~/.nvm
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
