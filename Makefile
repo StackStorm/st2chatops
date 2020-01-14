@@ -17,7 +17,7 @@ endif
 all: build
 
 build:
-	git config --global url."https://".insteadOf git://
+	sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
 	npm install --production --force
 	npm cache verify && npm cache clean --force
 
