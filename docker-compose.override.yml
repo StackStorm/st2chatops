@@ -2,13 +2,14 @@
 #
 suite:
   image: fake
-  working_dir: /root/st2chatops
+  working_dir: /tmp/st2chatops
   environment:
     - DEBUG_LEVEL=0
-    - ARTIFACT_DIR=/root/build
+    - ARTIFACT_DIR=/tmp/build
+    - HOME=/tmp
   volumes:
-    - .:/root/st2chatops
-    - /tmp/st2chatops:/root/build
+    - .:/tmp/st2chatops
+    - /tmp/st2chatops:/tmp/build
 
 suite-test:
   image: fake
