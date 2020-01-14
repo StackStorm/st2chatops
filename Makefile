@@ -17,7 +17,7 @@ endif
 all: build
 
 build:
-	npm install --unsafe-perm --production
+	npm install --production
 	npm cache verify && npm cache clean --force
 
 test:
