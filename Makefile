@@ -17,8 +17,7 @@ endif
 all: build
 
 build:
-	chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-	npm install --production --force
+	npm install --unsafe-perm --production
 	npm cache verify && npm cache clean --force
 
 test:
