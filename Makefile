@@ -17,6 +17,7 @@ endif
 all: build
 
 build:
+	chown -R root:root /root/st2chatops/
 	npm install --production
 	npm cache verify && npm cache clean --force
 
