@@ -13,6 +13,5 @@ RUN yum -y install python3
 
 # Upgrade gyp to a python3 compatible version
 RUN npm explore npm -g -- npm install node-gyp@latest
-
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
