@@ -21,6 +21,15 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 # Install development tools
 RUN yum -y install nodejs
 
+{%- if version in ('centos8') %}
+
+# Install python3 for gyp
+RUN yum -y install python3
+
+# Upgrade gyp to a python3 compatible version
+RUN npm explore npm -g -- npm install node-gyp@latest
+
+{%- endif %}
 {% else -%}
 
 # Install prerequesties
