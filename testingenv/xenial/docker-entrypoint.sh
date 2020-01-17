@@ -6,7 +6,7 @@ case "$operation" in
 pull)
   ;;
 test)
-  sudo apt-get install -y $ARTIFACT_DIR/*.deb
+  apt-get install -y $ARTIFACT_DIR/*.deb
   cd /opt/stackstorm/chatops
   sed -i.bak -r "s/^# (export HUBOT_ADAPTER=slack)/\1/" st2chatops.env
   sed -i.bak -r "s/^# (export HUBOT_SLACK_TOKEN.).*/\1$SLACK_TOKEN/" st2chatops.env
