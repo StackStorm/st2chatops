@@ -20,6 +20,6 @@ test)
   exit $?
   ;;
 *)
-  [ $# -gt 0 ] && exec "$@"
+  [[ $# -gt 0 ]] && exec "$@"
   ;;
 esac

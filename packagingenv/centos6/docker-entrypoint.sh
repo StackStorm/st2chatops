@@ -10,6 +10,6 @@ build)
   cp ../*.rpm $ARTIFACT_DIR
   ;;
 *)
-  [ $# -gt 0 ] && exec "$@"
+  [[ $# -gt 0 ]] && exec "$@"
   ;;
 esac

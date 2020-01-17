@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:8
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
