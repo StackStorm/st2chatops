@@ -21,6 +21,11 @@ Prefix:         /opt/stackstorm/chatops
 %define _rpmdir %(pwd)/..
 %define _build_name_fmt %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
+%if 0%{?rhel} >= 8
+BuildRequires:  python36-rpm-macros
+%undefine %brp_mangle_shebangs
+%endif
+
 # Cat debian/package.dirs, set buildroot prefix and create directories.
 %define debian_dirs cat debian/%{name}.dirs | grep -v '^\\s*#' | sed 's~^~%{buildroot}/~' | \
           while read dir_path; do \

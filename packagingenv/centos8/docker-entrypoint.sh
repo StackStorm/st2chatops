@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+
 operation="${1:-build}"
 
 case "$operation" in
