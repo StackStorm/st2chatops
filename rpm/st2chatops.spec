@@ -23,7 +23,7 @@ Prefix:         /opt/stackstorm/chatops
 
 %if 0%{?rhel} >= 8
 BuildRequires:  python36-rpm-macros
-%undefine %brp_mangle_shebangs
+  %undefine __brp_mangle_shebangs
 %endif
 
 # Cat debian/package.dirs, set buildroot prefix and create directories.
