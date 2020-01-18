@@ -5,9 +5,13 @@ FROM {{ dist }}:{{ version }}
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
-# Install development tools
-RUN yum -y install nodejs
 
+# Install development tools
+{%- if version in ('centos8') %}
+RUN dnf -y module install nodejs:10
+{% else -%}
+RUN yum -y install nodejs
+{% endif -%}
 {% else -%}
 
 # Install prerequesties
