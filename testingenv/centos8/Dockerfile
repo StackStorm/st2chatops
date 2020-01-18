@@ -4,7 +4,7 @@ FROM centos:8
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
 # Install development tools
-RUN yum -y install nodejs
+RUN dnf -y module install nodejs:10
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
