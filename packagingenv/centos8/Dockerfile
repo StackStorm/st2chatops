@@ -12,6 +12,6 @@ RUN dnf -y module install nodejs:10
 RUN yum -y install python3 python36-rpm-macros
 
 # Upgrade gyp to a python3 compatible version
-RUN npm explore npm -g -- npm install node-gyp@latest
+RUN npm install -g node-gyp@latest
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
