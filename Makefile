@@ -19,6 +19,8 @@ all: build
 build:
 	# Permissions workaround for global `npm install`
 	chown -R root:root /root/st2chatops/
+	# Need to update npm here since we clean the 'node_modules' dir before build
+	npm explore npm -g -- npm install node-gyp@latest
 	npm install --production
 	npm cache verify && npm cache clean --force
 
