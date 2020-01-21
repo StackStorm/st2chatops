@@ -19,8 +19,7 @@ all: build
 build:
 	# Permissions workaround for global `npm install`
 	chown -R root:root /root/st2chatops/
-	npm config set python /usr/bin/python3
-	npm install --production
+	npm install --production --python=/usr/bin/python3
 	npm cache verify && npm cache clean --force
 
 test:
