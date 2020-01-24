@@ -9,7 +9,7 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 RUN yum -y module install nodejs:10
 
 # Install python3 for gyp
-RUN yum -y install python3 python36-rpm-macros
+RUN yum -y install python3
 
 # Upgrade gyp to a python3 compatible version
 RUN npm explore npm -g -- npm install node-gyp@latest
