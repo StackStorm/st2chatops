@@ -22,9 +22,10 @@ Prefix:         /opt/stackstorm/chatops
 %define _build_name_fmt %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
 %if 0%{?rhel} >= 8
-BuildRequires:  python36-rpm-macros
-%global __requires_exclude_from ^/usr/bin/perl
-%global __requires_exclude_from ^/usr/bin/ruby
+%undefine __brp_mangle_shebangs
+  Requires: /bin/bash
+  Requires: /bin/sh
+  Requires: /usr/bin/env
 %endif
 
 # Cat debian/package.dirs, set buildroot prefix and create directories.
