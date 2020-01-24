@@ -23,9 +23,9 @@ Prefix:         /opt/stackstorm/chatops
 
 %if 0%{?rhel} >= 8
 %undefine __brp_mangle_shebangs
-  Requires: /bin/bash
-  Requires: /bin/sh
-  Requires: /usr/bin/env
+Requires: /bin/bash
+Requires: /bin/sh
+Requires: /usr/bin/env
 %endif
 
 # Cat debian/package.dirs, set buildroot prefix and create directories.
