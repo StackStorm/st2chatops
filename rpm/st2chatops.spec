@@ -23,8 +23,6 @@ Prefix:         /opt/stackstorm/chatops
 
 %if 0%{?rhel} >= 8
 BuildRequires:  python36-rpm-macros
-%global __requires_exclude_from ^/usr/bin/./node_modules/.bin/coffee
-%global __requires_exclude_from ^/usr/bin/coffee
 %global __requires_exclude_from ^/usr/bin/perl
 %global __requires_exclude_from ^/usr/bin/ruby
 %endif
