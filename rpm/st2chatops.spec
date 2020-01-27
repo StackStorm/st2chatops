@@ -8,13 +8,7 @@
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-
-# Use Node 2:10 on el8
-%if 0%{?rhel} >= 8
-Requires:       nodejs >= 2:10.16, nodejs < 2:11.0
-%else
 Requires:       nodejs >= 2:8.0, nodejs < 2:11.0
-%endif
 
 Summary:        St2Chatops - StackStorm ChatOps
 
