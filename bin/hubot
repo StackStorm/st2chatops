@@ -4,7 +4,9 @@ set -e
 
 fail() {
     echo "$1"
+    echo "$1" | systemd-cat -p warning
     echo "See README.md for more information"
+    echo "See README.md for more information" | systemd-cat -p warning
     exit 1
 }
 
