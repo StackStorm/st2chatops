@@ -22,6 +22,8 @@ Prefix:         /opt/stackstorm/chatops
 %define _build_name_fmt %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
 %if 0%{?rhel} >= 8
+# brp_mangle_shebangs refrains from looking for shebangs which cause ruby, perl and coffee to be dependencies,
+# which are not needed because they are provided by node
 %undefine __brp_mangle_shebangs
 Requires: /bin/bash
 Requires: /bin/sh
