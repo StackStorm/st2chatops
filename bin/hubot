@@ -3,6 +3,7 @@
 set -e
 
 fail() {
+    # Added `| systemd-cat -p warning` for el8 support
     echo "$1"
     echo "$1" | systemd-cat -p warning
     echo "See README.md for more information"
