@@ -3,12 +3,12 @@
 set -e
 
 fail() {
-    # Added `| systemd-cat -p warning` for el8 support
-    echo "$1"
-    echo "$1" | systemd-cat -p warning
-    echo "See README.md for more information"
-    echo "See README.md for more information" | systemd-cat -p warning
-    exit 1
+   echo "$1"
+   echo "See README.md for more information"
+   # Workaround for systemd race that results in a lost log messages for the unit, appearing under EL8
+   # See https://github.com/systemd/systemd/issues/2913
+   sleep 0.1
+   exit 1
 }
 
 HERE=$(dirname $(dirname "$(readlink -f "$0")"))
