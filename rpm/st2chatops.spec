@@ -9,6 +9,7 @@ Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
 Requires:       nodejs >= 2:8.0, nodejs < 2:11.0
+
 Summary:        St2Chatops - StackStorm ChatOps
 
 License:        Apache 2.0
@@ -20,6 +21,15 @@ Prefix:         /opt/stackstorm/chatops
 %define _builddir %(pwd)
 %define _rpmdir %(pwd)/..
 %define _build_name_fmt %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
+
+%if 0%{?rhel} >= 8
+# brp_mangle_shebangs refrains from looking for shebangs which cause ruby, perl and coffee to be dependencies,
+# which are not needed because they are provided by node
+%undefine __brp_mangle_shebangs
+Requires: /bin/bash
+Requires: /bin/sh
+Requires: /usr/bin/env
+%endif
 
 # Cat debian/package.dirs, set buildroot prefix and create directories.
 %define debian_dirs cat debian/%{name}.dirs | grep -v '^\\s*#' | sed 's~^~%{buildroot}/~' | \
