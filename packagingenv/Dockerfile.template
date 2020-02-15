@@ -18,6 +18,19 @@ ENV CXX /opt/rh/devtoolset-2/root/usr/bin/c++
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
+{%- if version in ('centos8') %}
+
+# Install development tools
+yum -y module install nodejs:10
+
+# Install python3 for gyp
+RUN yum -y install python3
+
+# Upgrade gyp to a python3 compatible version
+RUN npm explore npm -g -- npm install node-gyp@latest
+
+{%- endif %}
+
 # Install development tools
 RUN yum -y install nodejs
 

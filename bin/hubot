@@ -3,9 +3,13 @@
 set -e
 
 fail() {
-    echo "$1"
-    echo "See README.md for more information"
-    exit 1
+  echo "$1"
+  echo "See README.md for more information"
+  # Workaround for systemd race that results in a lost log messages for the unit, appearing
+  # under EL8
+  # See https://github.com/systemd/systemd/issues/2913
+  sleep 0.1
+  exit 1
 }
 
 HERE=$(dirname $(dirname "$(readlink -f "$0")"))
