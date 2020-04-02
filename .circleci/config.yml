@@ -9,10 +9,10 @@ jobs:
   build:
     machine: true
     working_directory: ~/StackStorm/st2chatops
-    parallelism: 6
+    parallelism: 5
     shell: /bin/bash --login
     environment:
-      DISTROS: trusty xenial bionic el6 el7 el8
+      DISTROS: xenial bionic el6 el7 el8
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
       ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
@@ -107,7 +107,7 @@ jobs:
       - image: circleci/ruby:2.4
     working_directory: ~/packages
     environment:
-      DISTROS: "trusty xenial bionic el6 el7 el8"
+      DISTROS: "xenial bionic el6 el7 el8"
     steps:
       - attach_workspace:
           at: /home/circleci
