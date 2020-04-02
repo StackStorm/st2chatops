@@ -1,10 +1,4 @@
 # Packaging environments
-trusty:
-  build: ./packagingenv/trusty
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 xenial:
   build: ./packagingenv/xenial
   extends:
@@ -36,12 +30,6 @@ el6:
     service: suite
 
 # Testing environments
-trusty-test:
-  build: ./testingenv/trusty
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
 xenial-test:
   build: ./testingenv/xenial
   extends:
