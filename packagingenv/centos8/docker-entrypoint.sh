@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eu
+set -o pipefail
+
 operation="${1:-build}"
 
 case "$operation" in

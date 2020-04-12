@@ -1,12 +1,15 @@
 #!/bin/bash
 
+set -eu
+set -o pipefail
+
 operation="${1:-test}"
 
 case "$operation" in
 pull)
   ;;
 test)
-  apt-get install -y $ARTIFACT_DIR/*.deb
+  yum install -y $ARTIFACT_DIR/*.rpm
   cd /opt/stackstorm/chatops
   sed -i.bak -r "s/^# (export HUBOT_ADAPTER=slack)/\1/" st2chatops.env
   sed -i.bak -r "s/^# (export HUBOT_SLACK_TOKEN.).*/\1$SLACK_TOKEN/" st2chatops.env
@@ -20,6 +23,6 @@ test)
   exit $?
   ;;
 *)
-  [ $# -gt 0 ] && exec "$@"
+  [[ $# -gt 0 ]] && exec "$@"
   ;;
 esac

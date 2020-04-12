@@ -1,10 +1,4 @@
 # Packaging environments
-trusty:
-  build: ./packagingenv/trusty
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 xenial:
   build: ./packagingenv/xenial
   extends:
@@ -13,6 +7,12 @@ xenial:
 
 bionic:
   build: ./packagingenv/bionic
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
+el8:
+  build: ./packagingenv/centos8
   extends:
     file: docker-compose.override.yml
     service: suite
@@ -30,12 +30,6 @@ el6:
     service: suite
 
 # Testing environments
-trusty-test:
-  build: ./testingenv/trusty
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
 xenial-test:
   build: ./testingenv/xenial
   extends:
@@ -44,6 +38,12 @@ xenial-test:
 
 bionic-test:
   build: ./testingenv/bionic
+  extends:
+    file: docker-compose.override.yml
+    service: suite-test
+
+el8-test:
+  build: ./testingenv/centos8
   extends:
     file: docker-compose.override.yml
     service: suite-test
