@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "st2_version": "3.2dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
@@ -10,7 +10,7 @@
     "coffee-register": "1.0.0",
     "coffee-script": "1.12.7",
     "hubot": "^3.1.1",
-    "hubot-botframework": "^0.10.1",
+    "hubot-botframework": "git+https://github.com/microsoft/BotFramework-Hubot.git#01d5be9",
     "hubot-diagnostics": "0.0.2",
     "hubot-flowdock": "^0.7.8",
     "hubot-help": "^0.2.2",
@@ -21,8 +21,8 @@
     "hubot-rocketchat": "^2.0.0",
     "hubot-scripts": "^2.17.2",
     "hubot-slack": "^4.5.5",
-    "hubot-spark": "^2.0.0",
-    "hubot-stackstorm": "^0.9.6",
+    "hubot-spark": "git+https://github.com/tonybaloney/hubot-spark.git#c440504",
+    "hubot-stackstorm": "^0.10.2",
     "hubot-xmpp": "^0.2.5"
   },
   "engines": {
