@@ -10,7 +10,7 @@
     "coffee-register": "1.0.0",
     "coffee-script": "1.12.7",
     "hubot": "^3.1.1",
-    "hubot-botframework": "git+https://github.com/microsoft/BotFramework-Hubot.git#01d5be9",
+    "hubot-botframework": "^0.10.1",
     "hubot-diagnostics": "0.0.2",
     "hubot-flowdock": "^0.7.8",
     "hubot-help": "^0.2.2",
