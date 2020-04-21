@@ -1263,9 +1263,12 @@
       "integrity": "sha1-1NDpudv8p3vwjusKikcVUP454ok="
     },
     "axios": {
-      "version": "0.7.0",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-0.7.0.tgz",
-      "integrity": "sha1-SJwmkETVBm36LGTHScsTGxdvSno="
+      "version": "0.19.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-0.19.2.tgz",
+      "integrity": "sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==",
+      "requires": {
+        "follow-redirects": "1.5.10"
+      }
     },
     "b64u": {
       "version": "2.0.0",
@@ -2429,6 +2432,24 @@
           "version": "0.4.3",
           "resolved": "https://registry.npmjs.org/tunnel-agent/-/tunnel-agent-0.4.3.tgz",
           "integrity": "sha1-Y3PbdpCf5XDgjXNYM2Xtgop07us="
+        }
+      }
+    },
+    "follow-redirects": {
+      "version": "1.5.10",
+      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.5.10.tgz",
+      "integrity": "sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==",
+      "requires": {
+        "debug": "=3.1.0"
+      },
+      "dependencies": {
+        "debug": {
+          "version": "3.1.0",
+          "resolved": "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz",
+          "integrity": "sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==",
+          "requires": {
+            "ms": "2.0.0"
+          }
         }
       }
     },
@@ -3979,16 +4000,16 @@
       }
     },
     "hubot-stackstorm": {
-      "version": "0.10.2",
-      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.10.2.tgz",
-      "integrity": "sha512-ifFTqiwyrlrPjkv967r9/T3gD/TuUcWpl223YoypwIiCDma6OGeWQkfI6lzohkoYbmFbTtolCOMyMGJUZHJy6Q==",
+      "version": "0.10.3",
+      "resolved": "https://registry.npmjs.org/hubot-stackstorm/-/hubot-stackstorm-0.10.3.tgz",
+      "integrity": "sha512-8+d6ReZ86dEkxX/hJnRsgQlmbrIBjm8PcJB2apNxn98MpFJ7zFA5Ps8yVmz+Uq3/v4Bi042/cRxQPbKOTthkwA==",
       "requires": {
         "cli-table": "<=1.0.0",
         "coffee-register": "1.0.0",
         "coffee-script": "1.12.7",
         "lodash": "^4.17.11",
         "rsvp": "^4.8.4",
-        "st2client": "^1.1.3",
+        "st2client": "^1.2.2",
         "truncate": "^2.0.1",
         "uuid": "^3.0.0"
       }
@@ -5394,11 +5415,11 @@
       }
     },
     "st2client": {
-      "version": "1.2.1",
-      "resolved": "https://registry.npmjs.org/st2client/-/st2client-1.2.1.tgz",
-      "integrity": "sha512-7xZNyGNaL2ekoNJcSbishtpfOJ5p53oBcoZPfZTxywJC17iGbqrP09wRCPuFUtrkUReH+4dLC4GxgxCx/LLGWg==",
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/st2client/-/st2client-1.2.2.tgz",
+      "integrity": "sha512-mutxKjPoDAfqwWXFOK8QtFts+WazjVWDgMaZ6eeSCDRP5jXVxvnNvRg4dBGMF0JRoP6RIryuCCLvVd3r5lDyTA==",
       "requires": {
-        "axios": "^0.7.0",
+        "axios": "^0.19.0",
         "eventsource": "^0.1.4",
         "lodash": "^4.17.15",
         "object.assign": "^1.0.1"
