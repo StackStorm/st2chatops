@@ -1389,10 +1389,7 @@
     "asn1js": {
       "version": "2.0.26",
       "resolved": "https://registry.npmjs.org/asn1js/-/asn1js-2.0.26.tgz",
-      "integrity": "sha512-yG89F0j9B4B0MKIcFyWWxnpZPLaNTjCj4tkE3fjbAoo0qmpGw0PYYqSbX/4ebnd9Icn8ZgK4K1fvDyEtW1JYtQ==",
-      "requires": {
-        "pvutils": "^1.0.17"
-      }
+      "integrity": "sha512-yG89F0j9B4B0MKIcFyWWxnpZPLaNTjCj4tkE3fjbAoo0qmpGw0PYYqSbX/4ebnd9Icn8ZgK4K1fvDyEtW1JYtQ=="
     },
     "assert-plus": {
       "version": "1.0.0",
@@ -5248,19 +5245,11 @@
       "version": "2.1.88",
       "resolved": "https://registry.npmjs.org/pkijs/-/pkijs-2.1.88.tgz",
       "integrity": "sha512-R/1VglrBioIx3wdX1/DzEcJDvhJgl5cNsT+Ovex3zWbCwjY2mDUW2Qvj6/kc0S7PDDnijXwHczAVRYscNLhUgQ==",
-      "requires": {
-        "asn1js": "^2.0.26",
-        "bytestreamjs": "^1.0.29",
-        "pvutils": "^1.0.17"
-      },
       "dependencies": {
         "asn1js": {
           "version": "2.0.26",
           "resolved": "https://registry.npmjs.org/asn1js/-/asn1js-2.0.26.tgz",
-          "integrity": "sha512-yG89F0j9B4B0MKIcFyWWxnpZPLaNTjCj4tkE3fjbAoo0qmpGw0PYYqSbX/4ebnd9Icn8ZgK4K1fvDyEtW1JYtQ==",
-          "requires": {
-            "pvutils": "^1.0.17"
-          }
+          "integrity": "sha512-yG89F0j9B4B0MKIcFyWWxnpZPLaNTjCj4tkE3fjbAoo0qmpGw0PYYqSbX/4ebnd9Icn8ZgK4K1fvDyEtW1JYtQ=="
         }
       }
     },
