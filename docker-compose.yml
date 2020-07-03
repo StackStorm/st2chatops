@@ -23,12 +23,6 @@ el7:
     file: docker-compose.override.yml
     service: suite
 
-el6:
-  build: ./packagingenv/centos6
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 # Testing environments
 xenial-test:
   build: ./testingenv/xenial
@@ -50,12 +44,6 @@ el8-test:
 
 el7-test:
   build: ./testingenv/centos7
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
-el6-test:
-  build: ./testingenv/centos6
   extends:
     file: docker-compose.override.yml
     service: suite-test
