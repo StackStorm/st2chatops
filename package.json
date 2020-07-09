@@ -14,15 +14,15 @@
     "hubot-diagnostics": "0.0.2",
     "hubot-flowdock": "^0.7.8",
     "hubot-help": "^0.2.2",
-    "hubot-irc": "^0.4.0",
-    "hubot-matteruser": "^5.2.0",
+    "hubot-irc": "^0.4.2",
+    "hubot-matteruser": "^5.3.1",
     "hubot-redis-brain": "0.0.4",
     "hubot-rocketchat": "^2.0.0",
     "hubot-scripts": "^2.17.2",
-    "hubot-slack": "^4.5.5",
+    "hubot-slack": "^4.8.0",
     "hubot-spark": "git+https://github.com/tonybaloney/hubot-spark.git#c440504",
     "hubot-stackstorm": "^0.11.0",
-    "hubot-xmpp": "^0.2.5"
+    "hubot-xmpp": "^0.2.6"
   },
   "engines": {
     "node": ">=8.0 <11.0"
