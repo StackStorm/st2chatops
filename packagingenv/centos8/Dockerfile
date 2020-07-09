@@ -12,6 +12,10 @@ RUN yum -y module install nodejs:10
 RUN yum -y install python3
 
 # Upgrade gyp to a python3 compatible version
-RUN npm explore npm -g -- npm install node-gyp@latest
+RUN npm install -g node-gyp@latest
+
+# Install development tools
+RUN yum -y install nodejs
+
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]

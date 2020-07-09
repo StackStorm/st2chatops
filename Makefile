@@ -41,7 +41,7 @@ install: changelog
 
 .PHONY: virtualenv
 virtualenv:
-	test -d $(VIRTUALENV_DIR) || virtualenv --no-site-packages --python=$(PYTHON) $(VIRTUALENV_DIR)
+	test -d $(VIRTUALENV_DIR) || virtualenv --python=$(PYTHON) $(VIRTUALENV_DIR)
 
 .PHONY: requirements
 requirements: virtualenv

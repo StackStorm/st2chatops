@@ -39,7 +39,6 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 * Use [`st2chatops.env`](st2chatops.env) to store the settings. The example uses Slack; set appropriate environment variables for other Chat Services:
 [Slack](https://github.com/slackhq/hubot-slack),
 [Microsoft Teams](https://github.com/Microsoft/BotFramework-Hubot),
-[HipChat](https://github.com/hipchat/hubot-hipchat),
 [Cisco Spark](https://github.com/tonybaloney/hubot-spark),
 [Flowdock](https://github.com/flowdock/hubot-flowdock),
 [IRC](https://github.com/nandub/hubot-irc),
