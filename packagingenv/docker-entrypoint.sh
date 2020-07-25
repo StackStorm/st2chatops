@@ -15,6 +15,9 @@ test)
 complete)
   echo complete
   ;;
+/bin/bash)
+  /bin/bash
+  ;;
 *)
   [[ $# -gt 0 ]] && exec "$@"
   ;;

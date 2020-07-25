@@ -9,6 +9,9 @@ build)
   rpmbuild -bb rpm/st2chatops.spec
   cp ../*.rpm $ARTIFACT_DIR
   ;;
+/bin/bash)
+  /bin/bash
+  ;;
 *)
   [[ $# -gt 0 ]] && exec "$@"
   ;;
