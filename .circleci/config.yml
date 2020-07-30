@@ -21,7 +21,11 @@ jobs:
     - run:
         name: Get repos and dependencies
         command: |
+          echo "Cloning ${ST2_PACKAGES_BRANCH:-master} branch of st2-packages"
           git clone --branch ${ST2_PACKAGES_BRANCH:-master} --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
+          # Use DEPRECATED/all-in-one for now, we'll have to circle back around
+          # and fix this to use the master branch
+          echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
           sudo apt-get update -qq && sudo apt-get install -y rpm jq
