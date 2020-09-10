@@ -38,10 +38,6 @@ Requires: /usr/bin/env
           done \
 %{nil}
 
-%if 0%{?_unitdir:1}
-  %define use_systemd 1
-%endif
-
 
 %description
   Package providing StackStorm ChatOps functionality: bundled, tested and ready to use Hubot
@@ -57,11 +53,7 @@ Requires: /usr/bin/env
 %install
   %debian_dirs
   %make_install
-%if 0%{?use_systemd}
   install -D -p -m0644 %{_builddir}/rpm/st2chatops.service %{buildroot}%{_unitdir}/st2chatops.service
-%else
-  install -D -p -m0755 %{_builddir}/rpm/st2chatops.init %{buildroot}%{_sysconfdir}/rc.d/init.d/st2chatops
-%endif
 
 %clean
   rm -rf %{buildroot}
@@ -73,11 +65,7 @@ Requires: /usr/bin/env
   /opt/stackstorm/chatops/*
   %attr(755, st2, root) %{_localstatedir}/log/st2
   %config(noreplace) %{_sysconfdir}/logrotate.d/st2chatops
-%if 0%{?use_systemd}
   %{_unitdir}/st2chatops.service
-%else
-  %{_sysconfdir}/rc.d/init.d/st2chatops
-%endif
 
 %config(noreplace) /opt/stackstorm/chatops/st2chatops.env
 %config(noreplace) /opt/stackstorm/chatops/external-scripts.json
