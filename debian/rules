@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
+
 IS_SYSTEMD := $(shell command -v dh_systemd_enable > /dev/null 2>&1 && echo true)
+# Avoid building .ddeb debug packages: https://lists.debian.org/debian-devel/2015/12/msg00262.html
+DEB_BUILD_OPTIONS = noddebs
 
 %:
 ifeq (true, $(IS_SYSTEMD))

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -eu
+set -o pipefail
+
 # If no operation is given run complete suite (default behaviour)
 operation="${1:-complete}"
 
