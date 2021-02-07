@@ -3,7 +3,7 @@
 
 HERE=$(dirname $(dirname "$(readlink -f "$0")"))
 
-ST2_CONTAINER=stackstorm-hubot
+ST2_CONTAINER=stackstorm-st2chatops
 
 if [[ ! -z $(docker ps -a | grep $ST2_CONTAINER) ]];
 then
@@ -12,9 +12,11 @@ then
 fi
 
 # Launch with env variables
+echo "Using config: ${HERE}/st2chatops.env"
 echo "Running $ST2_CONTAINER ..."
+
 /usr/bin/docker run                                              \
   --name $ST2_CONTAINER --net bridge --detach=true               \
   -m 0b -p 8081:8080 --add-host $ST2_HOSTNAME:10.0.1.100         \
-  -v $HERE/st2chatops.env:/app/st2chatops.env                        \
-  stackstorm/hubot
+  -v $HERE/st2chatops.env:/app/st2chatops.env                    \
+  stackstorm/st2chatops
