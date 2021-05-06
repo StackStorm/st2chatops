@@ -62,7 +62,7 @@ Run the script, and ensure that hubot-stackstorm is running and there are no err
 
 ### Node Version
 
-Grab your favorite Node.JS version (>=8.0, <11.x), and pick your tag. Update `Dockerfile` as needed.
+Grab your favorite Node.JS version (>=8.0, <11.x), and pick your tag. Update `Dockerfile` as needed. Investigate later nodeJS...
 
 ### Pre-Requsites
 
