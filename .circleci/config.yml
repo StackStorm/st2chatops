@@ -111,7 +111,7 @@ jobs:
       - image: circleci/ruby:2.4
     working_directory: ~/packages
     environment:
-      DISTROS: "xenial bionic el7 el8 focal"
+      DISTROS: "xenial bionic focal el7 el8"
     steps:
       - attach_workspace:
           at: /home/circleci
