@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 # Install prerequisites
 RUN apt-get update && \

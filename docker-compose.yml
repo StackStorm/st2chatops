@@ -11,6 +11,12 @@ bionic:
     file: docker-compose.override.yml
     service: suite
 
+focal:
+  build: ./packagingenv/focal
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
 el8:
   build: ./packagingenv/centos8
   extends:
@@ -32,6 +38,12 @@ xenial-test:
 
 bionic-test:
   build: ./testingenv/bionic
+  extends:
+    file: docker-compose.override.yml
+    service: suite-test
+
+focal-test:
+  build: ./testingenv/focal
   extends:
     file: docker-compose.override.yml
     service: suite-test
