@@ -1,10 +1,4 @@
 # Packaging environments
-xenial:
-  build: ./packagingenv/xenial
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 bionic:
   build: ./packagingenv/bionic
   extends:
@@ -30,12 +24,6 @@ el7:
     service: suite
 
 # Testing environments
-xenial-test:
-  build: ./testingenv/xenial
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
 bionic-test:
   build: ./testingenv/bionic
   extends:
