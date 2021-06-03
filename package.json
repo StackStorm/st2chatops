@@ -21,7 +21,7 @@
     "hubot-scripts": "^2.17.2",
     "hubot-slack": "^4.5.5",
     "hubot-spark": "git+https://github.com/tonybaloney/hubot-spark.git#c440504",
-    "hubot-stackstorm": "^0.11.0",
+    "hubot-stackstorm": "^0.11.3",
     "hubot-xmpp": "^0.2.5"
   },
   "engines": {
