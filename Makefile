@@ -16,7 +16,7 @@ endif
 .PHONY: all build test clean distclean install
 all: build
 
-build:
+build: clean
 	# Permissions workaround for global `npm install`
 	chown -R root:root /root/st2chatops/
 	npm install --production
