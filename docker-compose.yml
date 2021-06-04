@@ -1,12 +1,12 @@
 # Packaging environments
-xenial:
-  build: ./packagingenv/xenial
+bionic:
+  build: ./packagingenv/bionic
   extends:
     file: docker-compose.override.yml
     service: suite
 
-bionic:
-  build: ./packagingenv/bionic
+focal:
+  build: ./packagingenv/focal
   extends:
     file: docker-compose.override.yml
     service: suite
@@ -24,14 +24,14 @@ el7:
     service: suite
 
 # Testing environments
-xenial-test:
-  build: ./testingenv/xenial
+bionic-test:
+  build: ./testingenv/bionic
   extends:
     file: docker-compose.override.yml
     service: suite-test
 
-bionic-test:
-  build: ./testingenv/bionic
+focal-test:
+  build: ./testingenv/focal
   extends:
     file: docker-compose.override.yml
     service: suite-test

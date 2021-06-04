@@ -25,12 +25,12 @@ RUN yum -y install nodejs
 
 {% else -%}
 
-# Install prerequesties
+# Install prerequisites
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential curl gnupg devscripts debhelper dh-make git libicu-dev
 
-{%- if version in ('xenial', 'bionic') %}
+{%- if version in ('bionic', 'focal') %}
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
 {% endif %}
 
