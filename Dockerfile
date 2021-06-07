@@ -1,4 +1,4 @@
-FROM node:10.15-slim
+FROM node:14.17-slim
 
 RUN apt update && apt install --yes \
   python \
