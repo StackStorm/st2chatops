@@ -9,8 +9,8 @@ Usage: python 'path to Dockerfile.template' distro
 
   :Example:
 
-  cd packagingenv/centos8
-  python ../ centos8
+  cd packagingenv/rockylinux8
+  python ../ rockylinux8
 
 """
 import argparse

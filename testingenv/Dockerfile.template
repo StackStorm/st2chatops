@@ -1,6 +1,6 @@
 FROM {{ dist }}:{{ version }}
 
-{% if dist in ('centos', 'fedora') -%}
+{% if dist in ('centos', 'fedora', 'rockylinux') -%}
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -

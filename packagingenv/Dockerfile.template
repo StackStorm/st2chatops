@@ -1,13 +1,13 @@
 FROM {{ dist }}:{{ version }}
 
-{% if dist in ('centos', 'fedora') -%}
+{% if dist in ('centos', 'fedora', 'rockylinux') -%}
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
-{%- if version in ('centos8') %}
+{%- if version in ('centos8', 'rockylinux8') %}
 
 # Install development tools
 RUN yum -y module install nodejs:10

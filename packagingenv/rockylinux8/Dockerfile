@@ -1,4 +1,4 @@
-FROM centos:8
+FROM rockylinux:8
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 

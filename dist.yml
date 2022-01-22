@@ -2,6 +2,8 @@ fedora:
   - !regexp fedora([0-9.]+)
 centos:
   - !regexp centos([0-9.]+)
+rockylinux:
+  - !regexp rockylinux([0-9.]+)
 ubuntu:
   - bionic
   - focal
