@@ -61,6 +61,7 @@ jobs:
     - run:
         name: Pull Docker build images
         command: |
+          set -ex
           docker-compose run ${DISTRO} pull
           docker-compose run ${DISTRO}-test pull
     - run:
