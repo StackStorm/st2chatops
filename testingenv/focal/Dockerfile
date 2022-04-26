@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:focal
 
 # Install prerequesties
 RUN apt-get clean && apt-get update && \

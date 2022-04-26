@@ -8,7 +8,7 @@
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-Requires:       nodejs >= 2:8.0, nodejs < 2:11.0
+Requires:       nodejs >= 2:10.0, nodejs < 2:15.0
 
 Summary:        St2Chatops - StackStorm ChatOps
 
