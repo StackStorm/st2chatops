@@ -27,7 +27,7 @@ jobs:
           echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
-          sudo apt-get update -qq && sudo apt-get install -y rpm jq
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs
           gem install package_cloud
           #sudo pip install "docker-compose==1.14.0"
           rm -rf node_modules
