@@ -31,7 +31,8 @@ jobs:
           make -C ~/st2-docker env
           sudo apt-get update -qq && sudo apt-get install -y rpm jq
           gem install package_cloud
-          sudo pip install "docker-compose==1.14.0"
+          #sudo pip install "docker-compose==1.14.0"
+          docker-compose version
           rm -rf node_modules
     - run:
         name: Ensure Docker running
