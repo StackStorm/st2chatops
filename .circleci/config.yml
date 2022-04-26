@@ -21,6 +21,7 @@ jobs:
     - run:
         name: Get repos and dependencies
         command: |
+          set -e
           echo "Cloning ${ST2_PACKAGES_BRANCH:-master} branch of st2-packages"
           git clone --branch ${ST2_PACKAGES_BRANCH:-master} --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
           # Use DEPRECATED/all-in-one for now, we'll have to circle back around
@@ -42,6 +43,7 @@ jobs:
     - run:
         name: Get PackageCloud variables
         command: |
+          set -e
           distros=($DISTROS)
           DISTRO=${distros[$CIRCLE_NODE_INDEX]}
           PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
@@ -58,11 +60,13 @@ jobs:
     - run:
         name: Pull Docker build images
         command: |
+          set -e
           docker-compose run ${DISTRO} pull
           docker-compose run ${DISTRO}-test pull
     - run:
         name: Build packages
         command: |
+          set -e
           source ~/.circlerc
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
@@ -74,6 +78,7 @@ jobs:
     - run:
         name: Pull & launch Docker st2-docker images
         command: |
+          set -e
           docker-compose -f ~/st2-docker/docker-compose.yml pull
           docker-compose -f ~/st2-docker/docker-compose.yml up -d
           # sleep 10 is needed to allow the st2-docker test containers time to start up.
@@ -83,6 +88,7 @@ jobs:
     - run:
         name: Run tests
         command: |
+          set -e
           source ~/.circlerc
           sleep 10
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
