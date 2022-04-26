@@ -37,8 +37,7 @@ jobs:
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
     - run:
         name: Set up Ruby 2.0
-        command: |
-          rm -f StackStorm/st2chatops/.rvmrc; echo ruby-2.0.0-p645 > StackStorm/st2chatops/.ruby-version; rvm use ruby-2.0.0-p645 --default
+        command: rvm use ruby-2.0.0-p645 --default
     - run:
         name: Get PackageCloud variables
         command: |
