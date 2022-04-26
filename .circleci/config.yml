@@ -31,6 +31,8 @@ jobs:
           gem install package_cloud
           #sudo pip install "docker-compose==1.14.0"
           rm -rf node_modules
+          whereis nodejs
+          whereis node
           docker-compose version
           node -v
     - run:
