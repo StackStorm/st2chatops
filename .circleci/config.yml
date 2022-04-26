@@ -21,7 +21,7 @@ jobs:
     - run:
         name: Get repos and dependencies
         command: |
-          set -e
+          set -eu
           echo "Cloning ${ST2_PACKAGES_BRANCH:-master} branch of st2-packages"
           git clone --branch ${ST2_PACKAGES_BRANCH:-master} --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
           # Use DEPRECATED/all-in-one for now, we'll have to circle back around
@@ -38,10 +38,6 @@ jobs:
           nodejs -v
           jq --version
           package_cloud version
-
-          nvm ls
-          nvm uninstall 6
-          source ~/.circlerc
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
@@ -74,8 +70,8 @@ jobs:
     - run:
         name: Build packages
         command: |
-          set -e
           source ~/.circlerc
+          set -eu
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
             -e PKG_RELEASE=${PKG_RELEASE} \
@@ -86,7 +82,7 @@ jobs:
     - run:
         name: Pull & launch Docker st2-docker images
         command: |
-          set -e
+          set -eu
           docker-compose -f ~/st2-docker/docker-compose.yml pull
           docker-compose -f ~/st2-docker/docker-compose.yml up -d
           # sleep 10 is needed to allow the st2-docker test containers time to start up.
@@ -96,8 +92,8 @@ jobs:
     - run:
         name: Run tests
         command: |
-          set -e
           source ~/.circlerc
+          set -eu
           sleep 10
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
           docker-compose run \
