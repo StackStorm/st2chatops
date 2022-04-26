@@ -30,8 +30,9 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs
           gem install package_cloud
           #sudo pip install "docker-compose==1.14.0"
-          docker-compose version
           rm -rf node_modules
+          docker-compose version
+          node -v
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
