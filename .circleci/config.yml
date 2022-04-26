@@ -39,7 +39,7 @@ jobs:
           jq --version
           package_cloud version
 
-          set -x
+          #set -x
           nvm ls
           nvm uninstall 6
           nvm ls-remote
