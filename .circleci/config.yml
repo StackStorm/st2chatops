@@ -27,14 +27,15 @@ jobs:
           echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
-          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq
           gem install package_cloud
           #sudo pip install "docker-compose==1.14.0"
           rm -rf node_modules
-          whereis nodejs
-          whereis node
+          # print versions
           docker-compose version
-          node -v
+          nodejs -v
+          jq --version
+          package_cloud version
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
@@ -44,11 +45,9 @@ jobs:
     - run:
         name: Get PackageCloud variables
         command: |
-          whereis node
-
           distros=($DISTROS)
           DISTRO=${distros[$CIRCLE_NODE_INDEX]}
-          PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
+          PKG_VERSION=$(nodejs -e "console.log(require('./package.json').st2_version);")
           if [ -n "$PACKAGECLOUD_TOKEN" ]; then
             PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
           else
