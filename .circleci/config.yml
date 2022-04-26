@@ -44,6 +44,7 @@ jobs:
           nvm uninstall 6
           nvm ls-remote
           nvm ls
+          set -x
           source ~/.circlerc
     - run:
         name: Ensure Docker running
