@@ -38,6 +38,9 @@ jobs:
           nodejs -v
           jq --version
           package_cloud version
+
+          nvm ls
+          source ~/.circlerc
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
@@ -70,7 +73,7 @@ jobs:
     - run:
         name: Build packages
         command: |
-          set -x
+          set -e
           source ~/.circlerc
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
