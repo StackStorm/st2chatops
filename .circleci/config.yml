@@ -70,7 +70,7 @@ jobs:
     - run:
         name: Build packages
         command: |
-          set -e
+          set -x
           source ~/.circlerc
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
