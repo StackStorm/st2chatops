@@ -39,6 +39,10 @@ jobs:
           jq --version
           package_cloud version
 
+          set -x
+          nvm ls
+          nvm uninstall 6
+          nvm ls-remote
           nvm ls
           source ~/.circlerc
     - run:
