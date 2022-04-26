@@ -42,7 +42,6 @@ jobs:
           #set -x
           nvm ls
           nvm uninstall 6
-          nvm ls-remote
           nvm ls
           set -x
           source ~/.circlerc
