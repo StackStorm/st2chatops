@@ -21,6 +21,7 @@ jobs:
     - run:
         name: Get repos and dependencies
         command: |
+          set -eu
           echo "Cloning ${ST2_PACKAGES_BRANCH:-master} branch of st2-packages"
           git clone --branch ${ST2_PACKAGES_BRANCH:-master} --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
           # Use DEPRECATED/all-in-one for now, we'll have to circle back around
@@ -28,23 +29,28 @@ jobs:
           echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
-          sudo apt-get update -qq && sudo apt-get install -y rpm jq
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs
           gem install package_cloud
-          sudo pip install "docker-compose==1.14.0"
+          #sudo pip install "docker-compose==1.14.0"
           rm -rf node_modules
+          # print versions
+          docker-compose version
+          nodejs -v
+          jq --version
+          package_cloud version
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
     - run:
         name: Set up Ruby 2.0
-        command: |
-          rm -f StackStorm/st2chatops/.rvmrc; echo ruby-2.0.0-p645 > StackStorm/st2chatops/.ruby-version; rvm use ruby-2.0.0-p645 --default
+        command: rvm use ruby-2.0.0-p645 --default
     - run:
         name: Get PackageCloud variables
         command: |
+          set -eu
           distros=($DISTROS)
           DISTRO=${distros[$CIRCLE_NODE_INDEX]}
-          PKG_VERSION=$(node -e "console.log(require('./package.json').st2_version);")
+          PKG_VERSION=$(nodejs -e "console.log(require('./package.json').st2_version);")
           if [ -n "$PACKAGECLOUD_TOKEN" ]; then
             PKG_RELEASE=$(~/st2-packages/.circle/packagecloud.sh next-revision ${DISTRO} ${PKG_VERSION} st2chatops)
           else
@@ -58,12 +64,14 @@ jobs:
     - run:
         name: Pull Docker build images
         command: |
+          set -e
           docker-compose run ${DISTRO} pull
           docker-compose run ${DISTRO}-test pull
     - run:
         name: Build packages
         command: |
           source ~/.circlerc
+          set -eu
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
             -e PKG_RELEASE=${PKG_RELEASE} \
@@ -74,6 +82,7 @@ jobs:
     - run:
         name: Pull & launch Docker st2-docker images
         command: |
+          set -eu
           docker-compose -f ~/st2-docker/docker-compose.yml pull
           docker-compose -f ~/st2-docker/docker-compose.yml up -d
           # sleep 10 is needed to allow the st2-docker test containers time to start up.
@@ -84,6 +93,7 @@ jobs:
         name: Run tests
         command: |
           source ~/.circlerc
+          set -eu
           sleep 10
           export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
           docker-compose run \
@@ -120,9 +130,7 @@ jobs:
           command: find . | sed 's|[^/]*/|  |g'
       - run:
           name: Install dependencies
-          command: |
-            set -x
-            gem install package_cloud
+          command: gem install package_cloud
       - run:
           name: Deploy deb/rpm packages to PackageCloud
           command: |
