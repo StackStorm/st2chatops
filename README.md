@@ -27,9 +27,9 @@ Where ${DISTRO} refers to flavor name. See [docker-compose.yml](docker-compose.y
 
 ### Usage
 
-* Pull the StackStorm/hubot image:
+* Pull the StackStorm/st2chatops image:
 
-        docker pull stackstorm/hubot
+        docker pull stackstorm/st2chatops
 
 * Set a hostname or IP address that will be accessible form a docker container,
   as $ST2_HOSTNAME environment variable:
@@ -52,10 +52,10 @@ The script is set for Slack; for other Chats, **edit it** to pass the environmen
 Run the script, and ensure that hubot-stackstorm is running and there are no errors:
 
         ./st2chatops-docker-run.sh
-        docker inspect -f {{.State.Status}} stackstorm-hubot
-        docker logs stackstorm-hubot
+        docker inspect -f {{.State.Status}} stackstorm-st2chatops
+        docker logs stackstorm-st2chatops
 
-  To automatically start `stackstorm-hubot`, use [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart>),
+  To automatically start `stackstorm-st2chatops`, use [restart policies](https://docs.docker.com/engine/reference/run/#restart-policies-restart>),
   or [integrate with a process manager](https://docs.docker.com/engine/admin/host_integration).
 
 * Go to your Chat room and begin Chatopsing. Learn more at [docs.stackstorm.com/chatops](https://docs.stackstorm.com/chatops)
@@ -73,15 +73,15 @@ Grab your favorite Node.JS version (>=10.0, <=14.x), and pick your tag. Update `
 
 * Step 0: Log in to docker with `docker login`.
   * Only have to do this the first time
-* Step 1: Build the image: `docker build -t stackstorm/hubot:<VER> .`
+* Step 1: Build the image: `docker build -t stackstorm/st2chatops:<VER> .`
   * Replace `<VER>` with a version tag
-* Step 2: Push the container up: `docker push stackstorm/hubot:<VER>`
+* Step 2: Push the container up: `docker push stackstorm/st2chatops:<VER>`
   * Use the same tag specified in Step 1.
 * Step 3: Update the `latest` tag:
 
   ```
-  docker build -t stackstorm/hubot:latest .
-  docker push stackstorm/hubot:latest
+  docker build -t stackstorm/st2chatops:latest .
+  docker push stackstorm/st2chatops:latest
   ```
 
 * Step 4: Profit
