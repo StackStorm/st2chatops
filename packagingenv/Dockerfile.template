@@ -1,13 +1,13 @@
 FROM {{ dist }}:{{ version }}
 
-{% if dist in ('centos', 'fedora') -%}
+{% if dist in ('centos', 'fedora', 'rockylinux') -%}
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
 
-{%- if version in ('centos8') %}
+{%- if version in ('centos8', 'rockylinux8') %}
 
 # Install development tools
 RUN yum -y module install nodejs:10
@@ -25,12 +25,12 @@ RUN yum -y install nodejs
 
 {% else -%}
 
-# Install prerequesties
+# Install prerequisites
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential curl gnupg devscripts debhelper dh-make git libicu-dev
 
-{%- if version in ('xenial', 'bionic') %}
+{%- if version in ('bionic', 'focal') %}
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
 {% endif %}
 

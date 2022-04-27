@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 
-# Install prerequesties
+# Install prerequisites
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential curl gnupg devscripts debhelper dh-make git libicu-dev
