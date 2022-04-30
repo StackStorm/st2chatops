@@ -1,6 +1,6 @@
 {
   "name": "st2-hubot",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "st2_version": "3.7dev",
   "private": true,
   "author": "StackStorm <support@stackstorm.com>",
