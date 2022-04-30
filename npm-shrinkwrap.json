@@ -1784,7 +1784,6 @@
             "promise": "^7.1.1",
             "request": "^2.88.0",
             "rsa-pem-from-mod-exp": "^0.8.4",
-            "skills-validator": "file:node_modules/botbuilder-teams/node_modules/botbuilder/skills-validator/skills-validator-1.0.0.tgz",
             "sprintf-js": "^1.0.3",
             "url-join": "^1.1.0"
           },
@@ -1941,15 +1940,6 @@
               "version": "5.2.1",
               "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz",
               "integrity": "sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ=="
-            },
-            "skills-validator": {
-              "version": "file:node_modules/botbuilder-teams/node_modules/botbuilder/skills-validator/skills-validator-1.0.0.tgz",
-              "integrity": "sha512-UFmS/Tj/1LcrwWkL8jqStUeKRHp3G5Ee2FmRJzerSOJIjSlTXePvvqTpKSxb1iXnZz7+BPayXAaSIMCfvKWcFQ==",
-              "requires": {
-                "@types/node-fetch": "^2.5.4",
-                "adal-node": "^0.2.1",
-                "node-fetch": "^2.6.0"
-              }
             },
             "underscore": {
               "version": "1.13.1",
