@@ -21,6 +21,7 @@ jobs:
     - run:
         name: Get repos and dependencies
         command: |
+          echo Test
           set -eu
           echo "Cloning ${ST2_PACKAGES_BRANCH:-master} branch of st2-packages"
           git clone --branch ${ST2_PACKAGES_BRANCH:-master} --depth 1 ${ST2_PACKAGES_REPO} ~/st2-packages
