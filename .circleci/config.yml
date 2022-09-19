@@ -47,7 +47,7 @@ jobs:
     - run:
         name: Get PackageCloud variables
         command: |
-          set -eu
+          set -e
           distros=($DISTROS)
           DISTRO=${distros[$CIRCLE_NODE_INDEX]}
           PKG_VERSION=$(nodejs -e "console.log(require('./package.json').st2_version);")
