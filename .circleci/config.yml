@@ -88,7 +88,7 @@ jobs:
           # sleep 10 is needed to allow the st2-docker test containers time to start up.
           # Otherwise st2api is not ready when the tests run.
           sleep 10 && echo 'Sleeping for 10 sec ...'
-          docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 --version
+          docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2ctl status
           docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list
     - run:
         name: Run tests
