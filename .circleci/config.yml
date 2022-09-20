@@ -1,6 +1,5 @@
 # Setup in CircleCI account the following ENV variables:
 # IS_PRODUCTION (default: 0)
-# IS_ENTERPRISE
 # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
 # PACKAGECLOUD_TOKEN
 # SLACK_TOKEN
@@ -29,9 +28,9 @@ jobs:
           echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
-          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs net-tools
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs
           gem install package_cloud
-          sudo pip install "docker-compose==1.27.4"
+          sudo pip install "docker-compose==1.29.2"
           rm -rf node_modules
           # print versions
           docker-compose version
@@ -90,14 +89,6 @@ jobs:
           sleep 10 && echo 'Sleeping for 10 sec ...'
           docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2ctl status
           docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list
-          # debug the interfaces
-          echo '-----'
-          ifconfig docker0
-          echo '-----'
-          ifconfig docker0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
-          echo '-----'
-          ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}'
-          echo '-----'
     - run:
         name: Run tests
         command: |
@@ -158,5 +149,4 @@ workflows:
               only:
                 - master
                 - /v[0-9]+\.[0-9]+/
-                - feature/circleci
-                - circle2.0
+                - debug/circleci
