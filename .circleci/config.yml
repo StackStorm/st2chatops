@@ -90,13 +90,21 @@ jobs:
           sleep 10 && echo 'Sleeping for 10 sec ...'
           docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2ctl status
           docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list
+          # debug the interfaces
+          echo '-----'
+          ifconfig docker0
+          echo '-----'
+          ifconfig docker0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p'
+          echo '-----'
+          ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}'
+          echo '-----'
     - run:
         name: Run tests
         command: |
           source ~/.circlerc
           set -eu
           sleep 10
-          export ST2_HOSTNAME=$(ifconfig docker0 | grep 'inet addr' | awk -F: '{print $2}' | awk '{print $1}')
+          export ST2_HOSTNAME=$(ifconfig docker0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
           -e ST2_USERNAME=${ST2_USER} \
