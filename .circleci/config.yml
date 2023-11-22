@@ -6,7 +6,8 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: "ubuntu-2004:current"
     working_directory: ~/StackStorm/st2chatops
     parallelism: 4
     shell: /bin/bash --login
@@ -29,8 +30,9 @@ jobs:
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
           sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs net-tools
-          sudo gem install package_cloud
-          sudo pip install "docker-compose==1.29.2"
+          gem install package_cloud
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
           rm -rf node_modules
           # print versions
           docker-compose version
