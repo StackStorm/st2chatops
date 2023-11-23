@@ -14,7 +14,7 @@
     "hubot-diagnostics": "0.0.2",
     "hubot-flowdock": "^0.7.8",
     "hubot-help": "^0.2.2",
-    "hubot-irc": "^0.4.2",
+    "hubot-irc": "0.4.0",
     "hubot-matteruser": "^5.4.6",
     "hubot-redis-brain": "0.0.4",
     "hubot-rocketchat": "^2.0.0",
