@@ -6,7 +6,8 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine:
+      image: "ubuntu-2004:current"
     working_directory: ~/StackStorm/st2chatops
     parallelism: 4
     shell: /bin/bash --login
@@ -30,7 +31,8 @@ jobs:
           make -C ~/st2-docker env
           sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs net-tools
           gem install package_cloud
-          sudo pip install "docker-compose==1.29.2"
+          sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
           rm -rf node_modules
           # print versions
           docker-compose version
@@ -117,7 +119,7 @@ jobs:
   deploy:
     docker:
       # The primary container is an instance of the first list image listed. Your build commands run in this container.
-      - image: circleci/ruby:2.4
+      - image: circleci/ruby:2.7
     working_directory: ~/packages
     environment:
       DISTROS: "bionic focal el7 el8"
