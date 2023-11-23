@@ -1431,7 +1431,6 @@
         "promise": "^7.1.1",
         "request": "^2.88.0",
         "rsa-pem-from-mod-exp": "^0.8.4",
-        "skills-validator": "file:node_modules/botbuilder/skills-validator/skills-validator-1.0.0.tgz",
         "sprintf-js": "^1.0.3",
         "url-join": "^1.1.0"
       },
@@ -4971,15 +4970,6 @@
         "call-bind": "^1.0.0",
         "get-intrinsic": "^1.0.2",
         "object-inspect": "^1.9.0"
-      }
-    },
-    "skills-validator": {
-      "version": "file:node_modules/botbuilder/skills-validator/skills-validator-1.0.0.tgz",
-      "integrity": "sha512-UFmS/Tj/1LcrwWkL8jqStUeKRHp3G5Ee2FmRJzerSOJIjSlTXePvvqTpKSxb1iXnZz7+BPayXAaSIMCfvKWcFQ==",
-      "requires": {
-        "@types/node-fetch": "^2.5.4",
-        "adal-node": "^0.2.1",
-        "node-fetch": "^2.6.0"
       }
     },
     "sntp": {
