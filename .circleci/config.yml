@@ -29,7 +29,7 @@ jobs:
           echo "Cloning ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} branch of st2-docker"
           git clone --branch ${ST2_DOCKER_BRANCH:-DEPRECATED/all-in-one} --depth 1 ${ST2_TEST_ENVIRONMENT} ~/st2-docker
           make -C ~/st2-docker env
-          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs net-tools npm
+          sudo apt-get update -qq && sudo apt-get install -y rpm jq nodejs net-tools
           gem install package_cloud
           sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
