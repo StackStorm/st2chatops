@@ -23,6 +23,8 @@ Changed
 
     Contributed by @lopf
 
+* Pinned coffeescript version to 1.12.7
+
 Removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Remove skills-validator from npm-shrinkwrap.json
