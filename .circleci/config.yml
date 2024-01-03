@@ -99,7 +99,7 @@ jobs:
           export ST2_HOSTNAME=$(ifconfig docker0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
-          -e ST2_USERNAME=${ST2_USER} \
+          -e ST2_USERNAME=${ST2_USERNAME} \
           -e ST2_PASSWORD=${ST2_PASSWORD} \
           -e SLACK_TOKEN=${SLACK_TOKEN} \
           ${DISTRO}-test test
