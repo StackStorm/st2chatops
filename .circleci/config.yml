@@ -9,10 +9,10 @@ jobs:
     machine:
       image: "ubuntu-2004:current"
     working_directory: ~/StackStorm/st2chatops
-    parallelism: 4
+    parallelism: 2
     shell: /bin/bash --login
     environment:
-      DISTROS: bionic focal el7 el8
+      DISTROS: focal el8
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
       ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
@@ -122,7 +122,7 @@ jobs:
       - image: circleci/ruby:2.7
     working_directory: ~/packages
     environment:
-      DISTROS: "bionic focal el7 el8"
+      DISTROS: "focal el8"
     steps:
       - attach_workspace:
           at: /home/circleci
