@@ -23,6 +23,9 @@ Changed
 
     Contributed by @lopf
 
+* Removed EL7 and bionic
+    Contributed by @amanda11
+
 Removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Remove skills-validator from npm-shrinkwrap.json

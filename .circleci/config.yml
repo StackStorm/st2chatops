@@ -7,12 +7,12 @@ version: 2
 jobs:
   build:
     machine:
-      image: "ubuntu-2004:current"
+      image: "ubuntu-2204:2023.04.2"
     working_directory: ~/StackStorm/st2chatops
-    parallelism: 4
+    parallelism: 2
     shell: /bin/bash --login
     environment:
-      DISTROS: bionic focal el7 el8
+      DISTROS: focal el8
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
       ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
@@ -38,7 +38,6 @@ jobs:
           docker-compose version
           nodejs -v
           jq --version
-          package_cloud version
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
@@ -122,7 +121,7 @@ jobs:
       - image: circleci/ruby:2.7
     working_directory: ~/packages
     environment:
-      DISTROS: "bionic focal el7 el8"
+      DISTROS: "focal el8"
     steps:
       - attach_workspace:
           at: /home/circleci
