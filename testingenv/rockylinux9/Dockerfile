@@ -1,6 +1,4 @@
-FROM centos:7
-
-RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
+FROM rockylinux:9
 
 # Add NodeSource repo
 RUN curl --silent --location https://rpm.nodesource.com/setup_10.x | bash -
