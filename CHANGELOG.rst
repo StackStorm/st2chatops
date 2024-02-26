@@ -23,6 +23,9 @@ Changed
 
     Contributed by @lopf
 
+* Added support for EL9. Removed support for EL7 and bionic. #187
+    Contributed by @amanda11
+
 Removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Remove skills-validator from npm-shrinkwrap.json

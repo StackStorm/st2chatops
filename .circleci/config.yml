@@ -38,7 +38,6 @@ jobs:
           docker-compose version
           nodejs -v
           jq --version
-          package_cloud version
     - run:
         name: Ensure Docker running
         command: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
