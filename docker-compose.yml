@@ -1,10 +1,4 @@
 # Packaging environments
-bionic:
-  build: ./packagingenv/bionic
-  extends:
-    file: docker-compose.override.yml
-    service: suite
-
 focal:
   build: ./packagingenv/focal
   extends:
@@ -17,19 +11,13 @@ el8:
     file: docker-compose.override.yml
     service: suite
 
-el7:
-  build: ./packagingenv/centos7
+el9:
+  build: ./packagingenv/rockylinux9
   extends:
     file: docker-compose.override.yml
     service: suite
 
 # Testing environments
-bionic-test:
-  build: ./testingenv/bionic
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
-
 focal-test:
   build: ./testingenv/focal
   extends:
@@ -42,8 +30,8 @@ el8-test:
     file: docker-compose.override.yml
     service: suite-test
 
-el7-test:
-  build: ./testingenv/centos7
+el9-test:
+  build: ./testingenv/rockylinux9
   extends:
     file: docker-compose.override.yml
     service: suite-test
