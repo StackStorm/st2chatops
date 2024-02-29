@@ -25,6 +25,9 @@ Changed
 
 * Pinned coffeescript version to 1.12.7
 
+* Removed EL7 and bionic
+    Contributed by @amanda11
+
 Removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Remove skills-validator from npm-shrinkwrap.json

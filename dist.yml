@@ -5,5 +5,4 @@ centos:
 rockylinux:
   - !regexp rockylinux([0-9.]+)
 ubuntu:
-  - bionic
   - focal
