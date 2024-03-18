@@ -9,38 +9,41 @@ RUN curl --silent --location https://rpm.nodesource.com/setup_20.x | bash -
 
 {%- if version in ('centos8', 'rockylinux8') %}
 
-# Install development tools
-RUN yum -y module install nodejs:10
+# Install node
+RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash && \
+    source ~/.bashrc && \
+    nvm install 20.8.1 && \
+    node -v && npm -v
 
 # Install python3 for gyp
 RUN yum -y install python3
 
 # Upgrade gyp to a python3 compatible version
-RUN npm install -g node-gyp@latest
+RUN source ~/.bashrc && nvm use 20.8.1 && npm install -g node-gyp@latest
 
 {%- endif %}
 
-# Install development tools
-RUN yum -y install nodejs
+# Install node
+RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash && \
+    source ~/.bashrc && \
+    nvm install 20.8.1 && \
+    node -v && npm -v
 
 {% else -%}
 
 # Install prerequisites
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-    build-essential curl gnupg devscripts debhelper dh-make git libicu-dev
+    build-essential curl gnupg devscripts debhelper dh-make git libicu-dev curl
 
 {%- if version in ('focal') %}
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install dh-systemd
 {% endif %}
 
-# Add NodeSource repo
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-
-# Install node
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
-
-RUN apt-get clean
+RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash - && \
+    . ~/.bashrc && \
+    nvm install 20.8.1 && \
+    node -v && npm -v
 
 {% endif -%}
 
