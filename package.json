@@ -9,6 +9,7 @@
     "botbuilder": "^3.30.0",
     "coffee-register": "1.0.0",
     "coffee-script": "1.12.7",
+    "coffeescript": "1.12.7",
     "hubot": "^3.5.0",
     "hubot-botframework": "git+https://github.com/microsoft/BotFramework-Hubot.git#01d5be9",
     "hubot-diagnostics": "0.0.2",
@@ -25,6 +26,6 @@
     "hubot-xmpp": "^0.2.6"
   },
   "engines": {
-    "node": ">=10.0 <=14.0"
+    "node": ">=20.0"
   }
 }
