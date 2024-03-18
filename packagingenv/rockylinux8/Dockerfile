@@ -6,7 +6,7 @@ RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 RUN curl --silent --location https://rpm.nodesource.com/setup_20.x | bash -
 
 # Install development tools
-RUN yum -y module install nodejs:10
+RUN yum -y module install nodejs:20
 
 # Install python3 for gyp
 RUN yum -y install python3
