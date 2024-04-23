@@ -13,6 +13,7 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
 
 RUN apt-get clean
+RUN npm install -g npm@6
 
 
 COPY docker-entrypoint.sh /entrypoint.sh
