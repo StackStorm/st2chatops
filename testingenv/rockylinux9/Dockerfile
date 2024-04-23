@@ -1,4 +1,4 @@
-FROM rockylinux:8
+FROM rockylinux:9
 
 # Add NodeSource repo
 #RUN curl --silent --location https://rpm.nodesource.com/setup_20.x | bash -
