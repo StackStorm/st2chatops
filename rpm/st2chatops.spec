@@ -8,7 +8,7 @@
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-Requires:       nodejs >= 2:20.0
+Requires:       nodejs >= 20.0
 
 Summary:        St2Chatops - StackStorm ChatOps
 
@@ -29,6 +29,9 @@ Prefix:         /opt/stackstorm/chatops
 Requires: /bin/bash
 Requires: /bin/sh
 Requires: /usr/bin/env
+%endif
+%if 0%{?rhel} >= 9
+BuildRequires: systemd-rpm-macros
 %endif
 
 # Cat debian/package.dirs, set buildroot prefix and create directories.
