@@ -1,6 +1,7 @@
 FROM rockylinux:9
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
+RUN yum -y install systemd-rpm-macros
 
 # Add NodeSource repo
 #RUN curl --silent --location https://rpm.nodesource.com/setup_20.x | bash -
