@@ -2,9 +2,6 @@ FROM rockylinux:8
 
 RUN yum -y install gcc-c++ make git libicu-devel rpmdevtools
 
-# Add NodeSource repo
-#RUN curl --silent --location https://rpm.nodesource.com/setup_20.x | bash -
-
 # Install node
 RUN yum -y module install nodejs:20
 
