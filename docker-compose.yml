@@ -11,6 +11,12 @@ el8:
     file: docker-compose.override.yml
     service: suite
 
+el9:
+  build: ./packagingenv/rockylinux9
+  extends:
+    file: docker-compose.override.yml
+    service: suite
+
 # Testing environments
 focal-test:
   build: ./testingenv/focal
@@ -20,6 +26,12 @@ focal-test:
 
 el8-test:
   build: ./testingenv/rockylinux8
+  extends:
+    file: docker-compose.override.yml
+    service: suite-test
+
+el9-test:
+  build: ./testingenv/rockylinux9
   extends:
     file: docker-compose.override.yml
     service: suite-test
