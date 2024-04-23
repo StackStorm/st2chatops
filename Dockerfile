@@ -1,7 +1,8 @@
-FROM node:14.17-slim
+FROM node:20.11.1-slim
 
 RUN apt update && apt install --yes \
-  python \
+  python3 \
+  npm \
   libicu-dev \
   libxml2-dev \
   libexpat1-dev \
@@ -11,6 +12,7 @@ RUN apt update && apt install --yes \
 
 COPY . /app
 WORKDIR /app
+RUN npm install npm@6 -g
 RUN npm install --production && npm cache verify
 
 RUN apt remove --yes \

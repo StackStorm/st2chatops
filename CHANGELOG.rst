@@ -9,6 +9,9 @@ Added
 * A changelog file.
 
     Contributed by @nzlosh
+* EL9 support and node20 support
+
+    Contributed by @amanda11
 
 Fixed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
