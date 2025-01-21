@@ -9,10 +9,10 @@ jobs:
     machine:
       image: "ubuntu-2204:2023.04.2"
     working_directory: ~/StackStorm/st2chatops
-    parallelism: 3
+    parallelism: 4
     shell: /bin/bash --login
     environment:
-      DISTROS: focal el8 el9
+      DISTROS: focal jammy el8 el9
       ST2_PACKAGES_REPO: https://github.com/StackStorm/st2-packages
       ST2_TEST_ENVIRONMENT: https://github.com/StackStorm/st2-docker
       DEPLOY_PACKAGES: 1
@@ -96,7 +96,9 @@ jobs:
           source ~/.circlerc
           set -eu
           sleep 10
-          export ST2_HOSTNAME=$(ifconfig docker0 | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+          # Get ip address assigned to docker interface from output sample like below:
+          # docker0          DOWN           172.17.0.1/16 fe80::42:a0ff:fe6b:1f34/64
+          export ST2_HOSTNAME=$(ip -br add show dev docker0 | awk -F'[/ ]*' '{print $3}')
           docker-compose run \
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
           -e ST2_USERNAME=${ST2_USER} \
@@ -122,7 +124,7 @@ jobs:
       - image: circleci/ruby:2.7
     working_directory: ~/packages
     environment:
-      DISTROS: "focal el8 el9"
+      DISTROS: "focal jammy el8 el9"
     steps:
       - attach_workspace:
           at: /home/circleci

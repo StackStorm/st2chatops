@@ -6,3 +6,4 @@ rockylinux:
   - !regexp rockylinux([0-9.]+)
 ubuntu:
   - focal
+  - jammy

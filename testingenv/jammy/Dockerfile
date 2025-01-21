@@ -1,11 +1,4 @@
-FROM {{ dist }}:{{ version }}
-
-{% if dist in ('centos', 'fedora', 'rockylinux') -%}
-
-# Install development tools
-RUN yum -y module install nodejs:20
-
-{% else -%}
+FROM ubuntu:jammy
 
 # Install prerequesties
 RUN apt-get clean && apt-get update && \
@@ -17,8 +10,6 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 # Install node
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install nodejs
-
-{% endif -%}
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]

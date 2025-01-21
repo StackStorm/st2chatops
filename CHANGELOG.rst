@@ -12,6 +12,9 @@ Added
 * EL9 support and node20 support
 
     Contributed by @amanda11
+* Ubuntu Jammy support
+
+    Contributed by @nzlosh
 
 Fixed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
