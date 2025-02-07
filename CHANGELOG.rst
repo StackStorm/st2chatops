@@ -29,6 +29,8 @@ Changed
 
     Contributed by @lopf
 
+* Pinned coffeescript version to 1.12.7
+
 * Removed EL7 and bionic
     Contributed by @amanda11
 
