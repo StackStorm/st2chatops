@@ -1,50 +1,51 @@
 # Packaging environments
-focal:
-  build: ./packagingenv/focal
-  extends:
-    file: docker-compose.override.yml
-    service: suite
+services:
+  focal:
+    build: ./packagingenv/focal
+    extends:
+      file: docker-compose.override.yml
+      service: suite
 
-jammy:
-  build: ./packagingenv/jammy
-  extends:
-    file: docker-compose.override.yml
-    service: suite
+  jammy:
+    build: ./packagingenv/jammy
+    extends:
+      file: docker-compose.override.yml
+      service: suite
 
-el8:
-  build: ./packagingenv/rockylinux8
-  extends:
-    file: docker-compose.override.yml
-    service: suite
+  el8:
+    build: ./packagingenv/rockylinux8
+    extends:
+      file: docker-compose.override.yml
+      service: suite
 
-el9:
-  build: ./packagingenv/rockylinux9
-  extends:
-    file: docker-compose.override.yml
-    service: suite
+  el9:
+    build: ./packagingenv/rockylinux9
+    extends:
+      file: docker-compose.override.yml
+      service: suite
 
-# Testing environments
-focal-test:
-  build: ./testingenv/focal
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
+  # Testing environments
+  focal-test:
+    build: ./testingenv/focal
+    extends:
+      file: docker-compose.override.yml
+      service: suite-test
 
-jammy-test:
-  build: ./testingenv/jammy
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
+  jammy-test:
+    build: ./testingenv/jammy
+    extends:
+      file: docker-compose.override.yml
+      service: suite-test
 
-el8-test:
-  build: ./testingenv/rockylinux8
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
+  el8-test:
+    build: ./testingenv/rockylinux8
+    extends:
+      file: docker-compose.override.yml
+      service: suite-test
 
-el9-test:
-  build: ./testingenv/rockylinux9
-  extends:
-    file: docker-compose.override.yml
-    service: suite-test
+  el9-test:
+    build: ./testingenv/rockylinux9
+    extends:
+      file: docker-compose.override.yml
+      service: suite-test
 
