@@ -66,8 +66,8 @@ jobs:
         name: Pull Docker build images
         command: |
           set -e
-          docker-compose run ${DISTRO} pull
-          docker-compose run ${DISTRO}-test pull
+          docker-compose run ${DISTRO} pull --project-name=${DISTRO}
+          docker-compose run ${DISTRO}-test pull --project-name=${DISTRO}-test
     - run:
         name: Build packages
         command: |
@@ -76,7 +76,7 @@ jobs:
           docker-compose run \
             -e PKG_VERSION=${PKG_VERSION} \
             -e PKG_RELEASE=${PKG_RELEASE} \
-            ${DISTRO} build
+            ${DISTRO} build --project-name=${DISTRO}
           # Collect artifacts
           cp -r /tmp/st2chatops/*  ~/packages/${DISTRO}
     # TODO: The tests need to look for ERROR logs, e.g. due to /stream not reachable
@@ -84,12 +84,12 @@ jobs:
         name: Pull & launch Docker st2-docker images
         command: |
           set -eu
-          docker-compose -f ~/st2-docker/docker-compose.yml pull
-          docker-compose -f ~/st2-docker/docker-compose.yml up -d
+          docker-compose -f ~/st2-docker/docker-compose.yml pull --project-name=${DISTRO}
+          docker-compose -f ~/st2-docker/docker-compose.yml up -d --project-name=${DISTRO}
           # sleep 10 is needed to allow the st2-docker test containers time to start up.
           # Otherwise st2api is not ready when the tests run.
           sleep 10 && echo 'Sleeping for 10 sec ...'
-          docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list
+          docker-compose -f ~/st2-docker/docker-compose.yml exec stackstorm st2 action-alias list --project-name=${DISTRO}
     - run:
         name: Run tests
         command: |
@@ -105,7 +105,7 @@ jobs:
           -e ST2_PASSWORD=${ST2_PASSWORD} \
           -e SLACK_TOKEN=${SLACK_BOT_TOKEN} \
           -e SLACK_APP_TOKEN=${SLACK_APP_TOKEN} \
-          ${DISTRO}-test test
+          ${DISTRO}-test test --project-name=${DISTRO}-test
     - run:
         name: Collect logs
         command: for name in $(docker ps -a --format "{{.Names}}"); do docker logs ${name} > ~/packages/${DISTRO}/log/${name}.log 2>&1; done

@@ -2,7 +2,7 @@
 #
 services:
   suite:
-    #image: fake
+    image: fake
     working_dir: /root/st2chatops
     environment:
       - DEBUG_LEVEL=0
@@ -12,7 +12,7 @@ services:
       - /tmp/st2chatops:/root/build
 
   suite-test:
-    #image: fake
+    image: fake
     extends:
       file: docker-compose.override.yml
       service: suite
