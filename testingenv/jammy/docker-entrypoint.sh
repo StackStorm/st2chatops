@@ -19,8 +19,8 @@ test)
   bin/hubot &> /tmp/hubot.log &
   sleep 15
   cat /tmp/hubot.log
-  grep -rq "INFO Connected to Slack RTM" /tmp/hubot.log && \
-  grep -rq "INFO [[:digit:]]\+ commands are loaded" /tmp/hubot.log
+  grep -rq "socket-mode:SocketModeClient:0 Now connected to Slack" /tmp/hubot.log && \
+  grep -rq "[[:digit:]]\+ commands are loaded" /tmp/hubot.log
   exit $?
   ;;
 *)
