@@ -43,4 +43,4 @@ if [ ! -n "$HUBOT_ALIAS" ]; then
 fi
 
 # Keep st2chatops hack (ignored by hubot) for process discovery
-exec $HERE/node_modules/.bin/hubot "$@" st2chatops
+exec $HERE/node_modules/.bin/hubot "$@" -a @hubot-friends/hubot-slack st2chatops

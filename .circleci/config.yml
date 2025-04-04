@@ -103,7 +103,8 @@ jobs:
           -e ST2_HOSTNAME=${ST2_HOSTNAME} \
           -e ST2_USERNAME=${ST2_USER} \
           -e ST2_PASSWORD=${ST2_PASSWORD} \
-          -e SLACK_TOKEN=${SLACK_TOKEN} \
+          -e SLACK_TOKEN=${SLACK_BOT_TOKEN} \
+          -e SLACK_APP_TOKEN=${SLACK_APP_TOKEN} \
           ${DISTRO}-test test
     - run:
         name: Collect logs

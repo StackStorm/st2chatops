@@ -3,3 +3,4 @@ node_modules
 .hubot_history
 .idea
 debian/*.log
+.vscode
