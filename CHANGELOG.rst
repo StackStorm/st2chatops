@@ -36,12 +36,12 @@ Changed
 
   - hubot 11.3 -> 14.1 (Express 5, ``connect-multiparty`` removed, and a CommandBus for
     commands).
-  - hubot-stackstorm 0.13 -> 0.14, Encore's fork (``EncoreTechnologies/hubot-stackstorm``). It
-    works with hubot 14, selects the Slack formatting for hubot-slack's new adapter name, and no
-    longer exits when the StackStorm API returns an error body without ``faultstring``. It is
-    vendored as ``vendor/hubot-stackstorm-0.14.0.tgz``: ``.npmrc`` blocks git dependencies, and the
-    build then needs only the npm registry. To update it, run ``npm pack`` in the fork, replace
-    the tarball and the version in ``package.json``, then run ``npm install``.
+  - hubot-stackstorm 0.13 -> 0.14. It works with hubot 14, selects the Slack formatting for
+    hubot-slack's new adapter name, and no longer exits when the StackStorm API returns an error
+    body without ``faultstring``. It is vendored as ``vendor/hubot-stackstorm-0.14.0.tgz``:
+    ``.npmrc`` blocks git dependencies, and the build then needs only the npm registry. To update
+    it, run ``npm pack`` in hubot-stackstorm, replace the tarball and the version in
+    ``package.json``, then run ``npm install``.
   - @hubot-friends/hubot-slack 3.1 -> 3.8.
   - ``overrides`` replace st2client's ``axios`` 0.21 with 1.20 and ``eventsource`` 0.1 with 2.0.
     Both had published advisories, and eventsource's was critical. They also pin
