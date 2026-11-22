@@ -8,7 +8,10 @@
 Name:           st2chatops
 Version:        %{version}
 Release:        %{release}
-Requires:       nodejs >= 20.0
+# RHEL's nodejs carries Epoch 1: without it any version satisfies the requirement
+Requires:       nodejs >= 1:24
+# JavaScript only (no native modules)
+BuildArch:      noarch
 
 Summary:        St2Chatops - StackStorm ChatOps
 

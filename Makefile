@@ -13,14 +13,12 @@ else
 	REDHAT := 1
 endif
 
-.PHONY: all build test clean distclean install
+.PHONY: all build test clean distclean install rpm
 all: build
 
+# dependencies come from npm-shrinkwrap.json; .npmrc applies the supply-chain guardrails
 build:
-	# Permissions workaround for global `npm install`
-	chown -R root:root /root/st2chatops/
-	npm install --production
-	npm cache verify && npm cache clean --force
+	npm ci --omit=dev --no-audit --no-fund
 
 test:
 	npm test
@@ -34,6 +32,8 @@ distclean: clean
 install: changelog
 	mkdir -p $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/bin $(DESTDIR)$(PREFIX)/bin
+	mkdir -p $(DESTDIR)$(PREFIX)/scripts
+	cp $(CURDIR)/scripts/*.js $(DESTDIR)$(PREFIX)/scripts
 	cp -R $(CURDIR)/node_modules $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/external-scripts.json $(DESTDIR)$(PREFIX)
 	cp -R $(CURDIR)/st2chatops.env $(DESTDIR)$(PREFIX)
@@ -67,11 +67,5 @@ ifeq ($(DEBIAN),1)
 	debchange -v $(PKG_VERSION)-$(PKG_RELEASE) -M ""
 endif
 
-.PHONY: docker-dev-build
-docker-dev-build:
-	docker build --tag st2chatops-dev dev
-
-.PHONY: docker-dev
-docker-dev:
-	docker images st2chatops-dev 1>/dev/null || make docker-dev-build
-	docker run -it --rm --publish 127.0.0.1:8081:8081/tcp --volume $$(pwd):/app st2chatops-dev
+rpm:
+	rpmbuild -bb rpm/st2chatops.spec

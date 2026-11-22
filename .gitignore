@@ -4,3 +4,4 @@ node_modules
 .idea
 debian/*.log
 .vscode
+vendor/
