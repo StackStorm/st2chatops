@@ -13,21 +13,25 @@ fail() {
 }
 
 HERE=$(dirname $(dirname "$(readlink -f "$0")"))
+# hubot reads external-scripts.json from the working directory
+cd "$HERE"
 
 export PATH="$HERE/node_modules/.bin:$HERE/node_modules/hubot/node_modules/.bin:$PATH"
 
 . $HERE/st2chatops.env
 
-for i in "$@"
-  do
-    case $i in
-      --test)
-      export HUBOT_ADAPTER=shell
-      export EXPRESS_PORT=31337
-      shift
-      ;;
-    esac
-  done
+# --test (first argument): talk to the bot on stdin/stdout through hubot's Shell adapter
+if [ "${1:-}" = "--test" ]; then
+  shift
+  export HUBOT_ADAPTER=Shell
+  export EXPRESS_PORT=31337
+  # the Shell adapter keeps .hubot_history in the working directory, which the service user can't
+  # write; hubot still finds its packages from its own location
+  workdir=$(mktemp -d)
+  ln -s "$HERE/external-scripts.json" "$workdir/external-scripts.json"
+  ln -s "$HERE/scripts" "$workdir/scripts"
+  cd "$workdir"
+fi
 
 # Ensure proper ENV variables are set
 if [ ! -n "$HUBOT_ADAPTER" ]; then
@@ -42,5 +46,11 @@ if [ ! -n "$HUBOT_ALIAS" ]; then
     fail "Must provide HUBOT_ALIAS to start"
 fi
 
+# HUBOT_ADAPTER picks the adapter; "slack" is the bundled @hubot-friends/hubot-slack
+case "$HUBOT_ADAPTER" in
+  slack) adapter=@hubot-friends/hubot-slack ;;
+  *)     adapter=$HUBOT_ADAPTER ;;
+esac
+
 # Keep st2chatops hack (ignored by hubot) for process discovery
-exec $HERE/node_modules/.bin/hubot "$@" -a @hubot-friends/hubot-slack st2chatops
+exec $HERE/node_modules/.bin/hubot "$@" -a "$adapter" st2chatops

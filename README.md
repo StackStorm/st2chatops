@@ -54,7 +54,9 @@ Run the script, and ensure that hubot-stackstorm is running and there are no err
 
 ### Node Version
 
-Grab your favorite Node.JS version (>=20.0), and pick your tag. Update `Dockerfile` as needed.
+Node.js 24 LTS (`.nvmrc`, `engines`). The `Dockerfile` builds on `node:24-alpine`, and the RPM
+requires the `nodejs:24` module stream on EL9. npm 11.10 or later is needed for the `.npmrc`
+supply-chain settings (no install scripts, 14-day release cooldown).
 
 ### Pre-Requsites
 

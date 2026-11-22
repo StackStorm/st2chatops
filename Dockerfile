@@ -1,29 +1,19 @@
-FROM node:20.11.1-slim
+FROM node:24-alpine
 
-RUN apt update && apt install --yes \
-  python3 \
-  npm \
-  libicu-dev \
-  libxml2-dev \
-  libexpat1-dev \
-  build-essential \
-  git \
-  make
-
-COPY . /app
 WORKDIR /app
-RUN npm install npm@6 -g
-RUN npm install --production && npm cache verify
 
-RUN apt remove --yes \
-  libicu-dev \
-  libxml2-dev \
-  libexpat1-dev \
-  build-essential \
-  git \
-  make
+# .npmrc applies the supply-chain guardrails: no install scripts, no git dependencies.
+# The tree has no native modules, so no compiler is needed.
+COPY package.json npm-shrinkwrap.json .npmrc ./
+COPY vendor ./vendor
+RUN npm ci --omit=dev --no-audit --no-fund && npm cache clean --force
 
-RUN apt autoremove --yes
+COPY bin ./bin
+# hubot scripts only (scripts/ also holds st2chatops-docker-run.sh)
+COPY scripts/*.js ./scripts/
+COPY external-scripts.json st2chatops.env ./
 
+USER node
 EXPOSE 8081
-CMD ["source /app/st2chatops.env && /app/bin/hubot"]
+# bin/hubot sources st2chatops.env, whose settings all fall back to the environment
+CMD ["/app/bin/hubot"]
