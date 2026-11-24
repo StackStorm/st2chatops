@@ -3,7 +3,7 @@
 # PACKAGECLOUD_ORGANIZATION (default: stackstorm)
 # PACKAGECLOUD_TOKEN
 # SLACK_TOKEN
-version: 2
+version: 2.1
 jobs:
   build:
     machine:
