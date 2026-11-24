@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:noble
 
 # Install prerequesties
 RUN apt-get clean && apt-get update && \
