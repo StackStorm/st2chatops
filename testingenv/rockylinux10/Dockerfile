@@ -1,4 +1,4 @@
-FROM rockylinux:8
+FROM rockylinux:10
 
 # Install development tools
 RUN yum -y module install nodejs:20 
